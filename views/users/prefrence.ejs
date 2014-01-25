@@ -1,0 +1,70 @@
+<% layout( '../boilerplate') -%>
+
+ <script type="text/javascript" >
+	/* var pref = <%=user.prefrences %>
+	 if(typeof pref !== "undefined" && typeof pref !== null)
+	 {
+		var html ="";
+		
+		$("#prefrencedata").html();
+	 }
+	else{
+	}*/
+</script>
+<form action="updateprefrence" method="post">
+
+		<div class="page-title" id="prefrencedata">	
+			<h3>Prefrences for your common Expenditures</h3>	
+			<!-- Start Cateogry -->
+			<div>
+				<div class="page-title">Transportation</div>
+				<div class="content">
+					<ul>
+					<li><input type="checkbox" name="Transport[car]" />Car</li>
+					<li><input type="checkbox" name="Transport[bike]" />Bike/Scooter</li>
+					<li><input type="checkbox" name="Transport[public]" />Public Transport</li>
+					</ul>
+				</div>
+			</div>
+			<!-- End Cateogry -->
+		  	<!-- Start Cateogry -->
+			<div>
+				<div class="page-title">Entertainment</div>
+				<div class="content">
+					<ul>
+					<li><input type="checkbox" name="Entertainment[Movies]" />Movie</li>
+					<li><input type="checkbox" name="Entertainment[Foods]" />Foods</li>
+					<li><input type="checkbox" name="Entertainment[Travelling]" />Travelling</li>
+					</ul>
+				</div>
+			</div>
+			<!-- End Cateogry -->
+			<!-- Start Cateogry 
+			<div>
+				<div class="page-title">Entertainment</div>
+				<div class="content">
+					<ul>
+					<li><input type="checkbox" name="subcat" />Movie</li>
+					<li><input type="checkbox" name="subcat" />Foods</li>
+					<li><input type="checkbox" name="subcat" />Travelling</li>
+					</ul>
+				</div>
+			</div>-->
+			<!-- End Cateogry -->
+			<!-- Start Cateogry 
+			<div>
+				<div class="page-title">Entertainment</div>
+				<div class="content">
+					<ul>
+					<li><input type="checkbox" name="subcat" />Movie</li>
+					<li><input type="checkbox" name="subcat" />Foods</li>
+					<li><input type="checkbox" name="subcat" />Travelling</li>
+					</ul>
+				</div>
+			</div>-->
+			<!-- End Cateogry -->
+		</div>
+			<input type="submit" name="submit" />
+    </form>
+			
+	

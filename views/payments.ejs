@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta charset="utf-8" />
+<title>Sulvo -Spur Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+
+<!-- BEGIN PLUGIN CSS -->
+<link href="assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/jquery-datatable/css/jquery.dataTables.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/boostrap-checkbox/css/bootstrap-checkbox.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen"/>
+<!-- END PLUGIN CSS -->
+
+<link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen"/>
+<!-- BEGIN CORE CSS FRAMEWORK -->
+
+<link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+<!-- END CORE CSS FRAMEWORK -->
+
+<!-- BEGIN CSS TEMPLATE -->
+<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/responsive.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+<!-- END CSS TEMPLATE -->
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body class="">
+<!-- BEGIN HEADER -->
+<div class="header navbar navbar-inverse ">
+  <!-- BEGIN TOP NAVIGATION BAR -->
+  <div class="navbar-inner">
+    <div class="header-seperation">
+      <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper" style="display:none">
+        <li class="dropdown"> <a id="main-menu-toggle" href="#main-menu"  class="" >
+          <div class="iconset top-menu-toggle-white"></div>
+          </a> </li>
+      </ul>
+      <!-- BEGIN LOGO -->
+         <a href="earnings"><img src="assets/img/logo.png" class="logo"  data-src="assets/img/logo.png" data-src-retina="assets/img/logo.png" width="150" height="40"/></a>
+       <!-- END LOGO -->
+    </div>
+    <!-- END RESPONSIVE MENU TOGGLER -->
+    <div class="header-quick-nav" >
+      <!-- BEGIN TOP NAVIGATION MENU -->
+      <div class="pull-left">
+        <ul class="nav quick-section">
+          <li class="quicklinks"> <a href="#" class="" id="layout-condensed-toggle" >
+            <div class="iconset top-menu-toggle-dark"></div>
+            </a> </li>
+        </ul>
+      </div>
+      <!-- END TOP NAVIGATION MENU -->
+      <!-- BEGIN CHAT TOGGLER -->
+      <div class="pull-right"> 
+		<div class="chat-toggler">	
+				<a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" 
+						   data-content='' data-toggle="dropdown" data-original-title="Notifications">
+					<div class="user-details"> 
+						<div class="username">
+							<span class="badge badge-important"></span> 
+							<%= user.firstName %> <span class="bold"><%= user.lastName %></span>									
+						</div>						
+					</div> 
+					<div class="iconset top-down-arrow"></div>
+				</a>						
+				<div class="profile-pic"> 
+					<img alt="" src="<%= path %>" data-src="<%= path %>" width="35" height="35" /> 
+				</div>       			
+			</div>
+		 <ul class="nav quick-section ">
+			<li class="quicklinks"> 
+				<a data-toggle="dropdown" class="dropdown-toggle  pull-right" href="#">						
+					<div class="iconset top-settings-dark "></div> 	
+				</a>
+				<ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu">
+                  <li><a href="user-profile"> My Account</a>
+                  </li>
+                  <li class="divider"></li>                
+                  <li><a href="logout"><i class="icon-off"></i>&nbsp;&nbsp;Log Out</a></li>
+               </ul>
+			</li> 
+		</ul>
+      </div>
+      <!-- END CHAT TOGGLER -->
+    </div>
+   
+    <!-- END TOP NAVIGATION MENU -->
+  </div>
+  <!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+  <!-- BEGIN SIDEBAR -->
+  <div class="page-sidebar" id="main-menu"> 
+  <!-- BEGIN MINI-PROFILE -->
+   <div class="user-info-wrapper">	
+	<div class="profile-wrapper">
+		<img src="<%= path %>" data-src="<%= path %>" width="69" height="69" />
+	</div>
+
+    <div class="user-info">
+      <div class="greeting">Welcome</div>
+      <div class="username"><%= user.firstName %> <span class="semi-bold"><%= user.lastName %></span></div>
+    </div>
+   </div>
+  <!-- END MINI-PROFILE -->
+  
+  <!-- BEGIN MINI-WIGETS -->
+
+   <!-- END MINI-WIGETS -->
+   
+   <!-- BEGIN SIDEBAR MENU -->	
+	<p class="menu-title"></p>
+    <ul>
+        
+        <li class="start active"> <a href=""> <i class="icon-custom-chart"></i> <span class="title">Ad Sales</span> <span class="arrow "></span> </a>
+        <ul class="sub-menu">
+		  <li> <a href="earnings"> Revenue </a> </li>
+		   <li> <a href="payments">Payments</a> </li>
+        </ul>
+      </li>
+        
+         <li class=""> <a href=""> <i class="icon-custom-thumb"></i> <span class="title">Influence Boost</span> <span class="arrow "></span> </a>
+        <ul class="sub-menu">
+        </ul>
+      </li>
+        
+         <li class=""> <a href=""> <i class="icon-custom-extra"></i> <span class="title">Knowledge Base</span> <span class="arrow "></span> </a>
+        <ul class="sub-menu">
+        </ul>
+      </li>
+	</ul>
+	
+	<!-- SCROLLBAR --> 
+	<a href="#" class="scrollup">Scroll</a>
+	
+    <!-- END SIDEBAR MENU --> 
+  </div>
+  
+  <!-- END SIDEBAR --> 
+  <!-- BEGIN PAGE CONTAINER-->
+  <div class="page-content"> 
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <div id="portlet-config" class="modal hide">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"></button>
+        <h3>Widget Settings</h3>
+      </div>
+      <div class="modal-body"> Widget settings form goes here </div>
+    </div>
+  
+    <div class="content">  
+		<div class="page-title">
+            <h3><span class="semi-bold">Payment Settings</span>
+			</h3>		
+		</div>
+         <div class = "row">
+            <div class = "col-md-12">
+                <div class="grid simple col-md-6">
+                <div class="grid-title no-border">
+                  <h4>Tax Form <span class="semi-bold">Upload</span></h4>
+                  <div class="tools"> 
+                  </div>
+                </div>
+                <div class="grid-body no-border">
+                    <div id="taxFormWarning">
+                    </div>
+                    
+                    <form style="" id="taxUploadForm" action = "taxFormupload" class="dropzone no-margin">
+                         <div class="fallback">
+                        <input name="file" id="taxUploadFile" type="file"/>
+                      </div>           
+                    </form> 
+                    </div>
+                </div>
+                
+                 <div class = "col-md-6">
+                <div class = "alert alert-danger">
+                     Note: Payouts are on a NET 60 basis. Please familiarise yourself with your financial institution’s fees (such as incoming wire transfer or currency exchange fees) to make sure you select the most economical option. 
+                <br />
+All payments are on hold until you select your preferred payment method and submit your tax info.
+                <br />
+If you live in the U.S. please upload your completed W-9 <a href="http://www.irs.gov/pub/irs-pdf/fw9.pdf">(http://www.irs.gov/pub/irs-pdf/fw9.pdf)</a>
+otherwise complete and submit a W-8BEN from <a href = "http://www.irs.gov/pub/irs-pdf/fw8ben.pdf">(http://www.irs.gov/pub/irs-pdf/fw8ben.pdf)</a>
+                </div>
+            </div>
+                
+             </div>
+        </div>
+        
+         <div class = "row">
+            <div class = "col-md-12">
+                <div class="grid simple">
+                    <div class="grid-title no-border">
+                        <h4>Payment <span class="semi-bold">Methods</span></h4>
+                    </div>
+                    <div class="grid-body no-border">
+                   
+                <!--Wire Transger Row International-->
+                    <div class = "row">
+                        <div id = "wireTransferGrid" class="grid simple">
+                            <div id = "wireTransferGridTitle" class="grid-title no-border">
+                                <div class="radio">
+                                    <input id="wireTransferRadio" name = "paymentoptions" type="radio" value="1" checked="checked" class = "payment-radio">
+                                    <label for="wireTransferRadio"></bold><span class="semi-bold">Wire Transfer International ($26) </span></label>
+                                </div>
+                            </div>
+                            <div id = "wireTransferGridBody" class="grid-body">
+                            <div id="wireTransferInternationalStatus" class = "row col-md-12">
+                            </div>
+                                
+                            <div class = "row spacing-bottom 2col">
+                            <form id="wireTransferForm" class="" action="wireTransferInternational" method="post">                <div class = "col-md-6"> 
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        <label class="form-label">Bank Name</label>
+                                        <div class="controls">
+                                            <div class="input-with-icon  right">
+                                                <i class="icon-building"></i>
+                                                <input type="text" name="bankNameIN" id="bankNameIN" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank Address</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-envelope"></i>
+                                                    <input type="textarea" name="bankAddressIN" id="bankAddressIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank City</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-location-arrow"></i>
+                                                    <input type="text" name="bankCityIN" id="bankCityIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank State</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-globe"></i>
+                                                    <input type="text" name="bankStateIN" id="bankStateIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank Country</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-flag"></i>
+                                                    <input type="text" name="bankCountryIN" id="bankCountryIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank Swift</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-suitcase"></i>
+                                                    <input type="text" name="bankSwiftIN" id="bankSwiftIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">CHIPS/UID </label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-suitcase"></i>
+                                                    <input type="text" name="chipsUID" id="chipsUID" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-md-6">
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Account Holder Name</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-user"></i>
+                                                    <input type="text" name="accountHolderNameIN" id="accountHolderNameIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Account Number</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-key"></i>
+                                                    <input type="text" name="accountNumberIN" id="accountNumberIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> Address</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-envelope"></i>
+                                                    <input type="text" name="addressIN" id="addressIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> City</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-location-arrow"></i>
+                                                    <input type="text" name="cityIN" id="cityIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> State</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-globe"></i>
+                                                    <input type="text" name="stateIN" id="stateIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> ZIP</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-suitcase"></i>
+                                                    <input type="text" name="zipIN" id="zipIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> Country</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-flag"></i>
+                                                    <input type="text" name="countryIN" id="zipIN" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                 </div>
+                                </form>
+                                </div>
+                            
+                                
+                            </div>
+                        </div>
+                    </div>
+                <!--Wire Transger Row-->
+                <!-- Wire Transfer US -->   
+                    <div class = "row">
+                        <div id = "wireTransferUSGrid" class="grid simple">
+                            <div id = "wireTransferUSGridTitle" class="grid-title no-border">
+                                <div class="radio">
+                                    <input id="wireTransferUSRadio" name = "paymentoptions" type="radio" value="2" class = "payment-radio">
+                                    <label for="wireTransferUSRadio"><span class="semi-bold">Wire Transfer US ($17)</span> </label>
+                                </div>
+                            </div>
+                            <div id = "wireTransferUSGridBody" class="grid-body">
+                            <div id="wireTransferUSStatus" class = "row col-md-12">
+                            </div>
+                            <div class = "row spacing-bottom 2col">
+                            <form id="wireTransferUSForm" class="" action="wireTransferUSSubmit" method="post">                <div class = "col-md-6"> 
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        <label class="form-label">Bank Name</label>
+                                        <div class="controls">
+                                            <div class="input-with-icon  right">
+                                                <i class="icon-building"></i>
+                                                <input type="text" name="bankName" id="bankName" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank Address</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-envelope"></i>
+                                                    <input type="text" name="bankAddress" id="bankAddress" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank City</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-location-arrow"></i>
+                                                    <input type="text" name="bankCity" id="bankCity" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank State</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-globe"></i>
+                                                    <input type="text" name="bankState" id="bankState" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank Country</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-flag"></i>
+                                                    <input type="text" name="bankCountry" id="bankCountry" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Bank ABA #</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-key"></i>
+                                                    <input type="text" name="bankABA" id="bankABA" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "col-md-6">
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Account Holder Name</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-user"></i>
+                                                    <input type="text" name="accountHolderName" id="accountHolderName" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-key">Account Number</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-suitcase"></i>
+                                                    <input type="text" name="accountNumber" id="accountNumber" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> Address</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-envelope"></i>
+                                                    <input type="text" name="address" id="address" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> City</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-location-arrow"></i>
+                                                    <input type="text" name="city" id="city" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> State</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-globe"></i>
+                                                    <input type="text" name="state" id="state" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                      <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label"> ZIP</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-key"></i>
+                                                    <input type="text" name="zip" id="zip" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                 </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Wire Transfer US -->  
+                <!-- ACH Deposit U.S Free -->
+                        <div class = "row">
+                        <div id = "achGrid" class="grid simple">
+                            <div id = "achGridTitle" class="grid-title no-border">
+                                <div class="radio">
+                                    <input id="achRadio" name = "paymentoptions" type="radio" value="2" class = "payment-radio">
+                                    <label for="achRadio"><span class="semi-bold">ACH Deposit</span>  </label>
+                                </div>
+                            </div>
+                            <div id = "achGridBody" class="grid-body">
+                            <div class = "row spacing-bottom 2col">
+                            <div id="achStatus" class = "row col-md-12">
+                            </div>
+                                <form id="achForm" class="" action="achSubmit" method="post">                <div class = "col-md-6"> 
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        <label class="form-label">Account Name</label>
+                                        <div class="controls">
+                                            <div class="input-with-icon  right">
+                                                <i class="icon-user"></i>
+                                                <input type="text" name="accountNameACH" id="accountName-ACH" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Routing Number</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-key"></i>
+                                                    <input type="text" name="routingNumberACH" id="routingNumber-ACH" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Account Number</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-key"></i>
+                                                    <input type="text" name="accountNumberACH" id="accountNumber-ACH" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Account Type</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-globe"></i> 
+                                                    <select id="accountTypeACH" name ="accountTypeACH" style="width:100%">
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Checking">Checking</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                 </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 <!-- ACH Deposit U.S Free -->
+                 <!-- Paper Check -->
+                        
+                        <div class = "row">
+                        <div id = "paperCheckGrid" class="grid simple">
+                            <div id = "paperCheckGridTitle" class="grid-title no-border">
+                                <div class="radio">
+                                    <input id="paperCheckRadio" name = "paymentoptions" type="radio" value="2" class = "payment-radio">
+                                    <label for="paperCheckRadio"> <span class="semi-bold">Paper Check</span> </label>
+                                </div>
+                            </div>
+                            <div id = "paperCheckGridBody" class="grid-body">
+                            <div class = "row spacing-bottom 2col">
+                                <form id="paperCheckForm" class="" action="login" method="post">                <div class = "col-md-6"> 
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        <label class="form-label">Payee</label>
+                                        <div class="controls">
+                                            <div class="input-with-icon  right">
+                                                <i class="icon-user"></i>
+                                                <input type="text" name="payee" id="payee" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Street Address</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-envelope"></i>
+                                                    <input type="text" name="streetAddress" id="streetAddress" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">City</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-location-arrow"></i>
+                                                    <input type="text" name="paperCheckCity" id="paperCheckCity" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">State</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-globe"></i>
+                                                    <input type="text" name="paperCheckState" id="paperCheckState" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">ZIP</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-key"></i>
+                                                    <input type="text" name="paperCheckZIP" id="paperCheckZIP" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">Country</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-flag"></i>
+                                                    <input type="text" name="paperCheckCountry" id="paperCheckCountry" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                 </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                <!-- Paper Check -->
+                        
+                <!-- Paypal -->
+                        
+                        <div class = "row">
+                        <div id = "paypalGrid" class="grid simple">
+                            <div id = "paypalGridTitle" class="grid-title no-border">
+                                <div class="radio">
+                                    <input id="paypalRadio" name = "paymentoptions" type="radio" value="2" class = "payment-radio">
+                                    <label for="paypalRadio"><span class="semi-bold">BTC Wallet</span>  </label>
+                                </div>
+                            </div>
+                            <div id = "paypalGridBody" class="grid-body Bisque">
+                            <div class = "row spacing-bottom 2col">
+                                <div id="paypalFormStatus" class = "row col-md-12">
+                                </div>
+                                <form id="paypalForm" class="" action="paypal" method="post">                <div class = "col-md-6"> 
+                                    <div class="row">
+                                        <div class="form-group col-md-10">
+                                            <label class="form-label">BTC Wallet Address</label>
+                                            <span class="help"></span>
+                                            <div class="controls">
+                                                <div class="input-with-icon  right">
+                                                    <i class="icon-envelope"></i>
+                                                    <input type="text" name="paypalAddress" id="paypalAddress" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <button class="btn btn-primary btn-cons" type="submit">Submit</button>
+                                        </div>
+                                    </div>
+                                 </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                <!-- Paper Check -->
+                        
+                        
+                        
+                        
+                        
+                        
+                </div>
+                </div>
+             </div>
+        </div>
+      </div>
+         
+        
+		<!-- END CONTENT -->
+    </div>
+  </div>
+ </div>
+<!-- END CONTAINER --> 
+<!-- BEGIN CHAT -->
+
+<!-- END CHAT -->
+<!-- END CONTAINER -->
+
+<!-- BEGIN CORE JS FRAMEWORK--> 
+<script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/breakpoints.js" type="text/javascript"></script> 
+<script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/jquery-block-ui/jqueryblockui.js" type="text/javascript"></script> 
+<!-- END CORE JS FRAMEWORK --> 
+<!-- BEGIN PAGE LEVEL JS --> 
+ <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-slider/jquery.sidr.min.js" type="text/javascript"></script> 	
+<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>  
+<script src="assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+<script src="assets/js/earnings.js" type="text/javascript"></script>
+<script src="assets/js/date.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-datatable/js/jquery.dataTables.min.js" type="text/javascript" ></script>
+<script src="assets/plugins/jquery-datatable/extra/js/TableTools.min.js" type="text/javascript" ></script>
+<script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
+<script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
+<script src="assets/plugins/jquery-flot/jquery.flot.js"></script>
+<script src="assets/plugins/jquery-flot/jquery.flot.time.min.js"></script>
+<script src="assets/plugins/jquery-flot/jquery.flot.selection.min.js"></script>
+<script src="assets/plugins/jquery-flot/jquery.flot.animator.min.js"></script>
+<script src="assets/plugins/jquery-flot/jquery.flot.orderBars.js"></script>
+<script src="assets/plugins/dropzone/dropzone.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="assets/js/payments.js" type="text/javascript"></script>
+
+<!-- BEGIN CORE TEMPLATE JS --> 
+<script src="assets/js/core.js" type="text/javascript"></script> 
+<script src="assets/js/demo.js" type="text/javascript"></script> 
+<!-- END CORE TEMPLATE JS --> 
+</body>
+</html>

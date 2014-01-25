@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta charset="utf-8" />
+<title>Webarch - Responsive Admin Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<!-- BEGIN CORE CSS FRAMEWORK -->
+<link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+<!-- END CORE CSS FRAMEWORK -->
+<!-- BEGIN CSS TEMPLATE -->
+<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/responsive.css" rel="stylesheet" type="text/css"/>
+<link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+<!-- END CSS TEMPLATE -->
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="error-body no-top">
+<div class="container">
+    <div id = "emailRow" class = "row separation">
+        <div class = "col-md-6">
+            <div id = "emailformStatus">
+            </div>
+           <form id = "emailform" action = "getUser" role="form">
+               <div class="form-group">
+                   <label class="sr-only" for="email">Email address</label>
+                   <input type="email" name = "email" class="form-control" id="email" placeholder="Enter email">                 </div>
+               <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div>
+    </div>
+    
+     <div id = "createUserRow" class = "row">
+        <div class = "col-md-12">
+            <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Create <span class="semi-bold">New User</span></h4>
+              <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+            </div>
+            <div class="grid-body no-border">
+			<form class="createUserForm" id="createUserForm" action = "createUser" novalidate="novalidate">	
+              <div class="row column-seperation">
+                <div class="col-md-6">
+                  <h4>Personal Information</h4>            
+                    <div class="row form-row">
+                      <div class="col-md-5">
+                        <input name="firstName" id="firstName" type="text" class="form-control" placeholder="First Name">
+                      </div>
+                      <div class="col-md-7">
+                        <input name="lastName" id="lastName" type="text" class="form-control" placeholder="Last Name">
+                      </div>
+                    </div>
+                  
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="email1" id="email1" type="email" class="form-control" placeholder="email@address.com">
+                      </div>
+                    </div>
+                    
+                      <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="pass1" id="pass1" type="password" class="form-control" placeholder="Password">
+                      </div>
+                    </div>
+                    
+                      <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="pass2" id="pass2" type="password" class="form-control" placeholder="Password">
+                      </div>
+                    </div>
+                    
+                     <div class="row form-row">
+                      <div class="col-md-4">
+                        <input name="countryCode" id="countryCode" type="text" class="form-control" placeholder="+94">
+                      </div>
+                      <div class="col-md-8">
+                        <input name="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="Phone Number">
+                      </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+				
+                  <h4>Account Information</h4>
+                  
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="url" id="url" type="text" class="form-control" placeholder="URL">
+                      </div>
+                    </div>
+                    
+                     <div id = "addTagsDiv" class="row form-row">
+                      <div class="addTagDiv top">
+                       <div class="col-md-3">
+                        <input name="adURL" id="adURL" type="text" class="form-control" placeholder="+Ad URL">
+                      </div>
+                      <div class="col-md-8">
+                        <input name="adTAGS" id="adTAGS" type="text" class="form-control" placeholder="Ad Tags">
+                      </div>
+                          <div class = "col-md-1 links">
+                               <a href = "javascript:addElement();" class="addMore topanchor"> add</a>
+                          </div>
+                         
+                          
+                      </div>
+                     </div>
+                    
+                    
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="revShare" id="revShare" type="text" class="form-control" placeholder="Revenue Share">
+                      </div>
+                     </div>
+                   
+                   
+                   
+                    <div class="row small-text">
+					<p class="col-md-12">
+					NOTE - Give comma separated values for filling the Ad Tags associated with URL.
+					</p>
+					</div>
+             
+                </div>
+              </div>
+				<div class="form-actions">
+					<div class="pull-right">
+					  <button class="btn btn-danger btn-cons" type="submit"><i class="icon-ok"></i> Save</button>
+					  <button class="btn btn-white btn-cons" type="button">Cancel</button>
+					</div>
+				  </div>
+			</form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN CORE JS FRAMEWORK-->
+<script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script> 
+<script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<!-- BEGIN CORE TEMPLATE JS -->
+<script src="assets/js/admin.js" type="text/javascript"></script>
+
+<!-- END CORE TEMPLATE JS -->
+</body>
+</html>

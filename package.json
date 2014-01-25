@@ -1,0 +1,23 @@
+{
+  "name": "Family",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.5"
+    "passport": "*",
+    "passport-local": "*",
+    "passport-facebook": "*",
+    "ejs": "*",
+    "jade": "*",
+    "connect-flash": "*",
+    "mongoose": "*",
+    "moment": "*",
+    "redis": "*",
+    "emailjs": "*",
+    "forms-mongoose" : "*",
+    "docco" : "*"
+  }
+}
