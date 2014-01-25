@@ -19,7 +19,7 @@ function initializeRoutes(app, passport, cache) {
 			res.redirect('../login');
 		}
 	});
-    app.get("/", function(req, res) {
+    /*app.get("/", function(req, res) {
 		 //res.render('users/home', { what: 'best', who: 'me' });
 		if (req.isAuthenticated()) {
 			console.log("Authenticated : " + req.user);
@@ -31,7 +31,7 @@ function initializeRoutes(app, passport, cache) {
 				message : req.flash('error')
 			});
 		}
-	});
+	});*/
 	app.get("/signup", function(req, res) {
 		 //res.render('users/home', { what: 'best', who: 'me' });
 		if (req.isAuthenticated()) {
@@ -45,7 +45,12 @@ function initializeRoutes(app, passport, cache) {
 			});
 		}
 	});
-	
+	app.get("/", function(req, res) {
+			res.render("homepage", {
+				message : req.flash('error')
+			});
+		
+	});
 
 }
 

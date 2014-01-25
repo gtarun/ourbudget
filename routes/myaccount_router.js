@@ -38,11 +38,8 @@ function initializeRoutes(App, passport, Cache) {
 
 
 	App.get("/users/prefrence",Auth.isAuthenticated, function(req, res) {
-		 //res.render('users/home', { what: 'best', who: 'me' });
-		console.log("user prefrence called"+req.user);
-			// Render the MyAccount page with correct User Picture.
 			res.render("users/prefrence", {
-				user : req.user
+				user : req.user.prefrences
 			});
 
 		

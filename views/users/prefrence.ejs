@@ -1,10 +1,18 @@
 <% layout( '../boilerplate') -%>
-
+	
+<% for(var item =0 ;item< user.length;item++){ %>
+	<%= JSON.stringify(user[item]) %>
+	
+<% } %>
  <script type="text/javascript" >
-	 var pref =  <%=user -%>;
-console.log(pref);
+	 var pref =  <% for(var item =0 ;item< user.length;item++){ %>
+	<%= JSON.stringify(user[item]) %>
+	
+<% } %>; // get user data from 
+ 		
 	 if(typeof pref !== "undefined" && typeof pref !== null)
 	 {
+		 console.log("set");
 		/*var html ="";
 		html+="<div>";
 				<div class="page-title">Transportation</div>
@@ -17,7 +25,7 @@ console.log(pref);
 				</div>
 			</div>
 		*/
-		$("#prefrencedata").html(pref);
+		$("#prefrencedata").html(JSON.stringify(pref));
 	 }
 	else{
 	}
