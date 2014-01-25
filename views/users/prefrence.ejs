@@ -1,15 +1,26 @@
 <% layout( '../boilerplate') -%>
 
  <script type="text/javascript" >
-	/* var pref = <%=user.prefrences %>
+	 var pref =  <%=user -%>;
+console.log(pref);
 	 if(typeof pref !== "undefined" && typeof pref !== null)
 	 {
-		var html ="";
-		
-		$("#prefrencedata").html();
+		/*var html ="";
+		html+="<div>";
+				<div class="page-title">Transportation</div>
+				<div class="content">
+					<ul>
+					<li><input type="checkbox" name="Transport[car]" />Car</li>
+					<li><input type="checkbox" name="Transport[bike]" />Bike/Scooter</li>
+					<li><input type="checkbox" name="Transport[public]" />Public Transport</li>
+					</ul>
+				</div>
+			</div>
+		*/
+		$("#prefrencedata").html(pref);
 	 }
 	else{
-	}*/
+	}
 </script>
 <form action="updateprefrence" method="post">
 
@@ -64,7 +75,7 @@
 			</div>-->
 			<!-- End Cateogry -->
 		</div>
-			<input type="submit" name="submit" />
+			<input type="submit" />
     </form>
 			
 	

@@ -47,10 +47,8 @@ function initializeRoutes(App, passport, Cache) {
 
 		
 	});
-	App.post("/users/updateprefrence",Auth.isAuthenticated,function(req,res){
-		console.log("posted data prefrece" +JSON.stringify(req.body));
-		AccountAPI.UpdatePrefrence;
-	});
+	App.post("/users/updateprefrence",Auth.isAuthenticated,
+		AccountAPI.UpdatePrefrence);
 }
 /**
  * Export the required functions as module.

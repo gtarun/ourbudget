@@ -209,9 +209,7 @@ function UpdatePrefrence(req,res){
 		multi : true
 	};
 
-	console.log("Updating the contact info with: ");
-	console.log(update);
-
+	var data= req.body;
 	// Save the Info into DB.
 	User
 			.findOne(
@@ -227,23 +225,14 @@ function UpdatePrefrence(req,res){
 						}
 
 						// Create the ContactInformation if not present.
-						if (!doc.contactInformaion)
+						if (!doc.prefrences)
 						{
-							doc.contactInformaion = {};	
+							doc.prefrences = {};	
 						}
 						
 						// Update the doc
-						doc.contactInformaion.countrycode = update.contactInformation.countrycode;
-						doc.contactInformaion.phonenumber = update.contactInformation.phonenumber;
+						doc.prefrences =data;
 				
-						if (update.pass) {
-							doc.pass = update.pass;
-						}
-						
-						if (update.email) {
-							doc.email = update.email;
-						}
-
 						// Save the information.
 						doc
 								.save(function(err) {
@@ -264,6 +253,10 @@ function UpdatePrefrence(req,res){
 
 								});
 					});
+	
+
+	// Save the Info into DB.
+	
 }
 
 /**
@@ -272,4 +265,4 @@ function UpdatePrefrence(req,res){
 
 exports.SaveAccountInfo = SaveAccountInfo;
 exports.ChangePicture = ChangePicture;
-exportsUpdatePrefrence =UpdatePrefrence
+exports.UpdatePrefrence =UpdatePrefrence;
