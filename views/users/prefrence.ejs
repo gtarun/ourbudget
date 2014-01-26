@@ -1,14 +1,12 @@
 <% layout( '../boilerplate') -%>
 	
 <% for(var item =0 ;item< user.length;item++){ %>
-	<%= JSON.stringify(user[item]) %>
-	
-<% } %>
+	<% var data=eval(user[item]) %>
+	<% for(var inner in data){ %>
+	<%= inner %>
+<% } }%>
  <script type="text/javascript" >
-	 var pref =  <% for(var item =0 ;item< user.length;item++){ %>
-	<%= JSON.stringify(user[item]) %>
-	
-<% } %>; // get user data from 
+	 var pref =  <%=user -%>; // get user data from 
  		
 	 if(typeof pref !== "undefined" && typeof pref !== null)
 	 {
