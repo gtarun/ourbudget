@@ -246,10 +246,13 @@ function UpdatePrefrence(req,res){
 									}
 
 									// Once is is saved, logout the user for security reasons.
-									req.logout();
+									
 									response.value = "Information Saved Succesfully";
 									console.log(response);
 									res.json(200, response);
+									res.render("users/prefrence", {
+										user : req.user.prefrences
+									});
 
 								});
 					});
