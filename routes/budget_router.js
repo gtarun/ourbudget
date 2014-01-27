@@ -17,8 +17,8 @@ function initializeRoutes(app, passport, cache) {
 	});
 	app.post("/users/addbudget", AccountAPI.addBudgget);
 	app.post("/addbudget", AccountAPI.addBudgget);
-	
-    
+	app.post("/getBudget",AccountAPI.getBudget);
+    app.post("/getAllBudget",AccountAPI.getAllBudget);
 }
 
 module.exports = initializeRoutes;
