@@ -41,7 +41,7 @@ function addBudgget(req, res) {
 	if(errors.ret){
 		var datetime = new Date();
 		var data =new Budget( {
-			userId : req.body.id,
+			userId : req.body.userId,
 			amount_spend : req.body.amount_spend,
 			DATE : datetime,
 			location : req.body.location,
