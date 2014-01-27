@@ -4,7 +4,7 @@
  */
 
 function initializeRoutes(app, passport, cache) {
-
+	
 	// Gets the User login page
 	app.get("/login", function(req, res) {
 
@@ -12,6 +12,7 @@ function initializeRoutes(app, passport, cache) {
 		
 		if (req.isAuthenticated()) {
 			console.log("Authenticated : " + req.user);
+			
 			res.redirect('users/home');
 
 		} else {
@@ -39,7 +40,7 @@ function initializeRoutes(app, passport, cache) {
 		failureRedirect : "/login",
 		failureFlash : true
 	}));
-
+	
 	// Logs out the current user and redirects to the login page
 	app.get('/logout', function(req, res) {
 

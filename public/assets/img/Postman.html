@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Postman</title>
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/css/custom-theme/jquery-ui-1.9.2.custom.min.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/css/bootstrap-modal.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/css/jquery.jscrollpane.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/theme/eclipse.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/css/keyvalueeditor.css">
+</head>
+<body>
+<div id="container" class="clearfix">
+<div id="sidebar-footer">
+    <a id="upgrade" href="http://blog.getpostman.com/?p=19&src=legacy">Upgrade to v0.9.x</a>
+    <a id="donate" href="http://www.getpostman.com/supporters" target="_blank" data-original-title="">Check out our supporters</a>
+</div>
+<div id="sidebar-toggle">
+    <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/tri_arrow_left.png">
+</div>
+<div id="sidebar" style="overflow: hidden; padding: 0px; width: 350px;">
+    
+    
+    
+<div class="jspContainer" style="width: 350px; height: 590px;"><div class="jspPane" style="padding: 0px 0px 0px 10px; top: 0px; width: 340px;"><div id="header" class="clearfix">
+        <div id="logo">
+            <a target="_blank">
+                <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/logo-grey.png" alt="Postman" height="15px" width="100px">
+            </a>
+        </div>
+        <div id="external-links">
+            <ul>
+                <li>
+                    <a rel="tooltip" data-placement="bottom" data-original-title="Download all data" id="download-all-data"><img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/download.png">
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.twitter.com/postmanclient" target="_blank"><img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/twitter.png">
+                    </a>
+                </li>
+                <li>
+                    <a id="postman-wiki" href="http://www.github.com/a85/POSTMan-Chrome-Extension/wiki" target="_blank"><img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/question_mark.png">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div><div id="sidebar-sections" class="clearfix">
+        <div id="history-options" class="section-options">
+            <a class="history-actions-delete" rel="tooltip" data-placement="bottom" data-original-title="Clear history">
+                <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/trash-empty.png" style="width:24px; height:24px; vertical-align: middle;">
+            </a>
+        </div>
+        <div id="collections-options" class="section-options">
+            <a href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#modal-new-collection" rel="tooltip" data-original-title="Add new collection" data-toggle="modal" data-backdrop="static" data-placement="bottom" data-keyboard="true"><img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/folder_plus.png" style="width:20px; height:20px; vertical-align: middle;"></a>
+            <a href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#modal-import-collection" rel="tooltip" data-original-title="Import collection" data-toggle="modal" data-backdrop="static" data-placement="bottom" data-keyboard="true"><img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/inbox_in.png" style="width:20px; height:20px; vertical-align: middle;"></a>
+        </div>
+        <ul id="sidebar-selectors" class="nav nav-pills">
+            <li class="active"><a href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#sidebar-section-history" data-id="history" data-toggle="tab">History</a></li>
+            <li><a href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#sidebar-section-collections" data-id="collections" data-toggle="tab">Collections</a></li>
+        </ul>
+        <div id="sidebar-section-data">
+            <div class="tab-pane active" id="sidebar-section-history">
+                <ul id="history-items" class="clearfix"><li id="sidebar-request-5fe4e733-aeff-277c-1fb5-419784107d9a" class="sidebar-history-request sidebar-request clearfix">
+    <div class="request-actions">
+        <a data-request-id="5fe4e733-aeff-277c-1fb5-419784107d9a" class="request-actions-delete">
+            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/delete.png">
+        </a>
+    </div>
+    <div class="request" data-request-id="5fe4e733-aeff-277c-1fb5-419784107d9a">
+        <a data-request-id="5fe4e733-aeff-277c-1fb5-419784107d9a">
+            <span class="label label-method-GET">GET</span>
+            <span class="request-name">
+                localhost:3000/login
+            </span>
+        </a>
+    </div>
+</li><li id="sidebar-request-5ee4b785-06dc-0c3f-7e2f-4301ecf60e84" class="sidebar-history-request sidebar-request clearfix">
+    <div class="request-actions">
+        <a data-request-id="5ee4b785-06dc-0c3f-7e2f-4301ecf60e84" class="request-actions-delete">
+            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/delete.png">
+        </a>
+    </div>
+    <div class="request" data-request-id="5ee4b785-06dc-0c3f-7e2f-4301ecf60e84">
+        <a data-request-id="5ee4b785-06dc-0c3f-7e2f-4301ecf60e84">
+            <span class="label label-method-GET">GET</span>
+            <span class="request-name">
+                localhost:3000/login?tarun.gupta@venture<br>pact.com=taurn
+            </span>
+        </a>
+    </div>
+</li><li id="sidebar-request-39a8974a-8cd1-028e-f252-d5f41d532794" class="sidebar-history-request sidebar-request clearfix">
+    <div class="request-actions">
+        <a data-request-id="39a8974a-8cd1-028e-f252-d5f41d532794" class="request-actions-delete">
+            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/delete.png">
+        </a>
+    </div>
+    <div class="request" data-request-id="39a8974a-8cd1-028e-f252-d5f41d532794">
+        <a data-request-id="39a8974a-8cd1-028e-f252-d5f41d532794">
+            <span class="label label-method-POST">POST</span>
+            <span class="request-name">
+                localhost:3000/login
+            </span>
+        </a>
+    </div>
+</li>
+                
+    <li id="sidebar-request-6276e019-2842-626b-d49d-406840dc7b2a" class="sidebar-history-request sidebar-request clearfix">
+    <div class="request-actions">
+        <a data-request-id="6276e019-2842-626b-d49d-406840dc7b2a" class="request-actions-delete">
+            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/delete.png">
+        </a>
+    </div>
+    <div class="request" data-request-id="6276e019-2842-626b-d49d-406840dc7b2a">
+        <a data-request-id="6276e019-2842-626b-d49d-406840dc7b2a">
+            <span class="label label-method-POST">POST</span>
+            <span class="request-name">
+                ourbudget.venturepact.com/getUser
+            </span>
+        </a>
+    </div>
+</li>
+
+    <li id="sidebar-request-e441fe3f-3100-374b-1ba3-521f84a013d7" class="sidebar-history-request sidebar-request clearfix">
+    <div class="request-actions">
+        <a data-request-id="e441fe3f-3100-374b-1ba3-521f84a013d7" class="request-actions-delete">
+            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/delete.png">
+        </a>
+    </div>
+    <div class="request" data-request-id="e441fe3f-3100-374b-1ba3-521f84a013d7">
+        <a data-request-id="e441fe3f-3100-374b-1ba3-521f84a013d7">
+            <span class="label label-method-POST">POST</span>
+            <span class="request-name">
+                ourbudget.venturepact.com/getUser
+            </span>
+        </a>
+    </div>
+</li>
+
+    <li id="sidebar-request-db858b5a-aa2d-fc4f-2e18-c4d75fa46ed4" class="sidebar-history-request sidebar-request clearfix">
+    <div class="request-actions">
+        <a data-request-id="db858b5a-aa2d-fc4f-2e18-c4d75fa46ed4" class="request-actions-delete">
+            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/delete.png">
+        </a>
+    </div>
+    <div class="request" data-request-id="db858b5a-aa2d-fc4f-2e18-c4d75fa46ed4">
+        <a data-request-id="db858b5a-aa2d-fc4f-2e18-c4d75fa46ed4">
+            <span class="label label-method-POST">POST</span>
+            <span class="request-name">
+                ourbudget.venturepact.com/getUser
+            </span>
+        </a>
+    </div>
+</li>
+</ul>
+            </div>
+            <div class="tab-pane active" id="sidebar-section-collections">
+                <ul id="collection-items" class="clearfix">
+                </ul>
+            </div>
+        </div>
+    </div><div id="sidebar-filler"></div></div></div></div>
+<div id="main" class="content" style="width: 930px;">
+<section id="request">
+    <div id="request-builder" style="display: block;">
+        <div id="request-types" class="clearfix">
+            <ul class="request-helper-tabs">
+                <li class="active" data-id="normal">Normal</li>
+                <li data-id="basicAuth">Basic Auth</li>
+                <li data-id="digestAuth">Digest Auth</li>
+                <li data-id="oAuth1">OAuth 1.0</li>
+            </ul>
+            <div id="environment-selector-wrapper">
+                <div id="environment-quicklook-wrapper">
+                    <a id="environment-quicklook">
+                        <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/eye.png">
+                    </a>
+                </div>
+                <div id="environment-quicklook-content" class="clearfix">
+                    <div id="environment-quicklook-environments">
+                        <h6>No environment</h6>
+                        <ul></ul>
+                    </div>
+                    <div id="environment-quicklook-globals">
+                        <h6>Globals</h6>
+                        <ul></ul>
+                    </div>
+                </div>
+                <div id="environment-selector">
+                    <div class="btn-group">
+                        <a data-toggle="dropdown">
+                            <span class="environment-list-item-selected">No environment</span>
+                            <span class="caret" style="margin-top: 8px;"></span></a>
+                        <ul class="dropdown-menu"><li><a class="environment-list-item-noenvironment">No environment</a></li>
+<li class="divider"></li>
+<li><a href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#modal-environments" data-toggle="modal" data-keyboard="true">Manage environments</a></li></ul>
+                    </div>
+                </div>
+            </div>
+            <div id="broadcasts" class="btn-group">
+                <a data-toggle="dropdown" rel="tooltip" id="broadcasts-count" data-original-title="" class="no-new-broadcasts">0</a>
+                <ul class="dropdown-menu">
+    <li class="broadcast">
+<div>v0.8.0.3 is now available on the Chrome Web Store. This is a bug fix release. If you encounter any issues, please file an issue on Github!</div>
+</li>
+
+    <li class="broadcast">
+<div>Hi! This is the broadcasts dropdown. Important stuff about Postman will come here in the future.</div>
+</li>
+
+
+</ul>
+            </div>
+            <div class="preferences">
+                <a data-toggle="modal" href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#modal-shortcuts" rel="tooltip" data-placement="bottom" data-original-title="Shortcuts">
+                    <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/keyboard_wireless.png" style="vertical-align: middle;"></a>
+                <a href="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/index.html#modal-settings" data-toggle="modal" rel="tooltip" data-placement="bottom" data-original-title="Settings">
+                    <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/settings.png" style="vertical-align: middle;"></a>
+            </div>
+        </div>
+        <div id="request-helpers" class="clearfix" style="display: none;">
+            <div id="request-helper-normal" class="request-helpers" style="display: block;"></div>
+            <div id="request-helper-basicAuth" class="request-helpers" style="display: none;">
+                <div class="request-helper-form-container">
+                    <form class="form form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Username</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-basicAuth-username" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Password</label>
+
+                            <div class="controls">
+                                <input type="password" id="request-helper-basicAuth-password" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a class="btn btn-secondary request-helper-submit" data-type="basic">Refresh headers</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="request-helper-form-description">
+                    <h4>Note</h4>
+                    The authorization header will be generated and added as a custom header.
+                </div>
+            </div>
+            <div id="request-helper-digestAuth" class="request-helpers" style="display: none;">
+                <div class="request-helper-form-container">
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Username</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-username" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Realm</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-realm" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Password</label>
+
+                            <div class="controls">
+                                <input type="password" id="request-helper-digestAuth-password" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Nonce</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-nonce" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Algorithm</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-algorithm" class="clean-input" placeholder="MD5/MD5-sess, default = MD5" value="MD5">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">qop</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-qop" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Nonce count</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-nonceCount" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Client nonce</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-clientNonce" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Opaque</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-digestAuth-opaque" class="clean-input">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a class="btn btn-secondary request-helper-submit" data-type="digest">Refresh headers</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="request-helper-form-description">
+                    <h4>Note</h4>
+                    The authorization header will be generated and added as a custom header.
+                </div>
+            </div>
+            <div id="request-helper-oAuth1" class="request-helpers" style="display: none;">
+                <div class="request-helper-form-container">
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Consumer Key</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-consumerKey" class="clean-input signatureParam" key="oauth_consumer_key">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Consumer Secret</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-consumerSecret" class="clean-input" key="oauth_consumer_secret">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Token</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-token" class="clean-input signatureParam" key="oauth_token">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Token Secret</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-tokenSecret" class="clean-input" key="oauth_token_secret">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Signature Method</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-signatureMethod" class="clean-input signatureParam" value="HMAC-SHA1" key="oauth_signature_method">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Timestamp</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-timestamp" class="clean-input signatureParam" key="oauth_timestamp">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Nonce</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-nonce" class="clean-input signatureParam" key="oauth_nonce">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Version</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-version" class="clean-input signatureParam" value="1.0" key="oauth_version">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Realm</label>
+
+                            <div class="controls">
+                                <input type="text" id="request-helper-oauth1-realm" class="clean-input" placeholder="Optional" value="" key="oauth_realm">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Add params to header</label>
+                            <div class="controls">
+                                <input type="checkbox" class="checkbox" id="request-helper-oauth1-header">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Auto add parameters</label>
+                            <div class="controls">
+                                <input type="checkbox" class="checkbox" id="request-helper-oauth1-auto">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <a class="btn btn-secondary request-helper-submit" data-type="oAuth1">
+                                    Refresh request
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="request-helper-form-description">
+                    <h4>Note</h4>
+                    If auto addition is enabled, OAuth parameters will be added when you send the request
+                </div>
+            </div>
+        </div>
+
+        <div id="request-meta" style="display: none;">
+            <div class="request-meta-actions">
+                <a class="request-meta-actions-togglesize" data-action="minimize">
+                    <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/circle_minus.png">
+                </a>
+            </div>
+            <h5 id="request-name" style="display: none;"></h5><span id="request-last-saved-time">Saved</span>
+
+            <div id="request-description-container">
+                <p id="request-description" style="display: none;"></p>
+
+                <div id="request-samples" style="display: none;">
+                    <h4>Sample responses</h4>
+                    <table class="table table-striped table-bordered"></table>
+                </div>
+            </div>
+        </div>
+
+        <div id="request-url" class="clearfix">
+            <div id="request-url-wrapper">
+                <div id="request-url-container">
+                    <input type="text" name="url" id="url" tabindex="1" class="input-text-light ui-autocomplete-input" placeholder="Enter request URL here" autocomplete="off"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible">No search results.</span>
+                </div>
+            </div>
+            <div id="request-modifiers">
+                <div id="request-method-container">
+                    <select id="request-method-selector">
+                        <option value="GET" selected="">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="DELETE">DELETE</option>
+                        <option value="COPY">COPY</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="OPTIONS">OPTIONS</option>
+                        <option value="LINK">LINK</option>
+                        <option value="UNLINK">UNLINK</option>
+                        <option value="PURGE">PURGE</option>
+                    </select>
+                </div>
+                <div id="request-url-buttons-container">
+                    <button class="btn active" id="url-keyvaleditor-actions-open"><i class="icon-edit"></i> URL params
+                    </button>
+                    <button class="btn" id="headers-keyvaleditor-actions-open"><i class="icon-edit"></i> Headers (<span class="headers-count">0</span>)
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div id="url-keyvaleditor-container" class="row" style="margin-left: 0px; display: block;">
+            <div id="url-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="URL Parameter Key" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""></div></div>
+        </div>
+
+        <div id="headers-keyvaleditor-container" class="row clearfix" style="margin-left: 0px; display: none;">
+            <div class="keyvaleditor-left">
+                <div id="headers-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="Header" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""></div></div>
+            </div>
+            <div class="keyvaleditor-right">
+                <div id="headers-keyvaleditor-actions">
+                    <input type="button" id="headers-keyvaleditor-actions-manage-presets" class="btn" rel="popover" data-trigger="hover" data-placement="bottom" data-content="Presets let you define groups of headers for quick addition" data-original-title="Header presets" value="Manage presets"><br>
+                </div>
+            </div>
+        </div>
+
+        <div id="data" style="display: none;">
+            <div class="clearfix">
+                <div id="data-mode-selector" class="btn-group clearfix" data-toggle="buttons-radio">
+                    <a class="btn active" data-mode="params">form-data</a>
+                    <a class="btn" data-mode="urlencoded">x-www-form-urlencoded</a>
+                    <a class="btn" data-mode="raw">raw</a>
+                </div>
+                <div id="body-editor-mode-selector" style="display: none;">
+                    <div class="btn-group">
+                        <a class="dropdown" data-toggle="dropdown">
+                            <span id="body-editor-mode-item-selected">Text</span>
+                            <span class="caret" style="margin-top: 8px;"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a data-editor-mode="text" data-language="text">Text</a></li>
+                            <li><a data-editor-mode="javascript" data-language="json">JSON</a></li>
+                            <li><a data-editor-mode="xml" data-language="xml">XML</a></li>
+                            <li><a data-editor-mode="xml" data-language="html">HTML</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="body-data-containers">
+                <div id="formdata-keyvaleditor-container" class="row" style="margin-left: 0px; display: none;">
+                    <div id="formdata-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="Key" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""><input type="file" multiple="" class="keyvalueeditor-value keyvalueeditor-value-file" placeholder="Value" name="keyvalueeditor-value" value="" style="display: none;"><select class="keyvalueeditor-valueTypeSelector"><option value="text" selected="">Text</option><option value="file">File</option></select></div></div>
+                </div>
+                <div id="urlencoded-keyvaleditor-container" class="row" style="margin-left: 0px; display: none;">
+                    <div id="urlencoded-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="Key" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""></div></div>
+                </div>
+                <div id="body-data-container" style="display: none;">
+                    <textarea name="data" id="body" tabindex="4" class="inputText"></textarea>
+                    <pre id="body-editor-mode-selector-format-result">                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="request-preview" style="display: none;">
+        <div id="request-preview-header" class="dropdown">
+            <span class="request-preview-header-title">Preview</span>
+            <a data-toggle="dropdown-toggle" class="dropdown-toggle request-preview-header-limitations">
+                Limitations
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li>Automatic headers sent by Chrome can not be previewed</li>
+                <li>Can not preview form-data files</li>
+            </ul>
+        </div>
+        <div id="request-preview-content">GET /login HTTP/1.1<br>Host: localhost:3000<br>Cache-Control: no-cache<br><br><br></div>
+    </div>
+
+<div id="request-actions" class="clearfix">
+    <div id="request-actions-primary">
+        <button class="btn btn-primary" data-loading-text="Fetching data..." type="button" data-complete-text="Send request" id="submit-request" tabindex="5">
+            Send
+        </button>
+        <button class="btn" id="update-request-in-collection" style="display: none;">Save
+        </button>
+        <button class="btn" data-action="preview" id="preview-request">Preview</button>
+        <button class="btn" id="add-to-collection" href="#modal-add-to-collection" data-toggle="modal" data-backdrop="static" data-keyboard="true">Add to collection
+        </button>
+    </div>
+    <div id="request-actions-secondary">
+        <button class="btn btn-danger" id="request-actions-reset">Reset</button>
+    </div>
+</div>
+</section>
+
+<section id="response" style="display: block;">
+    <div id="response-waiting-container" style="display: none;">
+        <h3>Loading...</h3>
+        <button id="cancel-request" class="btn">Cancel request</button>
+    </div>
+    <div id="response-failed-container" style="display: none;">
+        <h3>Could not get any response</h3>
+
+        <p>
+            This seems to be like an error connecting to <span id="connection-error-url"></span>.
+            The response status was 0.<br>
+            Check out the
+            <a href="http://www.w3.org/TR/XMLHttpRequest/#the-status-attribute" target="_blank">W3C XMLHttpRequest Level
+                2 spec</a>
+            for more details about when this happens.
+        </p>
+    </div>
+    <div id="response-success-container" style="display: block;">
+        <div id="response-top-bar">
+            <ul class="response-tabs clearfix">
+                <li class="active" data-section="body">Body</li>
+                <li data-section="cookies" id="response-tabs-cookies" style="display: block;">Cookies (2)</li>
+                <li data-section="headers">Headers (6)</li>
+            </ul>
+            <div id="response-status"><div class="response-code" data-placement="bottom" data-original-title="200 OK" data-content="Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action." rel="popover"><span class="label">Status</span>
+    <div class="data">200 OK</div>
+</div>
+</div>
+
+            <div id="response-time">
+                <span class="label">Time</span>
+                <span class="data">34 ms</span>
+            </div>
+
+            <div id="response-sample-status" class="span1" style="display: none;">
+                <span class="label label-info">Sample</span>
+            </div>
+        </div>
+
+        <div id="response-data-container" class="clearfix" style="display: block;">
+            <div id="response-data" style="display: block;" class="clearfix">
+                <div id="response-data-options" class="clearfix">
+                    <div id="response-formatting" class="btn-group clearfix" data-toggle="buttons-radio" style="display: block;">
+                        <a data-type="parsed" class="btn active">Pretty</a>
+                        <a data-type="raw" class="btn">Raw</a>
+                        <a data-type="preview" class="btn">Preview</a>
+                    </div>
+                    <div id="response-actions" class="clearfix" style="display: block;">
+                        <a class="btn" rel="tooltip" data-placement="bottom" data-original-title="Toggle size" id="response-body-toggle">
+                            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/full-screen-alt-4.png" style="width:16px; height:16px; vertical-align: middle;">
+                        </a>
+                    </div>
+                    <div id="response-pretty-modifiers" class="clearfix" style="display: block;">
+                        <a class="btn active" rel="tooltip" data-placement="bottom" data-original-title="Toggle wrapping" id="response-body-line-wrapping">
+                            <img src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/img/right_indent.png" style="width:16px; height:16px; vertical-align: middle;">
+                        </a>
+
+                        <div id="response-language" class="btn-group clearfix" data-toggle="buttons-radio" style="display: block;">
+                            <a data-mode="javascript" class="btn">JSON</a>
+                            <a data-mode="html" class="btn active">XML</a>
+                        </div>
+                    </div>
+                    <div id="response-collection-request-actions" class="clearfix" style="display: none;">
+                        <span id="response-sample-save-start-container">
+                            <a class="btn" rel="tooltip" data-placement="bottom" data-original-title="Save sample response" id="response-sample-save-start">
+                                <i class="icon-bookmark"></i>
+                            </a>
+                        </span>
+                        <span id="response-sample-save-form">
+                            <form class="form-inline">
+                                <input type="text" class="input-small" placeholder="Name" id="response-sample-name">
+                                <a class="btn" rel="tooltip" data-placement="bottom" data-original-title="Save" id="response-sample-save">
+                                    <i class="icon-ok-sign"></i>
+                                </a>
+                                <a class="btn" rel="tooltip" data-placement="bottom" data-original-title="Cancel" id="response-sample-cancel">
+                                    <i class="icon-remove-sign"></i>
+                                </a>
+                            </form>
+                        </span>
+                    </div>
+
+                </div>
+                <div id="response-editors">
+                    <div id="response-as-code" style="display: block;">
+                        <textarea id="code-data" data-formatted="false" data-mime="html" style="display: none;"></textarea><div class="CodeMirror CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.1875px; left: 46.1875px;"><textarea wrap="off" autocorrect="off" autocapitalize="off" style="position: absolute; padding: 0px; width: 1px; height: 1em;"></textarea></div><div class="CodeMirror-scrollbar" style="z-index: -2; visibility: hidden; display: none; height: 1622px;"><div class="CodeMirror-scrollbar-inner" style="height: 1622px;"></div></div><div class="CodeMirror-scroll cm-s-eclipse" tabindex="-1"><div style="position: relative;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 1635px;"><div class="CodeMirror-gutter-text"><pre>1</pre><pre>2</pre><pre>3</pre><pre>4</pre><pre>5</pre><pre>6<br>&nbsp;</pre><pre>7</pre><pre>8</pre><pre>9</pre><pre>10<br>&nbsp;</pre><pre>11</pre><pre>12</pre><pre>13</pre><pre>14</pre><pre>15</pre><pre>16</pre><pre>17</pre><pre>18</pre><pre>19</pre><pre>20</pre><pre>21</pre><pre>22</pre><pre>23</pre><pre>24</pre><pre>25</pre><pre>26</pre><pre>27</pre><pre>28</pre><pre>29</pre><pre>30</pre><pre>31</pre><pre>32</pre><pre>33</pre><pre>34</pre><pre>35</pre><pre>36<br>&nbsp;</pre><pre>37</pre><pre>38</pre><pre>39</pre><pre>40</pre><pre>41</pre><pre>42</pre><pre>43</pre><pre>44</pre><pre>45</pre><pre>46</pre><pre>47</pre><pre>48</pre><pre>49</pre><pre>50</pre><pre>51</pre><pre>52</pre><pre>53</pre><pre>54</pre><pre>55</pre><pre>56</pre><pre>57</pre><pre>58</pre><pre>59</pre><pre>60</pre><pre>61</pre><pre>62</pre><pre>63</pre><pre>64</pre><pre>65</pre><pre>66</pre><pre>67</pre><pre>68</pre><pre>69<br>&nbsp;</pre><pre>70</pre><pre>71</pre><pre>72</pre><pre>73</pre><pre>74</pre><pre>75</pre><pre>76</pre><pre>77</pre><pre>78</pre><pre>79</pre><pre>80</pre><pre>81<br>&nbsp;</pre><pre>82</pre><pre>83</pre><pre>84</pre><pre>85</pre><pre>86</pre><pre>87</pre><pre>88</pre><pre>89<br>&nbsp;</pre><pre>90</pre><pre>91</pre><pre>92</pre><pre>93</pre><pre>94</pre><pre>95</pre><pre>96<br>&nbsp;</pre><pre>97</pre><pre>98</pre><pre>99</pre><pre>100</pre><pre>101</pre><pre>102</pre><pre>103</pre><pre>104</pre><pre>105<br>&nbsp;</pre><pre>106<br>&nbsp;</pre><pre>107</pre><pre>108<br>&nbsp;</pre><pre>109</pre><pre>110</pre><pre>111</pre><pre>112</pre><pre>113</pre><pre>114</pre><pre>115</pre></div></div><div class="CodeMirror-lines"><div style="position: relative; z-index: 0; outline: none; margin-left: 41px;"><div style="position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden;"></div><pre class="CodeMirror-cursor" style="top: 0px; left: 0px;">&nbsp;</pre><pre class="CodeMirror-cursor" style="visibility: hidden;">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-meta">&lt;!DOCTYPE html&gt;</span></pre><pre><span class="cm-tag">&lt;meta</span> <span class="cm-attribute">http-equiv</span>=<span class="cm-string">"content-type"</span> <span class="cm-attribute">content</span>=<span class="cm-string">"text/html;charset=UTF-8"</span> <span class="cm-tag">/&gt;</span></pre><pre><span class="cm-tag">&lt;head&gt;</span></pre><pre>    <span class="cm-tag">&lt;meta</span> <span class="cm-attribute">charset</span>=<span class="cm-string">"utf-8"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;title&gt;</span>Family Budgetting Platform<span class="cm-tag">&lt;/title&gt;</span></pre><pre>    <span class="cm-tag">&lt;meta</span> <span class="cm-attribute">name</span>=<span class="cm-string">"viewport"</span> <span class="cm-attribute">content</span>=<span class="cm-string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;meta</span> <span class="cm-attribute">content</span>=<span class="cm-string">""</span> <span class="cm-attribute">name</span>=<span class="cm-string">"description"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;meta</span> <span class="cm-attribute">content</span>=<span class="cm-string">""</span> <span class="cm-attribute">name</span>=<span class="cm-string">"author"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-comment">&lt;!-- BEGIN CORE CSS FRAMEWORK --&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/plugins/pace/pace-theme-flash.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-attribute">media</span>=<span class="cm-string">"screen"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/plugins/boostrapv3/css/bootstrap.min.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/plugins/boostrapv3/css/bootstrap-theme.min.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/plugins/font-awesome/css/font-awesome.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/css/animate.min.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-comment">&lt;!-- END CORE CSS FRAMEWORK --&gt;</span></pre><pre>    <span class="cm-comment">&lt;!-- BEGIN CSS TEMPLATE --&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/css/style.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/css/responsive.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-tag">&lt;link</span> <span class="cm-attribute">href</span>=<span class="cm-string">"assets/css/custom-icon-set.css"</span> <span class="cm-attribute">rel</span>=<span class="cm-string">"stylesheet"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/css"</span> <span class="cm-tag">/&gt;</span></pre><pre>    <span class="cm-comment">&lt;!-- END CSS TEMPLATE --&gt;</span></pre><pre>    <span class="cm-comment">&lt;!-- END HEAD --&gt;</span></pre><pre>    <span class="cm-comment">&lt;!-- BEGIN BODY --&gt;</span></pre><pre>    <span class="cm-tag">&lt;body</span> <span class="cm-attribute">class</span>=<span class="cm-string">"error-body no-top"</span><span class="cm-tag">&gt;</span></pre><pre>        <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"container"</span><span class="cm-tag">&gt;</span></pre><pre>            <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"row login-container column-seperation"</span><span class="cm-tag">&gt;</span></pre><pre>                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"col-md-5 col-md-offset-1"</span><span class="cm-tag">&gt;</span></pre><pre>                    <span class="cm-tag">&lt;h2&gt;</span></pre><pre>                        <span class="cm-tag">&lt;strong&gt;</span>Family Budgetting<span class="cm-tag">&lt;/strong&gt;</span></pre><pre>                        <span class="cm-tag">&lt;a</span> <span class="cm-attribute">href</span>=<span class="cm-string">"/"</span><span class="cm-tag">&gt;</span></pre><pre>                            <span class="cm-tag">&lt;img</span> <span class="cm-attribute">src</span>=<span class="cm-string">"assets/img/black_logo.png"</span> <span class="cm-tag">/&gt;</span></pre><pre>                        <span class="cm-tag">&lt;/a&gt;</span></pre><pre>                    <span class="cm-tag">&lt;/h2&gt;</span></pre><pre>                    <span class="cm-tag">&lt;p&gt;</span>Use the portal to log into your account.</pre><pre><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tag">&lt;/p&gt;</span></pre><pre>                    <span class="cm-tag">&lt;br&gt;</span></pre><pre>                        <span class="cm-tag">&lt;div</span> <span class="cm-attribute">id</span>=<span class="cm-string">"pleaseWaitDialog"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"modal fade"</span> <span class="cm-attribute">tabindex</span>=<span class="cm-string">"-1"</span> <span class="cm-attribute">role</span>=<span class="cm-string">"dialog"</span> <span class="cm-attribute">aria-labelledby</span>=<span class="cm-string">"myModalLabel"</span> <span class="cm-attribute">aria-hidden</span>=<span class="cm-string">"true"</span><span class="cm-tag">&gt;</span></pre><pre>                            <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"modal-dialog"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"width: <span class="cm-tab">    </span>38%;"</span><span class="cm-tag">&gt;</span></pre><pre>                                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"modal-content"</span><span class="cm-tag">&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"modal-header"</span><span class="cm-tag">&gt;</span></pre><pre>                                        <span class="cm-tag">&lt;h4</span> <span class="cm-attribute">class</span>=<span class="cm-string">"modal-title"</span><span class="cm-tag">&gt;</span>Sign up Family Budgetting!<span class="cm-tag">&lt;/h4&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"modal-body"</span><span class="cm-tag">&gt;</span></pre><pre>                                        <span class="cm-comment">&lt;!-- Modal Body --&gt;</span></pre><pre>                                        <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"grid-body no-border"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"width: 90%;"</span><span class="cm-tag">&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;br&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"progress progress-striped active"</span><span class="cm-tag">&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"bar"</span> <span class="cm-attribute">style</span>=<span class="cm-string">"width: 100%;"</span><span class="cm-tag">&gt;&lt;/div&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-error">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-comment">&lt;!-- Modal Body End --&gt;</span></pre><pre>                                        <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                    <span class="cm-comment">&lt;!-- /.modal-content --&gt;</span></pre><pre>                                <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                <span class="cm-comment">&lt;!-- /.modal-dialog --&gt;</span></pre><pre>                            <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- /.modal --&gt;</span></pre><pre>                        <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                        <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"col-md-5 "</span><span class="cm-tag">&gt;</span></pre><pre>                            <span class="cm-tag">&lt;br&gt;</span></pre><pre>                                <span class="cm-tag">&lt;form</span> <span class="cm-attribute">id</span>=<span class="cm-string">"login-form"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"login-form"</span> <span class="cm-attribute">action</span>=<span class="cm-string">"login"</span> <span class="cm-attribute">method</span>=<span class="cm-string">"post"</span><span class="cm-tag">&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">id</span>=<span class="cm-string">"loginStatus"</span><span class="cm-tag">&gt;&lt;/div&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"row"</span><span class="cm-tag">&gt;</span></pre><pre>                                        <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"form-group col-md-10"</span><span class="cm-tag">&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;label</span> <span class="cm-attribute">class</span>=<span class="cm-string">"form-label"</span><span class="cm-tag">&gt;</span>Email<span class="cm-tag">&lt;/label&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"controls"</span><span class="cm-tag">&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"input-with-icon  right"</span><span class="cm-tag">&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;i</span> <span class="cm-attribute">class</span>=<span class="cm-string">"icon-user"</span><span class="cm-tag">&gt;&lt;/i&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;input</span> <span class="cm-attribute">type</span>=<span class="cm-string">"email"</span> <span class="cm-attribute">name</span>=<span class="cm-string">"txtusername"</span> <span class="cm-attribute">id</span>=<span class="cm-string">"txtusername"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"form-control"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"tarun.gupta@venturepact.com"</span><span class="cm-tag">&gt;</span></pre><pre>                                                    <span class="cm-error">&lt;/div&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                        <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                        <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"row"</span><span class="cm-tag">&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"form-group col-md-10"</span><span class="cm-tag">&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;label</span> <span class="cm-attribute">class</span>=<span class="cm-string">"form-label"</span><span class="cm-tag">&gt;</span>Password<span class="cm-tag">&lt;/label&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;span</span> <span class="cm-attribute">class</span>=<span class="cm-string">"help"</span><span class="cm-tag">&gt;&lt;/span&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"controls"</span><span class="cm-tag">&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"input-with-icon  right"</span><span class="cm-tag">&gt;</span></pre><pre>                                                        <span class="cm-tag">&lt;i</span> <span class="cm-attribute">class</span>=<span class="cm-string">"icon-suitcase"</span><span class="cm-tag">&gt;&lt;/i&gt;</span></pre><pre>                                                        <span class="cm-tag">&lt;input</span> <span class="cm-attribute">type</span>=<span class="cm-string">"password"</span> <span class="cm-attribute">name</span>=<span class="cm-string">"txtpassword"</span> <span class="cm-attribute">id</span>=<span class="cm-string">"txtpassword"</span> <span class="cm-attribute">class</span>=<span class="cm-string">"form-control"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"123"</span><span class="cm-tag">&gt;</span></pre><pre>                                                        <span class="cm-error">&lt;/div&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"row"</span><span class="cm-tag">&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"control-group  col-md-10"</span><span class="cm-tag">&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"checkbox checkbox check-success"</span><span class="cm-tag">&gt;</span></pre><pre>                                                        <span class="cm-tag">&lt;a</span> <span class="cm-attribute">href</span>=<span class="cm-string">"forgotpassword"</span><span class="cm-tag">&gt;</span>Trouble logging in?<span class="cm-tag">&lt;/a&gt;</span><span class="cm-atom">&amp;nbsp;&amp;nbsp;</span></pre><pre><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span><span class="cm-tab">    </span></pre><pre>                                                    <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"row"</span><span class="cm-tag">&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;div</span> <span class="cm-attribute">class</span>=<span class="cm-string">"col-md-10"</span><span class="cm-tag">&gt;</span></pre><pre>                                                    <span class="cm-tag">&lt;button</span> <span class="cm-attribute">class</span>=<span class="cm-string">"btn btn-primary btn-cons pull-right"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"submit"</span><span class="cm-tag">&gt;</span>Login<span class="cm-tag">&lt;/button&gt;</span></pre><pre>                                                <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                            <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                        <span class="cm-error">&lt;/form&gt;</span></pre><pre>                                    <span class="cm-tag">&lt;/div&gt;</span></pre><pre>                                <span class="cm-error">&lt;/div&gt;</span></pre><pre>                            <span class="cm-error">&lt;/div&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- END CONTAINER --&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- BEGIN CORE JS FRAMEWORK--&gt;</span></pre><pre>                            <span class="cm-tag">&lt;script</span> <span class="cm-attribute">src</span>=<span class="cm-string">"assets/plugins/jquery-1.8.3.min.js"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/javascript"</span><span class="cm-tag">&gt;&lt;/script&gt;</span></pre><pre>                            <span class="cm-tag">&lt;script</span> <span class="cm-attribute">src</span>=<span class="cm-string">"assets/plugins/bootstrap/js/bootstrap.min.js"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/javascript"</span><span class="cm-tag">&gt;&lt;/script&gt;</span></pre><pre>                            <span class="cm-tag">&lt;script</span> <span class="cm-attribute">src</span>=<span class="cm-string">"assets/plugins/pace/pace.min.js"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/javascript"</span><span class="cm-tag">&gt;&lt;/script&gt;</span></pre><pre>                            <span class="cm-tag">&lt;script</span> <span class="cm-attribute">src</span>=<span class="cm-string">"assets/plugins/jquery-validation/js/jquery.validate.min.js"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/javascript"</span><span class="cm-tag">&gt;&lt;/script&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- BEGIN CORE TEMPLATE JS --&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- END CORE TEMPLATE JS --&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- BEGIN PAGE LEVEL JS --&gt;</span></pre><pre>                            <span class="cm-tag">&lt;script</span> <span class="cm-attribute">src</span>=<span class="cm-string">"assets/js/login.js"</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text/javascript"</span><span class="cm-tag">&gt;&lt;/script&gt;</span></pre><pre>                            <span class="cm-comment">&lt;!-- END PAGE LEVEL JS --&gt;</span></pre><pre>                        <span class="cm-error">&lt;/body&gt;</span></pre><pre>                    <span class="cm-error">&lt;/html&gt;</span></pre></div></div></div></div></div></div></div>
+                    </div>
+                    <div id="response-as-text" style="display: none;">
+                        <textarea id="code-data-raw"></textarea>
+                    </div>
+                    <div id="response-as-preview" style="display: none;"><iframe src="./Postman_files/response.html"></iframe></div>
+                    <div id="response-as-image" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <div id="response-cookies-container" style="display: none;">
+            <table id="response-cookies" class="table table-striped table-bordered">
+                <thead>
+                <tr><th>Name</th>
+                <th>Value</th>
+                <th>Domain</th>
+                <th>Path</th>
+                <th>Expires</th>
+                <th>HTTP</th>
+                <th>Secure</th>
+                </tr></thead>
+                <tbody id="response-cookies-items">
+    <tr>
+    <td>SQLiteManager_currentLangue</td>
+    <td>2</td>
+    <td>localhost</td>
+    <td>/</td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+
+
+    <tr>
+    <td>connect.sid</td>
+    <td>s%3A9ZhCdnshr8CCBmYGpr3dPLuP.CDz44UMUTpgWIJKCNUTp0k3e%2BeeM6PsKn6Er0wH44Ek</td>
+    <td>localhost</td>
+    <td>/</td>
+    <td></td>
+    <td>true</td>
+    <td></td>
+</tr>
+
+</tbody>
+            </table>
+        </div>
+        <div id="response-headers-container" style="display: none;">
+            <ul id="response-headers">
+    <li class="response-header clearfix">
+    <div class="response-header-name" data-placement="top" data-original-title="Connection" data-content="Options that are desired for the connection" data-trigger="hover" rel="popover">Connection →</div>
+    <div class="response-header-value">keep-alive</div>
+</li>
+
+    <li class="response-header clearfix">
+    <div class="response-header-name" data-placement="top" data-original-title="Content-Length" data-content="The length of the response body in octets (8-bit bytes)" data-trigger="hover" rel="popover">Content-Length →</div>
+    <div class="response-header-value">4473</div>
+</li>
+
+    <li class="response-header clearfix">
+    <div class="response-header-name" data-placement="top" data-original-title="Content-Type" data-content="The mime type of this content" data-trigger="hover" rel="popover">Content-Type →</div>
+    <div class="response-header-value">text/html; charset=utf-8</div>
+</li>
+
+    <li class="response-header clearfix">
+    <div class="response-header-name" data-placement="top" data-original-title="Date" data-content="The date and time that the message was sent" data-trigger="hover" rel="popover">Date →</div>
+    <div class="response-header-value">Mon, 27 Jan 2014 03:47:34 GMT</div>
+</li>
+
+    <li class="response-header clearfix">
+    <div class="response-header-name" data-placement="top" data-original-title="ETag" data-content="An identifier for a specific version of a resource, often a message digest" data-trigger="hover" rel="popover">ETag →</div>
+    <div class="response-header-value">"-1864370594"</div>
+</li>
+
+    <li class="response-header clearfix">
+    <div class="response-header-name" data-placement="top" data-original-title="X-Powered-By" data-content="Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)" data-trigger="hover" rel="popover">X-Powered-By →</div>
+    <div class="response-header-value">Express</div>
+</li>
+</ul>
+        </div>
+    </div>
+</section>
+</div>
+</div>
+<div id="modal-new-collection" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+
+        <h3>Create a new collection</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form form-horizontal" id="form-new-collection">
+            <div class="control-group" id="new-collection-container">
+                <label class="control-label">Collection name</label>
+
+                <div class="controls">
+                    <input type="text" class="medium clean-input" name="new-collection-blank" id="new-collection-blank">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary">Create</a>
+        <a data-dismiss="modal" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+<div id="modal-edit-collection" class="modal hide fade" tabindex="-1">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Edit collection</h3>
+    </div>
+    <div class="modal-body">
+        <div id="edit-collection-details">
+            <form class="form form-horizontal" id="form-edit-collection">
+                <input type="hidden" name="collection-id" class="collection-id">
+                <input type="text" name="collection-name" class="medium clean-input collection-name">
+            </form>
+        </div>
+
+        <div id="edit-collection-requests">
+            <ul id="edit-collection-requests-list"></ul>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary">Edit</a>
+        <a data-dismiss="modal" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+<div id="modal-edit-collection-request" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+
+        <h3>Edit request</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" id="form-edit-collection-request">
+            <div class="control-group">
+                <label class="control-label" for="new-collection">Request name</label>
+
+                <div class="controls">
+                    <div class="input">
+                        <input type="hidden" class="collection-request-id">
+                        <input type="text" class="medium clean-input collection-request-name" data-tabindex="1">
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="new-collection">Request description</label>
+
+                <div class="controls">
+                    <div class="input">
+                        <textarea class="medium collection-request-description" data-tabindex="2"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary" data-tabindex="3">Edit</a>
+        <a data-dismiss="modal" class="btn btn-secondary" data-tabindex="4">Cancel</a>
+    </div>
+</div>
+<div id="modal-add-to-collection" class="modal fade" data-keyboard="true">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+
+        <h3>Add request to a collection</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" id="form-add-to-collection">
+            <div class="control-group" id="select-collection-container">
+                <label class="control-label" for="select-collection">Existing collection</label>
+
+                <div class="controls">
+                    <select name="select-collection" class="medium" id="select-collection">
+                        <option value="_select">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="new-collection">or create a new one</label>
+
+                <div class="controls">
+                    <div class="input">
+                        <input type="text" class="medium clean-input" id="new-collection">
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="new-collection">Request name</label>
+
+                <div class="controls">
+                    <div class="input">
+                        <input type="text" class="medium clean-input" id="new-request-name">
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="new-collection">Request description</label>
+
+                <div class="controls">
+                    <div class="input">
+                        <textarea class="medium" id="new-request-description"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-primary">Add to collection</a>
+        <a data-dismiss="modal" class="btn btn-secondary">Cancel</a>
+    </div>
+</div>
+<div id="modal-share-collection" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal" id="modal-share-collection-close">x</a>
+
+        <h3>Share collection</h3>
+    </div>
+
+    <div class="modal-body">
+        <div>
+            <h4>Share as a link</h4>
+
+            <p>Upload your collection to getpostman.com and get a link to share with others.</p>
+            <pre id="share-collection-link"></pre>
+            <a id="share-collection-get-link" data-collection-id="" class="btn">Upload</a>
+        </div>
+        <div style="margin-top: 20px;">
+            <h4>Download as a file</h4>
+
+            <p>Get a JSON file to share with others or for backing up the collection.</p>
+            <a id="share-collection-download" data-collection-id="" class="btn">Download</a>
+        </div>
+        <hr>
+    </div>
+</div>
+<div id="modal-import-collection" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+
+        <h3>Import a collection</h3>
+    </div>
+
+    <div class="modal-body">
+        <h4>Import from disk</h4>
+
+        <div class="modal-import-alerts"></div>
+        <div id="import-collection-dropzone">
+            <h3>Drop files here or</h3>
+            <input type="file" id="collection-files-input" name="files[]" multiple="">
+        </div>
+        <hr>
+        <div id="import-collection-url-container">
+            <h4>Import from a URL</h4>
+
+            <div class="control-group">
+                <div class="controls">
+                    <input type="text" class="large clean-input" placeholder="Enter URL and press import" id="import-collection-url-input">
+                </div>
+            </div>
+            <div class="control-group">
+                <a id="import-collection-url-submit" class="btn btn-primary">Import</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-delete-collection" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+
+        <h3>Are you sure?</h3>
+    </div>
+
+    <div class="modal-body">
+        <p>
+            Are you sure you want to delete <span id="modal-delete-collection-name"></span>?
+        </p>
+    </div>
+
+    <div class="modal-footer">
+        <a data-collection-id="" id="modal-delete-collection-yes" data-dismiss="modal" class="btn btn-danger">Yes</a>
+        <a data-dismiss="modal" class="btn">No</a>
+    </div>
+</div>
+<div id="modal-delete-collection-request" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+
+        <h3>Are you sure?</h3>
+    </div>
+
+    <div class="modal-body">
+        <p>
+            Are you sure you want to delete <span id="modal-delete-collection-request-name"></span>?
+        </p>
+    </div>
+
+    <div class="modal-footer">
+        <a data-collection-id="" id="modal-delete-collection-request-yes" data-dismiss="modal" class="btn btn-danger">Yes</a>
+        <a data-dismiss="modal" class="btn">No</a>
+    </div>
+</div>
+<div id="modal-environments" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+        <h3>Manage environments</h3>
+    </div>
+
+    <div class="modal-body">
+        <div id="environments-list-wrapper">
+            <p>
+                Environments help you customize requests according to variables.
+            <span id="environments-list-help-detail">
+              Variables can be used in the
+              following form - {{variable}}. The string {{variable}} will be replaced with its corresponding value.
+              For example, for an environment variable 'url' with the value 'http://localhost'
+              , you will have to use {{url}} in the request URL field. {{url}} will be replaced by http://localhost
+              when the request is sent.
+            </span><a id="environments-list-help-toggle">Tell me more</a>
+            </p>
+
+            <div class="toolbar">
+                <button class="btn  environments-actions-add">
+                    Add
+                </button>
+                <button class="btn  environments-actions-import">
+                    Import
+                </button>
+                <button class="btn  environments-actions-manage-globals">
+                    Globals
+                </button>
+            </div>
+            <table id="environments-list" class="table table-striped table-bordered" style="margin-top: 10px;">
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="environment-editor">
+            <input type="text" name="environment-editor-name" id="environment-editor-name" class="clean-input" placeholder="New environment">
+            <input type="hidden" name="environment-editor-id" id="environment-editor-id" value="0" class="clean-input">
+
+            <div id="environment-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="Key" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""></div></div>
+        </div>
+        <div id="environment-importer">
+            <p>Select environment files from your desktop</p>
+
+            <div id="environment-importer-confirmations"></div>
+            <input type="file" id="environment-files-input" name="files[]" multiple="">
+        </div>
+        <div id="globals-editor">
+            <p>Globals are common values across all environments.</p>
+
+            <div id="globals-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="Key" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""></div></div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary environments-actions-add-submit">Submit</a>
+            <a class="btn environments-actions-add-back">Back</a>
+        </div>
+    </div>
+</div>
+<div id="modal-header-presets" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">x</a>
+
+        <h3>Manage header presets</h3>
+    </div>
+
+    <div class="modal-body">
+        <div id="header-presets-list-wrapper">
+            <p>
+                Quickly add groups of header key/value pairs to the request. Start typing the name of
+                the preset name and it'll show up in the dropdown list.
+            </p>
+
+            <div class="toolbar">
+                <button class="btn  header-presets-actions-add">
+                    Add
+                </button>
+            </div>
+            <table id="header-presets-list" class="table table-striped table-bordered" style="margin-top: 10px;">
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="header-presets-editor">
+            <input type="text" name="header-presets-editor-name" id="header-presets-editor-name" class="clean-input" placeholder="New preset name">
+            <input type="hidden" name="header-presets-editor-id" id="header-presets-editor-id" value="0" class="clean-input">
+
+            <div id="header-presets-keyvaleditor"><div class="keyvalueeditor-row keyvalueeditor-last"><input type="text" class="keyvalueeditor-key" placeholder="Key" name="keyvalueeditor-key" "=""><input type="text" class="keyvalueeditor-value keyvalueeditor-value-text" placeholder="Value" name="keyvalueeditor-value" "=""></div></div>
+        </div>
+
+        <div class="modal-footer">
+            <a class="btn btn-primary header-presets-actions-submit">Submit</a>
+            <a class="btn header-presets-actions-back">Back</a>
+        </div>
+    </div>
+</div>
+<div id="modal-settings" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+
+        <h3>Settings</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="history-count">Max history items</label>
+
+                <div class="controls">
+                    <select class="medium" name="history-count" id="history-count">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="-1">Unlimited</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="auto-save-request">Auto save request</label>
+
+                <div class="controls">
+                    <select class="medium" name="auto-save-request" id="auto-save-request">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="retain-link-headers">Retain headers on clicking on links</label>
+
+                <div class="controls">
+                    <select class="medium" name="retain-link-headers" id="retain-link-headers">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="send-no-cache-header">Send no-cache header</label>
+
+                <div class="controls">
+                    <select class="medium" name="send-no-cache-header" id="send-no-cache-header">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="language-detection">Language detection</label>
+
+                <div class="controls">
+                    <select class="medium" name="language-detection" id="language-detection">
+                        <option value="auto">Automatic detection</option>
+                        <option value="javascript">Force JSON</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="variable-delimiter">Variable delimiter</label>
+
+                <div class="controls">
+                    <input type="text" name="variable-delimiter" id="variable-delimiter">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="disable-iframe-preview">Disable IFrame Preview</label>
+
+                <div class="controls">
+                    <select class="medium" name="disable-iframe-preview" id="disable-iframe-preview">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="use-postman-proxy">Use Postman proxy?</label>
+
+                <div class="controls">
+                    <select class="medium" name="use-postman-proxy" id="use-postman-proxy">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+
+                    <p class="help-block">
+                        See <a href="https://github.com/a85/POSTMan-Chrome-Extension/wiki/Postman-Proxy">documentation</a>
+                        for usage instructions.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="control-group" id="postman-proxy-url-container" style="display: none;">
+                <label class="control-label" for="postman-proxy-url">Postman proxy URL</label>
+
+                <div class="controls">
+                    <input type="text" name="postman-proxy-url" id="postman-proxy-url">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="have-donated">Donated to Postman?</label>
+
+                <div class="controls">
+                    <select class="medium" name="have-donated" id="have-donated">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+
+                    <p class="help-block">
+                        Bad things will happen to you if you lie here.
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-spread-the-word" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+
+        <h3>Make Postman better!</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table table-striped">
+            <tbody><tr>
+                <td>
+                    <strong>Pay through your credit card or Paypal</strong>
+
+                    <div class="paypal-donate-form">
+                        If you found Postman useful, pay through your credit card or
+                        Paypal to help the project grow even more!
+                        The payment will go into the design, development and maintenance of the project.
+
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                            <input type="hidden" name="cmd" value="_s-xclick">
+                            <input type="hidden" name="hosted_button_id" value="UZTSEWB887WDJ">
+                            <input type="image" src="./Postman_files/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+                            <img alt="" border="0" src="./Postman_files/pixel.gif" width="1" height="1">
+                        </form>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a target="_blank" href="https://chrome.google.com/webstore/detail/fdmmgilgnpjigdojojpjoooidkmcomcm/reviews">Write a
+                        review</a>
+
+                    <p>
+                        We would love a good review. A bad review would hurt but make it as informative as possible!
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a target="_blank" href="https://github.com/a85/POSTMan-Chrome-Extension">Check out the source
+                        code</a>
+
+                    <p>
+                        Found a bug or want to add a feature? Let us know or checkout the code.
+                        Postman is licensed under the Apache Licence, Version 2.0.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Share Postman</strong>
+
+                    <div class="spreadtheword-sharebuttons">
+                        <div id="about-postman-social-buttons" class="clearfix">
+                            <div id="about-postman-twitter-button"></div>
+                            <div id="about-postman-plus-one-button"></div>
+                            <div id="about-postman-facebook-button"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+</div>
+<div id="modal-shortcuts" class="modal fade">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+
+        <h3>Shortcuts</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Shortcut key</th>
+            </tr>
+            </thead>
+            <tbody><tr>
+                <td>New request</td>
+                <td><strong>Alt + n</strong></td>
+            </tr>
+            <tr>
+                <td>Preview request</td>
+                <td><strong>Alt + p</strong></td>
+            </tr>
+            <tr>
+                <td>Edit URL</td>
+                <td><strong>Backspace</strong></td>
+            </tr>
+            <tr>
+                <td>Edit headers</td>
+                <td><strong>h</strong></td>
+            </tr>
+            <tr>
+                <td>Send request</td>
+                <td><strong>Enter/Return</strong></td>
+            </tr>
+            <tr>
+                <td>Maximize/minimze response</td>
+                <td><strong>f</strong></td>
+            </tr>
+            <tr>
+                <td>Add request to collection</td>
+                <td><strong>a</strong></td>
+            </tr>
+            <tr>
+                <td>Clear history</td>
+                <td><strong>Alt + c</strong></td>
+            </tr>
+            <tr>
+                <td>Manage environments</td>
+                <td><strong>e</strong></td>
+            </tr>
+            <tr>
+                <td>Toggle Quicklook window</td>
+                <td><strong>q</strong></td>
+            </tr>
+            <tr>
+                <td>This window</td>
+                <td><strong>?</strong></td>
+            </tr>
+        </tbody></table>
+    </div>
+</div>
+<script async="" src="./Postman_files/analytics.js"></script><script type="text/javascript" async="" src="./Postman_files/ga.js"></script><script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/ga.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jquery.min.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/underscore-min.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jsonlint.js"></script>
+
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/noty/jquery.noty.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/noty/layouts/top.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/noty/layouts/topRight.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/noty/themes/default.js"></script>
+
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/crypto/rollups/md5.js"></script>
+
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/dropbox/sha1.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/dropbox/oauth.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/util.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/httpstatuscodes.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/httpheaders.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/lib/util/formatting.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/lib/util/foldcode.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/mode/xmlpure/xmlpure.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/mode/xml/xml.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/codemirror.overlayParser.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/vkbeautify.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jquery.keyvalueeditor.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/jquery.jscrollpane.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/bootstrap-modalmanager.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/handlebars.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/templates.js"></script>
+<script type="text/javascript" src="chrome-extension://fdmmgilgnpjigdojojpjoooidkmcomcm/js/requester.js"></script>
+
+
+<ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="z-index: 1; display: none; top: 75px; left: 370px; width: 536px;"><li class="ui-menu-item" role="presentation"><a id="ui-id-10" class="ui-corner-all" tabindex="-1">localhost:3000/login</a></li><li class="ui-menu-item" role="presentation"><a id="ui-id-11" class="ui-corner-all" tabindex="-1">localhost:3000/login?tarun.gupta@venturepact.com=taurn</a></li></ul></body></html>
