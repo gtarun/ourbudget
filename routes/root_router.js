@@ -13,19 +13,7 @@ function initializeRoutes(app, passport, cache) {
 		 res.render('users/home', { what: 'best', who: 'me' });
 		
 	});
-    app.get("/", function(req, res) {
-		 //res.render('users/home', { what: 'best', who: 'me' });
-		if (req.isAuthenticated()) {
-			console.log("Authenticated : " + req.user);
-			res.redirect('users/home');
-
-		} else {
-			console.log("Unauthenticated Req received for GET /");
-			res.render("login", {
-				message : req.flash('error')
-			});
-		}
-	});
+    
 	app.get("/signup", function(req, res) {
 		 //res.render('users/home', { what: 'best', who: 'me' });
 		if (req.isAuthenticated()) {
