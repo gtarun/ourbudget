@@ -7,8 +7,8 @@ var login_router = require('../routes/login_router.js');
 var password_router = require('../routes/password_router.js');
 var root_router = require('../routes/root_router.js');
 var admin_router = require('../routes/admin_router.js');
-var earnings_router = require('../routes/earnings_router.js');
-var payments_router = require('../routes/payments_router.js');
+/*var earnings_router = require('../routes/earnings_router.js');
+var payments_router = require('../routes/payments_router.js');*/
 var myaccount_router = require('../routes/myaccount_router.js');
 var budget_router = require('../routes/budget_router.js');
 
@@ -24,10 +24,10 @@ module.exports = function(app, passport, cache) {
 	admin_router(app, passport, cache);
 	
 	// Initialize the earnings_router
-	earnings_router(app, passport, cache);
+	//earnings_router(app, passport, cache);
 	
 	// Initialize the payments_router
-	payments_router(app, passport, cache);
+	//payments_router(app, passport, cache);
 	
 	// Initialize the myaccount_router
 	myaccount_router(app, passport, cache);
