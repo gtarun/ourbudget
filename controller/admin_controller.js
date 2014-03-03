@@ -103,6 +103,13 @@ function createUser(req, res) {
 	// Construct the AdTags Structure
 	var members = [];
 	var size = 0;
+	var adData = {};
+	if(typeof(req.body.relation)=='string'){
+		adData.relation = req.body.relation;
+		adData.rel_email = req.body.rel_email;
+		members.push(adData);
+	}
+	else{
 	for ( var i = 0; i < req.body.relation.length; i++) {
 		var relation = req.body.relation[i];
 		var rel_email = req.body.rel_email[i];
@@ -123,12 +130,12 @@ function createUser(req, res) {
 */
 		// Prepare the adData
 		if (relation.length > 0 && rel_email.length > 0) {
-			var adData = {};
+			
 			adData.relation = relation;
 			adData.rel_email = rel_email;
 			members.push(adData);
 		}
-
+	}
 	}
 
 	data.familyMembers = members;
@@ -212,10 +219,10 @@ function sendMail(email){
 				subject : "SignUp"
 			}, function(err, message) {
 				if (err) {
-					console.log(err);
+					console.log("error occurred during sendmail"+err);
 				} 
 				else {
-					console.log("message:"+message);
+					console.log("message: is:"+message);
 				}
 			});
 		}

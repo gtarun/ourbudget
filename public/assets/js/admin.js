@@ -31,9 +31,9 @@ $(document).ready(function() {
      function disFormSubmit(event){
        event.preventDefault(); 
      };
-    console.log($('#email').val()); 
+    console.log("email is "+$('#email').val()); 
     if($('#email').val()){
-                               $('#email').prop('readonly',true);      
+     $('#email').prop('readonly',true);      
     }
     $("#createUserRow").hide();
     $("#modifyUserRow").hide();
@@ -52,27 +52,29 @@ $(document).ready(function() {
                 ignore: "",
                 rules: {
                     email: {
-                        minlength: 2,
+                        minlength: 10,
                         required: true
                     },
                 },
 
                 invalidHandler: function (event, validator) {
 					//display error alert on form submit    
+          console.log("invalid Handler");
                 },
 
                 errorPlacement: function (label, element) { // render error placement for each input type   
+                  console.log("errorPlacement");
 					          $('<span class="error"></span>').insertAfter(element).append(label)
                     var parent = $(element).parent('.input-with-icon');
                     parent.removeClass('success-control').addClass('error-control');  
                 },
 
                 highlight: function (element) { // hightlight error inputs
-					
+					console.log("hightlight");
                 },
 
                 unhighlight: function (element) { // revert the change done by hightlight
-                    
+                    console.log("unhighlight");
                 },
 
                 success: function (label, element) {
@@ -123,7 +125,7 @@ $(document).ready(function() {
 
                               }
                               else{
-                                var innerHTML = "<div class = 'col-md-12'><div class='alert alert-success'><button class='close' data-dismiss='alert'></button> You are signing up as parent.Please Check your e-mail for verification.You will be redirected to the login page after 3 seconds. Thank you !<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div></div>" ;               
+                                var innerHTML = "<div class = 'col-md-12'><div class='alert alert-success'><button class='close' data-dismiss='alert'></button> You are signing up as parent.Please Check your e-mail for verification.You will be redirected to the login page after 5 seconds. Thank you !<script>setTimeout(function(){window.location.href = '../login';},5000);</script></div></div>" ;               
                                 $("#emailform").html(innerHTML);
                               }
                                   return;

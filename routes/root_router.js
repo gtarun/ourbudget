@@ -38,11 +38,13 @@ function initializeRoutes(app, passport, cache) {
     
 	app.get("/signup", function(req, res) {
 		var token = req.query.token;
+		console.log("token is "+token);
 		var algo = 'aes256';
 	var key = 'password';
 	var decrypted = "";
-		console.log(token);
+		
 		if(token){
+			console.log("in if of token check");
 		var decipher = crypto.createDecipher(algo,key);
 		 decrypted = decipher.update(token,'hex','utf8') + decipher.final('utf8');
 		console.log('decrypted:'+ decrypted);
@@ -60,6 +62,7 @@ function initializeRoutes(app, passport, cache) {
 			});
 		}
 	});
+	
 	app.get("/", function(req, res) {
 			res.render("homepage", {
 				message : req.flash('error')

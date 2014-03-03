@@ -39,9 +39,10 @@ function addBudgget(req, res) {
 	}*/
 	errors.ret=true;
 	if(errors.ret){
+
 		var datetime = new Date();
 		var data =new Budget( {
-			userId : req.body.userId,
+			user : req.body.userid,
 			amount_spend : req.body.amount_spend,
 			DATE : datetime,
 			location : req.body.location,
@@ -68,7 +69,7 @@ function addBudgget(req, res) {
 			// Query executed successfully. Send User Created response.  
 			response.value = "Budget Saved " +doc;
 			res.json(200, response);
-			//res.redirect("/users/home");
+			res.redirect("/users/home");
 			});
 		}
 		else{
