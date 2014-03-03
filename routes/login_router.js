@@ -13,7 +13,7 @@ function initializeRoutes(app, passport, cache) {
 		if (req.isAuthenticated()) {
 			console.log("Authenticated : " + req.user);
 			
-			res.redirect('users/home');
+			res.render('users/home');
 
 		} else {
 			console.log("Unauthenticated Req received for GET /");

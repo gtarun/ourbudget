@@ -1688,7 +1688,7 @@ font-family: 'Open Sans';
 .page-content .content{
 	padding-left: 26px;
 	padding-right: 26px;
-	padding-top:83px;
+	padding-top:70px;
 }
 
 a.icon:hover {
@@ -6493,9 +6493,9 @@ table.fc-border-separate{
 .user-profile-pic img{
 	border-radius: 100px 100px 100px 100px;
     display: inline-block;
-    height: 68px;
+    height: 100px;
     overflow: hidden;
-    width: 68px;
+    width: 100px;
 	border:5px solid #fff;
 	background-color:#e5e9ec;	
 }

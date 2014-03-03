@@ -11,11 +11,12 @@ UserSchema = mongoose.Schema({
 	pass : String,
 	dob : String,
 	parentID: String,
+	address :String,
 	contactInformation: {
-		phonenumber : String
+		countrycode : String,
+		phonenumber : String,
 	},
 	monthlyIncome:String,
-	profile_pic_path : String,
 	facebook : {
 		id : String,
 		email : String,
@@ -26,7 +27,8 @@ UserSchema = mongoose.Schema({
 		email : String,
 		name : String
 	},
-	familyMembers: [],
+	familyMembers: [{relation: String,
+		rel_email : String}],
 	PaymentMethod : {},
 	prefrences : []
 });
@@ -64,6 +66,7 @@ UserSchema.statics.isValidUserPassword = function(email, password, done) {
 		}
 
 		if (password === user.pass) {
+			console.log(user);
 			return done(null, user);
 		}
 

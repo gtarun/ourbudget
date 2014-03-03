@@ -18,36 +18,34 @@ function SaveAccountInfo (req, res) {
 	// Information to be updated.
 	var update = {};
 
+	console.log("Update: "+req.user);
+
 	// Current contact information of the user.
-	var contactInfo = req.user.contactInformation;
+	//var contactInformation = req.user.contactInformation;
 	
 	// User can upload different pieces of information using this route.
 	// Figure out the info to be saved.
 	if (req.body.email !== null) {
 		email = req.body.email;
+		update.email = email;
 	}
 	if (req.body.countrycode !== null) {
-		contactInfo.countrycode = req.body.countrycode;
+		countrycode = req.body.countrycode;
+		update.countrycode = countrycode;
 	}
 	if (req.body.phonenumber !== null) {
-		contactInfo.countrycode = req.body.phonenumber;
+		phonenumber = req.body.phonenumber;
+		update.phonenumber = phonenumber;
 	}
 	if (req.body.pass1 !== null && req.body.pass1.length > 0) {
 		update.pass = req.body.pass1;
 	}
 
-	if (email !== null) {
-		update.email = email;
-	}
-	
-	update.contactInformation = contactInfo;
+		
+	//update.contactInformation = contactInformation;
 	
 	// Query Condition.
-	var conditions = {
-		email : req.user.email
-	}, options = {
-		multi : true
-	};
+	var conditions = {_id : req.user._id}, options = {multi : true};
 
 	console.log("Updating the contact info with: ");
 	console.log(update);
@@ -71,10 +69,12 @@ function SaveAccountInfo (req, res) {
 						{
 							doc.contactInformaion = {};	
 						}
+						//console.log(doc);
+						
 						
 						// Update the doc
-						doc.contactInformaion.countrycode = update.contactInformation.countrycode;
-						doc.contactInformaion.phonenumber = update.contactInformation.phonenumber;
+						doc.contactInformation.countrycode = update.countrycode;
+						doc.contactInformation.phonenumber = update.phonenumber;
 				
 						if (update.pass) {
 							doc.pass = update.pass;

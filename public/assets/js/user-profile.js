@@ -51,7 +51,7 @@ $(document).ready(function(){
                         minlength: 2
                     },
                     phonenumber: {
-                        minlength: 2
+                        minlength: 10
                     }
                 },
 
@@ -95,7 +95,7 @@ $(document).ready(function(){
                                 },
 
 		                      success : function(data) { 
-                                  var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Account Information has successfully saved. Please relogin. <script>setTimeout(function(){window.location.href = 'login';},5000);</script></div>" ; 
+                                  var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Account Information has successfully saved. Please relogin. <script>setTimeout(function(){window.location.href = '../login';},5000);</script></div>" ; 
                                   $("#accountInfoStatus").html(innerHTML);
                                   
                                 },

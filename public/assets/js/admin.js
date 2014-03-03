@@ -1,6 +1,6 @@
 function addElement()
 {
-    
+        
     var addHTML = "<div class='addTagDiv top'>" + 
                    "<div class='col-md-3'>" + 
                     "<input name='relation' id='relation' type='text' class='form-control' placeholder='+Relation'>" + 
@@ -27,12 +27,14 @@ function addElement()
     
 };
 
-$(document).ready(function() {    
-    
+$(document).ready(function() {
      function disFormSubmit(event){
        event.preventDefault(); 
      };
-     
+    console.log($('#email').val()); 
+    if($('#email').val()){
+                               $('#email').prop('readonly',true);      
+    }
     $("#createUserRow").hide();
     $("#modifyUserRow").hide();
     
@@ -60,7 +62,7 @@ $(document).ready(function() {
                 },
 
                 errorPlacement: function (label, element) { // render error placement for each input type   
-					$('<span class="error"></span>').insertAfter(element).append(label)
+					          $('<span class="error"></span>').insertAfter(element).append(label)
                     var parent = $(element).parent('.input-with-icon');
                     parent.removeClass('success-control').addClass('error-control');  
                 },
@@ -74,8 +76,9 @@ $(document).ready(function() {
                 },
 
                 success: function (label, element) {
-					var parent = $(element).parent('.input-with-icon');
-					parent.removeClass('error-control').addClass('success-control'); 
+					          var parent = $(element).parent('.input-with-icon');
+					          parent.removeClass('error-control').addClass('success-control'); 
+                    console.log("email form success");
                 },
 
                 submitHandler: function (form) {
@@ -93,65 +96,36 @@ $(document).ready(function() {
                                   $("#emailformStatus").html(innerHTML);
                                 },
 
-		                      success : function(data) { 
+		                          success : function(data) {
+                                 console.log("email form submit handler success")
+                              if($(location).attr('search')){
+
                                  if (data.value.user)
-                                 {
-                                      alert("The User exists in the system. User Modfy user Form to edit the current use details");
-                                     
-                                     console.log(data);
-                                     
-                                     $('#createUserRow').show();
-                                     $('#createUserForm')[0].reset();
-                                     $('#email1').val(data.value.user.email);
-$('#firstName').val(data.value.user.firstName);
-                                     $('#lastName').val(data.value.user.lastName);
-                                     $('#pass1').val(data.value.user.pass);
-                                     $('#pass2').val(data.value.user.pass);
-                                      $('#dob').val(data.value.user.dob);
-                                     $('#phoneNumber').val(data.value.user.contactInformation.phonenumber);
-                                     $('#address').val(data.value.user.address);
-                                     $('#monthlyIncome').val(data.value.user.monthlyIncome);
-                                     
-                                     $('.addTagDiv.top, #relation').val(data.value.user.familyMembers[0].relation[0]);
-                               
-                                     
-                                     $('.addTagDiv.top, #rel_email').val(data.value.user.familyMembers[0].rel_email[0]);
-                                    //console.log(data.value.user.familyMembers); 
-                                     for (var i = 1; i < data.value.user.familyMembers[0].relation.length; i++)
-                                     {
-                                         
-                                          var addHTML = "<div class='addTagDiv'>" + 
-                                                        "<div class='col-md-3'>" + 
-                                                        "<input value = '" + data.value.user.familyMembers[0].relation[i] + "' name ='relation' id='relation' type='text' class='form-control' placeholder='Relation'>" + 
-                                                        "</div>" +
-                                                        "<div class='col-md-8'>" + 
-                                                        "<input value = '" + data.value.user.familyMembers[0].rel_email[i] + "' name='rel_email' id='rel_email' type='email' class='form-control' placeholder='Relative Emails'>" + 
-                                                        "</div>" + 
-                                                        "<div class = 'col-md-1 links'>" + 
-                                                        "<a href = '#' class='destroy'> destroy</a>" + 
-                    "</div></div>";
-                                         
-                                          $('.addTagDiv.top').after(addHTML);
-                                         
-                                          $(".destroy").click(function () {
-                                             $(this).parent().parent().remove();
-                                          });    
-                                     }     
-                                     
-                                     
-                                     $('#emailRow').remove();
-                                 }
-                                else{
-                                    alert("The User doesnt exist. User Create user Form to create a new user");
-                                   console.log(data);
+                                 {                                    
                                     $('#createUserRow').show();
                                     $('#createUserForm')[0].reset();
                                     $('#email1').val(data.value.email);
                                     $('#email1').prop('readonly',true);
                                     $('#emailRow').remove();
-                                    
+                                    if(data.value.user.parentID){
+                                      $('#addTagsDiv').hide();
+                                    }                                    
                                 }
-                                  
+                                else{
+
+                                    alert("The User doesnt exist. User Create user Form to create a new user");
+                                    $('#createUserRow').show();
+                                    $('#createUserForm')[0].reset();
+                                    $('#email1').val(data.value.email);
+                                    $('#email1').prop('readonly',true);
+                                    $('#emailRow').remove();
+                                }
+
+                              }
+                              else{
+                                var innerHTML = "<div class = 'col-md-12'><div class='alert alert-success'><button class='close' data-dismiss='alert'></button> You are signing up as parent.Please Check your e-mail for verification.You will be redirected to the login page after 3 seconds. Thank you !<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div></div>" ;               
+                                $("#emailform").html(innerHTML);
+                              }
                                   return;
                                   
                                 },
@@ -192,6 +166,11 @@ $('#firstName').val(data.value.user.firstName);
                     dob: {
                         required: true
                     },
+                    countrycode: {
+                        minlength:3,
+                        maxlength:3,
+                        required: true
+                    },
                     phoneNumber: {
                         minlength: 10,
                         maxlength:10,
@@ -203,11 +182,9 @@ $('#firstName').val(data.value.user.firstName);
                     },
                     relation: {
                         minlength: 4,
-                        required: true
                     },
                      rel_email: {
                         minlength: 2,
-                        required: true,
                         email : true
                     }, 
                     monthlyIncome: {
@@ -221,7 +198,7 @@ $('#firstName').val(data.value.user.firstName);
                 },
 
                 errorPlacement: function (label, element) { // render error placement for each input type   
-					$('<span class="error"></span>').insertAfter(element).append(label)
+					          $('<span class="error"></span>').insertAfter(element).append(label)
                     var parent = $(element).parent('.input-with-icon');
                     parent.removeClass('success-control').addClass('error-control');  
                 },
@@ -235,8 +212,9 @@ $('#firstName').val(data.value.user.firstName);
                 },
 
                 success: function (label, element) {
-					var parent = $(element).parent('.input-with-icon');
-					parent.removeClass('error-control').addClass('success-control'); 
+					        var parent = $(element).parent('.input-with-icon');
+					        parent.removeClass('error-control').addClass('success-control'); 
+                  console.log("create user form success");
                 },
 
                 submitHandler: function (form) {
@@ -245,19 +223,19 @@ $('#firstName').val(data.value.user.firstName);
 		                      dataType : 'json',
                               data : $(form).serialize(),
                               type : 'POST', 
-		                      cache : false,
+		                          cache : false,
                               beforeSend : function() {
-                                    console.log("Submitting the WireTransfer US data to Server");
+                                    console.log("Submitting the Create New User form");
                               },
                               error : function(jqXHR, textStatus, errorThrown) {
                                   var innerHTML = "<div class='alert alert-danger'><button class='close' data-dismiss='alert'></button>  User Creation failed. Please try again. </div>" ; 
                                   $("#createUserForm").html(innerHTML);
                                 },
 
-		                      success : function(data) { 
-                                  var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Successfully created/updated the User</div>" ; 
+		                          success : function(data) { 
+                                  var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Successfully created/updated the User.You will be redirected to login screen after 3 seconds.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
                                   $("#createUserForm").html(innerHTML);
-                                  
+                                  console.log("create user form submit handler success");
                                 },
 
 		                      complete : function() {
