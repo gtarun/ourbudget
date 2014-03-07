@@ -1,14 +1,31 @@
 <% layout( '../boilerplate') -%>
 <h1>Add your Budget</h1>
+
 <form action="/addbudget" method="post">
+	<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>
 	<label for="amount_spend">Amount Spend</label> 
 		<input type="text" name="amount_spend" />
 	<label for="spend_on">Spend On</label> 
-		<input type="text" name="spend_on" />
+		<input type="text" name="spend_on" list="spend_items"/>
+	<datalist id="spend_items">
+   </datalist>
 	<label for="location">location</label>
 	<input type="text" name="location" />
-	<label for="id">Amount Spend</label> 
-		<input type="text" name="userId" />
-		<input type="submit" value="Add" />
+	<label for="id">Description</label> 
+		<input type="text" name="description" />
+		<input type="submit" value="Add" class='btn btn-primary'/>
 			
 </form>
+
+<% var pref = user.prefrences[0] %>
+
+<% for (key1 in pref){%>
+	 <% for (key2 in pref[key1]){%>
+    <script>
+        var option = document.createElement('OPTION');
+        option.text = '<%- key2 %>';
+        option.value = '<%- key2 %>';
+        document.getElementById('spend_items').appendChild(option);
+    </script>                                               
+<%}%>                                        
+<%}%>

@@ -70,7 +70,6 @@ font-size: 25px;
 </style>
 
 <form action="updateprefrence" method="post">
-<%=JSON.stringify(user)%>
 <br>
 <% if(user.length > 1){  %>
 <% for(var item =0 ;item< user.length;item++){ %>
@@ -102,16 +101,20 @@ font-size: 25px;
         <div class="back face center">
             <ul class="listing">
                 <li>
-                    <input type="checkbox" name="Transport[car]" />
-                    Car
-                </li>
-                <li>
-                    <input type="checkbox" name="Transport[Bike/Scooter]" />
-                    Bike/Scooter
-                </li>
-                <li>
-                    <input type="checkbox" name="Transport[Public Transport]" />
+                    <input type="checkbox" name="Transport[public]" />
                     Public Transport
+                </li>
+                <li>
+                    <input type="checkbox" name="Transport[Fuel]" />
+                    Fuel
+                </li>
+                <li>
+                    <input type="checkbox" name="Transport[purchase]" />
+                    Vehical Purchase
+                </li>
+                <li>
+                    <input type="checkbox" name="Transport[others]" />
+                    Others
                 </li>
             </ul>
         </div>
@@ -125,16 +128,20 @@ font-size: 25px;
         <div class="back face center">
             <ul class="listing">
                 <li>
-                    <input type="checkbox" name="Entertainment[Movies]" />
+                    <input type="checkbox" name="Entertainment[movie]" />
                     Movies
                 </li>
                 <li>
-                    <input type="checkbox" name="Entertainment[Outings]" />
+                    <input type="checkbox" name="Entertainment[outing]" />
                     Outings
                 </li>
                 <li>
-                    <input type="checkbox" name="Entertainment[other]" />
-                    other
+                    <input type="checkbox" name="Entertainment[party]" />
+                    Party
+                </li>
+                <li>
+                    <input type="checkbox" name="Entertainment[others]" />
+                    others
                 </li>
             </ul>
         </div>
@@ -148,28 +155,168 @@ font-size: 25px;
         <div class="back face center">
             <ul class="listing">
                 <li>
-                    <input type="checkbox" name="Household[Crockery]" />
+                    <input type="checkbox" name="Household[crockery]" />
                     Crockery
                 </li>
                 <li>
-                    <input type="checkbox" name="Household[RATION]" />
-                   RATION
+                    <input type="checkbox" name="Household[ration]" />
+                   Ration
                 </li>
                 <li>
-                    <input type="checkbox" name="Household[public]" />
-                    Public Transport
+                    <input type="checkbox" name="Household[pocketMoney]" />
+                    Pocket Money
+                </li>
+                <li>
+                    <input type="checkbox" name="Household[servantSalary]" />
+                    Servant Salary
+                </li>
+                <li>
+                    <input type="checkbox" name="Household[education]" />
+                    Education
+                </li>
+                <li>
+                    <input type="checkbox" name="Household[others]" />
+                    Others
                 </li>
             </ul>
         </div>
     </div>
 </div>
 
+<div class="f1_container">
+    <div class="f1_card" class="shadow">
+        <div class="front face">
+            <div class="page-title">Bills</div>
+        </div>
+        <div class="back face center">
+            <ul class="listing">
+                <li>
+                    <input type="checkbox" name="Bills[electricity]" />
+                    Electricity
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[water]" />
+                   Water
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[telephone]" />
+                    Telephone
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[gas]" />
+                    Gas
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[mobileRecharge]" />
+                    Mobile Recharge
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[internet]" />
+                    Internet
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[rent]" />
+                    Rent
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[healthCare]" />
+                    Health Care
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[television]" />
+                    Television
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[newspaper]" />
+                    Newspapers
+                </li>
+                <li>
+                    <input type="checkbox" name="Bills[others]" />
+                    Others
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="f1_container">
+    <div class="f1_card" class="shadow">
+        <div class="front face">
+            <div class="page-title">Shopping</div>
+        </div>
+        <div class="back face center">
+            <ul class="listing">
+                <li>
+                    <input type="checkbox" name="Shopping[householdCommodities]" />
+                    Household Commodities
+                </li>
+                <li>
+                    <input type="checkbox" name="Shopping[wardrobe]" />
+                   Wardrobe
+                </li>
+                <li>
+                    <input type="checkbox" name="Shopping[others]" />
+                    Others
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="f1_container">
+    <div class="f1_card" class="shadow">
+        <div class="front face">
+            <div class="page-title">Miscellaneous</div>
+        </div>
+        <div class="back face center">
+            <ul class="listing">
+                <li>
+                    <input type="checkbox" name="Miscellaneous[gifts]" />
+                    Gifts
+                </li>
+                <li>
+                    <input type="checkbox" name="Miscellaneous[services]" />
+                   Services
+                </li>
+                <li>
+                    <input type="checkbox" name="Miscellaneous[investment]" />
+                    Investment
+                </li>
+                <li>
+                    <input type="checkbox" name="Miscellaneous[donations]" />
+                    Donations
+                </li>
+                <li>
+                    <input type="checkbox" name="Miscellaneous[personalExpenses]" />
+                    Personal Expenses
+                </li>
+                <li>
+                    <input type="checkbox" name="Miscellaneous[moneyLending]" />
+                    Money Lending
+                </li>
+                <li>
+                    <input type="checkbox" name="Miscellaneous[others]" />
+                    Others
+                </li>
+                </ul>
+        </div>
+    </div>
+</div>
+
 <% } %>
+
+<%//=JSON.stringify(user.prefrences[0])%>
+<% var pref = user.prefrences[0] %>
+<%//=JSON.stringify(Object.keys(pref).length)%>
+<% for (key1 in pref){%>
+    <% for (key2 in pref[key1]){%>
+    <% var check = key1+'['+key2+']' %>
+    <script>
+    document.getElementsByName('<%- check %>')[0].checked = true;
+    </script>   
+    <%}%>                                            
+<%}%>                                        
  
-
-
 		<div>
-			<input type="submit" />
+			<input type="submit" class='btn btn-primary' value='Save Preferences'/>
 			</div>
     </form>
 			
