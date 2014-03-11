@@ -1,44 +1,36 @@
-/**
- * Admin controller which handles the routes in admin_router.js
- */
-
+var email = require("emailjs");
+var crypto = require("crypto");
+var redis = require("../cache/redis_cache");
 var User = require("../models/User");
+var url = require("url");
+var mail = require("../controller/MailingController");
 
-/**
- * GetUser will return the User details from the DB, and return as JSON object.
- * @param req
- * @param res 
- */
-function getUser(req, res) {
+var url='http://127.0.0.1:3000/signup';
+
+exports.getUser = function(req, res) {
 	var email = req.body.email;
-
 	console.log("Get User called with " + email);
-
-	// Response object to be returned
 	var response = {};
-
-	// Find the User object in the DB
-	User.findOne({
-		email : email
-	}, function(err, doc) {
+	User.findOne({email : email, parentID : {$exists:false}}, function(err, doc) {
 		if (err) {
 			console.log(err);
 			response.error = "DB Error";
 			res.json(500, response);
 			return;
 		}
-
 		// Initialize the value
 		response.value = {};
 		response.value.email = email;
-
 		// Prepare the response object
 		if (doc === null) {
-			// No User found
+			console.log('This user does not exist as a parent');
+			var text = 'Please click on th following link to sign up as a parent';
+			mail.sendMail(email,url,text);
 			res.json(200, response);
 			return;
 		} else {
 			// User found. Populate the user
+			console.log('You have already signed up as a parent');
 			response.value.user = doc;
 			res.json(200, response);
 			return;
@@ -53,25 +45,20 @@ function getUser(req, res) {
  * @param req
  * @param res
  */
-function createUser(req, res) {
-	console.log("Get User called");
-	console.log(req.body);
+exports.createUser = function(req, res) {
+	console.log("Create User called");
 	var email = req.body.email1;
 
-	if (typeof req.body.relation !== 'undefind') {
-		req.body.relation = [ req.body.relation ];
-		req.body.rel_email = [ req.body.rel_email ];
-	}
-
-	// Construct the User Json object from the data in the request
 	var data = {
 		firstName : req.body.firstName,
 		lastName : req.body.lastName,
 		email : req.body.email1,
 		pass : req.body.pass1,
 		dob : req.body.dob,
-		parentID: '',
+		address :req.body.address,
+		//parentID: '',
 		contactInformation : {
+				countrycode : req.body.countrycode,
 				phonenumber : req.body.phoneNumber
 		},
 		monthlyIncome:req.body.monthlyIncome,
@@ -94,33 +81,27 @@ function createUser(req, res) {
 	// Construct the AdTags Structure
 	var members = [];
 	var size = 0;
+	console.log("TYPE:"+typeof(req.body.relation));
+	if(typeof(req.body.relation)=='string')
+	{
+		var adData = {relation : req.body.relation, rel_email : req.body.rel_email};
+		members.push(adData);
+	}
+	else{
 	for ( var i = 0; i < req.body.relation.length; i++) {
 		var relation = req.body.relation[i];
 		var rel_email = req.body.rel_email[i];
 
-		// Trim the URL
-		/*if (relation) {
-			relation = relation.trim();
-		} else {
-			relation = "";
-		}
-
-		// Trim the AdTag
-		if (rel_email) {
-			rel_email = rel_email.trim();
-		} else {
-			rel_email = "";
-		}
-*/
 		// Prepare the adData
 		if (relation.length > 0 && rel_email.length > 0) {
-			var adData = {};
-			adData.relation = relation;
-			adData.rel_email = rel_email;
+			var adData = {relation : relation, rel_email : rel_email};
+			console.log('Pushing:' + adData.relation + adData.rel_email);
 			members.push(adData);
 		}
-
 	}
+	}
+
+	console.log('members: '+JSON.stringify(members));
 
 	data.familyMembers = members;
 	/*Add function to send Invitation to all the members */
@@ -135,22 +116,34 @@ function createUser(req, res) {
 	var options = {};
 	options.upsert = true;
 
-	User.findOneAndUpdate(query, data, options, function(err, doc) {
+	User.findOneAndUpdate(query, data, options, function(err, parent) {
 		if (err) {
 			console.log(err);
 			response.error = "Saving Failed";
 			res.json(500, response);
 			return;
 		}
-
+		if(parent){
+			console.log("Parent:"+parent)
+			for(var i=0; i<parent.familyMembers.length; i++)
+			{
+				console.log(i);
+				User.findOneAndUpdate({_id:parent.familyMembers[i]._id},
+									  {parentID : parent._id.toString(), email:parent.familyMembers[i].rel_email},
+									  {upsert : true},
+									  function(err,child){
+									  	if(child)
+									  		console.log("Child created."+ child);
+									  		var text = 'Please click on the following link to signup as a child';
+									  		mail.sendMail(child.email,url,text);
+									  })
+			}
+		}
 		// Query executed successfully. Send User Created response.  
 		response.value = "New User Created";
 		res.json(200, response);
 	});
 }
 
-/**
- * Export the functions
- */
-exports.getUser = getUser;
-exports.createUser = createUser;
+
+

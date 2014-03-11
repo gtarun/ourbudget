@@ -1,10 +1,10 @@
 function addElement()
 {
-    
+        
     var addHTML = "<div class='addTagDiv top'>" + 
                    "<div class='col-md-3'>" + 
-                    "<input name='relation' id='relation' type='text' class='form-control' placeholder='+Relation'>" + 
-                      "</div>" +
+                      "<select name='relation' id='relation' type='text' class='form-control' placeholder='+relation'></select>"+
+                       "</div>" +
                       "<div class='col-md-8'>" + 
                       "<input name='rel_email' id='rel_email' type='text' class='form-control' placeholder='Relative Email'>" + 
                       "</div>" + 
@@ -27,14 +27,21 @@ function addElement()
     
 };
 
-$(document).ready(function() {    
-    
+$(document).ready(function() {
      function disFormSubmit(event){
        event.preventDefault(); 
      };
-     
+    
+jQuery.validator.addMethod("notEqual", function(value, element, param) {
+ return this.optional(element) || value != $(param).val();
+}, "Email Ids of Parent and Children must be distint.");
+
+    if($('#email').val()){
+       $('#email').prop('readonly',true);      
+    }
+
     $("#createUserRow").hide();
-    $("#modifyUserRow").hide();
+    //$("#modifyUserRow").hide();
     
     
     $(".destroy").click(function () {
@@ -50,8 +57,9 @@ $(document).ready(function() {
                 ignore: "",
                 rules: {
                     email: {
-                        minlength: 2,
-                        required: true
+                        minlength: 6,
+                        required: true,
+                        email: true
                     },
                 },
 
@@ -60,7 +68,7 @@ $(document).ready(function() {
                 },
 
                 errorPlacement: function (label, element) { // render error placement for each input type   
-					$('<span class="error"></span>').insertAfter(element).append(label)
+					          $('<span class="error"></span>').insertAfter(element).append(label)
                     var parent = $(element).parent('.input-with-icon');
                     parent.removeClass('success-control').addClass('error-control');  
                 },
@@ -74,8 +82,9 @@ $(document).ready(function() {
                 },
 
                 success: function (label, element) {
-					var parent = $(element).parent('.input-with-icon');
-					parent.removeClass('error-control').addClass('success-control'); 
+					          var parent = $(element).parent('.input-with-icon');
+					          parent.removeClass('error-control').addClass('success-control'); 
+                    console.log("email form success");
                 },
 
                 submitHandler: function (form) {
@@ -93,66 +102,57 @@ $(document).ready(function() {
                                   $("#emailformStatus").html(innerHTML);
                                 },
 
-		                      success : function(data) { 
-                                 if (data.value.user)
-                                 {
-                                      alert("The User exists in the system. User Modfy user Form to edit the current use details");
-                                     
-                                     console.log(data);
-                                     
-                                     $('#createUserRow').show();
-                                     $('#createUserForm')[0].reset();
-                                     $('#email1').val(data.value.user.email);
-$('#firstName').val(data.value.user.firstName);
-                                     $('#lastName').val(data.value.user.lastName);
-                                     $('#pass1').val(data.value.user.pass);
-                                     $('#pass2').val(data.value.user.pass);
-                                      $('#dob').val(data.value.user.dob);
-                                     $('#phoneNumber').val(data.value.user.contactInformation.phonenumber);
-                                     $('#address').val(data.value.user.address);
-                                     $('#monthlyIncome').val(data.value.user.monthlyIncome);
-                                     
-                                     $('.addTagDiv.top, #relation').val(data.value.user.familyMembers[0].relation[0]);
-                               
-                                     
-                                     $('.addTagDiv.top, #rel_email').val(data.value.user.familyMembers[0].rel_email[0]);
-                                    //console.log(data.value.user.familyMembers); 
-                                     for (var i = 1; i < data.value.user.familyMembers[0].relation.length; i++)
-                                     {
-                                         
-                                          var addHTML = "<div class='addTagDiv'>" + 
-                                                        "<div class='col-md-3'>" + 
-                                                        "<input value = '" + data.value.user.familyMembers[0].relation[i] + "' name ='relation' id='relation' type='text' class='form-control' placeholder='Relation'>" + 
-                                                        "</div>" +
-                                                        "<div class='col-md-8'>" + 
-                                                        "<input value = '" + data.value.user.familyMembers[0].rel_email[i] + "' name='rel_email' id='rel_email' type='email' class='form-control' placeholder='Relative Emails'>" + 
-                                                        "</div>" + 
-                                                        "<div class = 'col-md-1 links'>" + 
-                                                        "<a href = '#' class='destroy'> destroy</a>" + 
-                    "</div></div>";
-                                         
-                                          $('.addTagDiv.top').after(addHTML);
-                                         
-                                          $(".destroy").click(function () {
-                                             $(this).parent().parent().remove();
-                                          });    
-                                     }     
-                                     
-                                     
-                                     $('#emailRow').remove();
-                                 }
-                                else{
-                                    alert("The User doesnt exist. User Create user Form to create a new user");
-                                   console.log(data);
+		                          success : function(data) {
+                                 console.log("email form submit handler success")
+                                 if($(location).attr('search')){
+
+                                  if (data.value.user)
+                                  {  
+                                    alert('The User already exists. U are signing up as a child') ;                                 
                                     $('#createUserRow').show();
                                     $('#createUserForm')[0].reset();
                                     $('#email1').val(data.value.email);
                                     $('#email1').prop('readonly',true);
                                     $('#emailRow').remove();
-                                    
+                                    //if(data.value.user.parentID){
+                                      $('#addTagsDiv').hide();
+                                    //}                                    
+                                  }
+                                  else{
+
+                                    alert("The User doesnt exist. U are signing up as a parent");
+                                    $('#createUserRow').show();
+                                    $('#createUserForm')[0].reset();
+                                    $('#email1').val(data.value.email);
+                                    $('#email1').prop('readonly',true);
+                                    $('#emailRow').remove();
+                                  }
+
                                 }
-                                  
-                                  return;
+                                else{
+                                  if(data.value.user){
+                                    var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>You  have already signed up as a parent. Please Login.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                                    $("#emailform").html(innerHTML);
+                                  }
+                                  else{
+                                    var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>Thank You for signing up as parent. Please check you email for verification.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                                    $("#emailform").html(innerHTML);
+                                  }
+                                }/*var message='';
+                                  if (data.value.user)
+                                    message = 'You already exist as a Parent . Please login from your parent account.';
+                                  else
+                                    message = 'Please Check your Email for verification.';
+                                  var innerHTML = "<div class = 'col-md-12'>
+                                                    <div class='alert alert-success'>
+                                                      <button class='close' data-dismiss='alert'></button>
+                                                      Message
+                                                      <script>setTimeout(function(){window.location.href = '../login';},3000);</script>
+                                                    </div>
+                                                  </div>" ;
+                                  $("#emailform").html(innerHTML);               
+                                }*/
+                                return;
                                   
                                 },
 
@@ -192,6 +192,11 @@ $('#firstName').val(data.value.user.firstName);
                     dob: {
                         required: true
                     },
+                    countrycode: {
+                        minlength:3,
+                        maxlength:3,
+                        required: true
+                    },
                     phoneNumber: {
                         minlength: 10,
                         maxlength:10,
@@ -203,12 +208,12 @@ $('#firstName').val(data.value.user.firstName);
                     },
                     relation: {
                         minlength: 4,
-                        required: true
                     },
                      rel_email: {
                         minlength: 2,
-                        required: true,
-                        email : true
+                        email : true,
+                        notEqual : "#email1",
+                        //notEqual : "#rel_email"
                     }, 
                     monthlyIncome: {
                         minlength: 3,
@@ -221,7 +226,7 @@ $('#firstName').val(data.value.user.firstName);
                 },
 
                 errorPlacement: function (label, element) { // render error placement for each input type   
-					$('<span class="error"></span>').insertAfter(element).append(label)
+					          $('<span class="error"></span>').insertAfter(element).append(label)
                     var parent = $(element).parent('.input-with-icon');
                     parent.removeClass('success-control').addClass('error-control');  
                 },
@@ -235,38 +240,12 @@ $('#firstName').val(data.value.user.firstName);
                 },
 
                 success: function (label, element) {
-					var parent = $(element).parent('.input-with-icon');
-					parent.removeClass('error-control').addClass('success-control'); 
+					        var parent = $(element).parent('.input-with-icon');
+					        parent.removeClass('error-control').addClass('success-control'); 
+                  console.log("create user form success");
                 },
 
-                submitHandler: function (form) {
-                	 $.ajax({
-		                      url : $(form).attr('action'),
-		                      dataType : 'json',
-                              data : $(form).serialize(),
-                              type : 'POST', 
-		                      cache : false,
-                              beforeSend : function() {
-                                    console.log("Submitting the WireTransfer US data to Server");
-                              },
-                              error : function(jqXHR, textStatus, errorThrown) {
-                                  var innerHTML = "<div class='alert alert-danger'><button class='close' data-dismiss='alert'></button>  User Creation failed. Please try again. </div>" ; 
-                                  $("#createUserForm").html(innerHTML);
-                                },
-
-		                      success : function(data) { 
-                                  var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Successfully created/updated the User</div>" ; 
-                                  $("#createUserForm").html(innerHTML);
-                                  
-                                },
-
-		                      complete : function() {
-			                     console.log('Finished all tasks');
-		                      }
-	                       });
-                    
-                            return false;
-                }
+                
             });
 
 }

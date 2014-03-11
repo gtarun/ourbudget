@@ -10,12 +10,13 @@ UserSchema = mongoose.Schema({
 	email : String,
 	pass : String,
 	dob : String,
-	parentID: String,
+	parentID : {type: String, default:''},
+	address :String,
 	contactInformation: {
-		phonenumber : String
+		countrycode : String,
+		phonenumber : String,
 	},
 	monthlyIncome:String,
-	profile_pic_path : String,
 	facebook : {
 		id : String,
 		email : String,
@@ -26,7 +27,8 @@ UserSchema = mongoose.Schema({
 		email : String,
 		name : String
 	},
-	familyMembers: [],
+	familyMembers: [{relation: String,
+		rel_email : String}],
 	PaymentMethod : {},
 	prefrences : []
 });
@@ -50,9 +52,7 @@ UserSchema.statics.signup = function(email, password, done) {
 };
 
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
-	this.findOne({
-		email : email
-	}, function(err, user) {
+	this.findOne({email : email, parentID:{$exists:false}}, function(err, user) {
 		if (err) {
 			return done(err);
 		}
@@ -64,11 +64,13 @@ UserSchema.statics.isValidUserPassword = function(email, password, done) {
 		}
 
 		if (password === user.pass) {
+			console.log(user);
 			return done(null, user);
 		}
-
+console.log('Password is incorrect. Plese retry.');
 		return done(null, false, {
 			message : 'Password is incorrect. Plese retry.'
+			
 		});
 	});
 };

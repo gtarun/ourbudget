@@ -68,7 +68,7 @@ function addBudgget(req, res) {
 			// Query executed successfully. Send User Created response.  
 			response.value = "Budget Saved " +doc;
 			res.json(200, response);
-			//res.redirect("/users/home");
+			res.redirect("/users/home");
 			});
 		}
 		else{

@@ -3,6 +3,7 @@
  */
 var fs = require('fs');
 var User = require('../models/User');
+var mail = require("../controller/MailingController");
 
 /**
  * Saves the Account Information in the request to the DB.
@@ -14,49 +15,31 @@ function SaveAccountInfo (req, res) {
 	var countrycode = null;
 	var phonenumber = null;
 	var password = null;
-
-	// Information to be updated.
 	var update = {};
 
-	// Current contact information of the user.
-	var contactInfo = req.user.contactInformation;
-	
-	// User can upload different pieces of information using this route.
-	// Figure out the info to be saved.
 	if (req.body.email !== null) {
 		email = req.body.email;
+		update.email = email;
 	}
 	if (req.body.countrycode !== null) {
-		contactInfo.countrycode = req.body.countrycode;
+		countrycode = req.body.countrycode;
+		update.countrycode = countrycode;
 	}
 	if (req.body.phonenumber !== null) {
-		contactInfo.countrycode = req.body.phonenumber;
+		phonenumber = req.body.phonenumber;
+		update.phonenumber = phonenumber;
 	}
 	if (req.body.pass1 !== null && req.body.pass1.length > 0) {
 		update.pass = req.body.pass1;
 	}
 
-	if (email !== null) {
-		update.email = email;
-	}
-	
-	update.contactInformation = contactInfo;
-	
-	// Query Condition.
-	var conditions = {
-		email : req.user.email
-	}, options = {
-		multi : true
-	};
+
+	var conditions = {_id : req.user._id}, options = {multi : true};
 
 	console.log("Updating the contact info with: ");
 	console.log(update);
 
-	// Save the Info into DB.
-	User
-			.findOne(
-					conditions,
-					function(err, doc) {
+	User.findOne(conditions,function(err, doc) {
 						var response = {};
 						if (err) {
 							console.log(err);
@@ -65,29 +48,39 @@ function SaveAccountInfo (req, res) {
 							res.json(500, response);
 							return;
 						}
-
 						// Create the ContactInformation if not present.
 						if (!doc.contactInformaion)
-						{
 							doc.contactInformaion = {};	
-						}
-						
-						// Update the doc
-						doc.contactInformaion.countrycode = update.contactInformation.countrycode;
-						doc.contactInformaion.phonenumber = update.contactInformation.phonenumber;
+						doc.contactInformation.countrycode = update.countrycode;
+						doc.contactInformation.phonenumber = update.phonenumber;
 				
 						if (update.pass) {
 							doc.pass = update.pass;
 						}
 						
 						if (update.email) {
-							doc.email = update.email;
+							if(doc.email !== update.email){
+								User.findOne({email : update.email, parentID : {$exists:false}}, function(err, parent){
+									if(parent){
+										console.log("parent exists :)");
+										response.user = parent;
+										res.json(200,response);
+										return;
+									}
+										
+									else{
+										console.log("parent doesn't exist :)");
+										mail.sendMail(update.email,'http://127.0.0.1:3000/login',
+										'Your login emailID has been changed from '+doc.email+' to '+update.email);
+										doc.email = update.email;
+									}
+								});
+								
+							}
 						}
 
 						// Save the information.
-						doc
-								.save(function(err) {
-									// Saving failed.
+						doc.save(function(err) {
 									if (err) {
 										console.log(err);
 										response.error = "Saving the File to server failed. Please retry";
@@ -95,7 +88,6 @@ function SaveAccountInfo (req, res) {
 										res.json(500, response);
 										return;
 									}
-
 									// Once is is saved, logout the user for security reasons.
 									req.logout();
 									response.value = "Information Saved Succesfully";
@@ -106,6 +98,30 @@ function SaveAccountInfo (req, res) {
 					});
 }
 
+function SaveRelationInfo (req, res){
+	User.findOne({_id:req.user._id},function(err,doc){
+		console.log("Update Monthly Income")
+		if(req.body.monthlyIncome !== null)
+			doc.monthlyIncome = req.body.monthlyIncome;
+		doc.save(function(err){console.log("Saved")})
+	});
+
+	var members = [];
+	for ( var i = 0; i < req.body.relation.length; i++) {
+		var relation = req.body.relation[i];
+		var rel_email = req.body.rel_email[i];
+
+		// Prepare the adData
+		if (relation.length > 0 && rel_email.length > 0) {
+			var adData = {relation : relation, rel_email : rel_email};
+			console.log('Pushing:' + adData.relation + adData.rel_email);
+			members.push(adData);
+		}
+	}
+
+	
+		
+}		
 /**
  * Saves the User picture uploaded in the request to the Images folder, and changes the user pic.
  * @param req
@@ -234,8 +250,7 @@ function UpdatePrefrence(req,res){
 						doc.prefrences =data;
 				
 						// Save the information.
-						doc
-								.save(function(err) {
+						doc.save(function(err) {
 									// Saving failed.
 									if (err) {
 										console.log(err);
@@ -262,6 +277,54 @@ function UpdatePrefrence(req,res){
 	
 }
 
+function RemoveRelationInfo (req, res){
+	console.log(req.body.email);
+	console.log(req.body.parent_id);
+	User.remove({email:req.body.email,parentID:req.body.parent_id},function(err,removed){
+		if(err)
+			console.log("Error in Remove Relation child");
+		if(removed){
+			console.log("removed child");
+		}
+	});
+	
+	User.findOneAndUpdate({_id:req.body.parent_id},
+						  {$pull:{familyMembers:{rel_email:req.body.email}}},
+						  function(err,updated){
+						  		if(err)
+									console.log("Error in Remove Relation Parent");
+								if(updated){
+									console.log("updated/removed from parent");
+								}
+    });
+	res.send(req.body);
+}
+
+function AddRelationInfo (req, res){
+	User.findOneAndUpdate({_id:req.body.parent_id},
+					      {$push:{familyMembers:{rel_email:req.body.email,relation:req.body.rel}}},
+					      function(err,added1){
+						    if(err) 
+						    	console.log('error');
+							if(added1){
+								console.log('updated/added into Parent'+added1);
+								var len=added1.familyMembers.length - 1;
+								console.log(len);
+								console.log(added1.familyMembers[len]._id);
+								User.findOneAndUpdate({_id:added1.familyMembers[len]._id},
+													  {email:req.body.email,parentID:req.body.parent_id},//{_id:added1.familyMembers[len]._id},
+													  {upsert:true},
+													  function(err,added2){
+														if(err) 
+															console.log('error2');
+														if(added2)
+														    console.log('Added child'+added2); 
+								}); 
+							}
+	});
+	
+	res.send(req.body);
+}
 /**
 * Export the prefrence of user
 */
@@ -269,3 +332,6 @@ function UpdatePrefrence(req,res){
 exports.SaveAccountInfo = SaveAccountInfo;
 exports.ChangePicture = ChangePicture;
 exports.UpdatePrefrence =UpdatePrefrence;
+exports.SaveRelationInfo = SaveRelationInfo;
+exports.RemoveRelationInfo = RemoveRelationInfo;
+exports.AddRelationInfo = AddRelationInfo;

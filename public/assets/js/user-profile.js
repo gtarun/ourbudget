@@ -1,4 +1,107 @@
-/**
+
+function remElement()
+{
+  $(".destroy").click(function () {
+      var email = $(this).parent().parent().find('#rel_email').val();
+      var parent_id = $('#parID').val();     
+      var postdata = {
+        'email' : email,
+        'parent_id' : parent_id
+      }
+      console.log(email);
+      console.log(parent_id);
+      
+        $.ajax({
+          url : 'removeRelation',
+          type: 'POST',
+          dataType : 'json',
+          data : postdata,
+
+          success : $(this).parent().parent().remove(),
+
+          error : function(data,a,b){
+            console.log("remElement:"+a);
+          }
+
+        });
+  });
+}
+
+    
+function addElement()
+{
+
+    var rel = $('#relation').val();
+    var email = $('#rel_email').val();
+    var parent_id = $('#parID').val();
+    var postdata ={
+      'rel' : rel,
+      'email' : email,
+      'parent_id' :parent_id
+    }
+    console.log(rel);
+    console.log(email);
+    console.log(parent_id);
+
+  $.ajax({
+    url : 'addRelation',
+    type : 'post',
+    dataType : 'json',
+    data : postdata,
+    beforeSend :  function(){
+      var addHTML = "<div class='addTagDiv top'>" + 
+                   "<div class='col-md-3'>" + 
+                    "<input name='relation' id='relation' type='text' class='form-control' placeholder='+Relation'>" + 
+                      "</div>" +
+                      "<div class='col-md-7'>" + 
+                      "<input name='rel_email' id='rel_email' type='text' class='form-control' placeholder='Relative Email'>" + 
+                      "</div>" + 
+                      "<div class = 'col-md-1 links'>" + 
+                      "<a href = 'javascript:addElement();' class='addMore topanchor'> add</a>" + 
+                      "</div></div>";
+      
+    $('.addMore.topanchor').text('remove');
+    $('.addMore.topanchor').attr('href', '#');
+    $('.addMore.topanchor').removeClass('topanchor addMore').addClass('destroy');
+    
+    var topDiv = $('.addTagDiv.top');
+    topDiv.before(addHTML);
+    topDiv.removeClass('top');
+  },
+ 
+  success:console.log("success"),
+
+  error : function(data,a,b){
+            console.log("addElement:"+a);
+          }
+}) ;  
+ 
+ $(".destroy").click(function () {
+      var email = $(this).parent().parent().find('#rel_email').val();
+      var parent_email = $('#parID').val();     
+      var postdata = {
+        'email' : email,
+        'parent_id' : parent_id
+      }
+      console.log(email);
+      console.log(parent_id);
+      
+        $.ajax({
+          url : 'removeRelation',
+          type: 'POST',
+          dataType : 'json',
+          data : postdata,
+
+          success : $(this).parent().parent().remove(),
+
+          error : function(data,a,b){
+            console.log("addElement/destroy:"+a);
+          }
+
+        });
+  }); 
+   
+}/**
  * New node file
  */
 $(document).ready(function(){
@@ -30,9 +133,13 @@ $(document).ready(function(){
     function disFormSubmit(event){
        event.preventDefault(); 
      };
+
+     jQuery.validator.addMethod("notEqual", function(value, element, param) {
+     return this.optional(element) || value != $(param).val();
+     }, "Email Ids of Parent and Children must be diffrent.");
     
     $('#accountInfoForm').submit(disFormSubmit);
-
+    $('#parID').hide();
      $('#accountInfoForm').validate({
                 focusInvalid: false, 
                 ignore: "",
@@ -45,13 +152,22 @@ $(document).ready(function(){
                         equalTo : "#pass1"
                     },
                     email: {
-                        minlength: 2
+                        minlength: 6,
+                        email: true,
+                        notEqual : "#rel_email"
+                    },
+                    rel_email:{
+                        minlength : 6,
+                        email: true,
+                        notEqual : "#email"
                     },
                     countrycode: {
-                        minlength: 2
+                        minlength: 3,
+                        maxlength : 3
                     },
                     phonenumber: {
-                        minlength: 2
+                        minlength: 10,
+                        maxlength: 10
                     }
                 },
 
@@ -95,10 +211,16 @@ $(document).ready(function(){
                                 },
 
 		                      success : function(data) { 
-                                  var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Account Information has successfully saved. Please relogin. <script>setTimeout(function(){window.location.href = 'login';},5000);</script></div>" ; 
-                                  $("#accountInfoStatus").html(innerHTML);
-                                  
-                                },
+                              console.log("myData:" +JSON.stringify(data));
+                              if(data.user){
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> This email ID already exists as Parent.</div>" ; 
+                                $("#accountInfoStatus").html(innerHTML);
+                              }
+                              else{
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Account Information has successfully saved. Please relogin. <script>setTimeout(function(){window.location.href = '../login';},5000);</script></div>" ; 
+                                $("#accountInfoStatus").html(innerHTML);
+                              }    
+                           },
 
 		                      complete : function() {
 			                     console.log('Finished all tasks');
