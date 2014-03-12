@@ -12,6 +12,7 @@ UserSchema = mongoose.Schema({
 	dob : String,
 	parentID : {type: String, default:''},
 	address :String,
+	mailSent: {type: Boolean, default:false},
 	contactInformation: {
 		countrycode : String,
 		phonenumber : String,

@@ -4,8 +4,8 @@ var crypto = require("crypto");
 var redis = require("../cache/redis_cache");
 
 var server = email.server.connect({
-	user : "zufeshanzareen14@gmail.com",
-	password : "Z\"fe$#@nZ@reeN14",
+	user : " ourbudget@venturepact.com",
+	password : "ourbudget@vp",
 	host : "smtp.gmail.com",
 	ssl : true
 });
@@ -29,7 +29,7 @@ exports.sendMail = function(email, url, text){
 			emailText = text + "\n" + myurl;
 			server.send({
 				text : emailText,
-				from : "zufeshanzareen14@gmail.com",
+				from : "ourbudget@venturepact.com",
 				to : email,
 				subject : "SignUp-OurBudget"
 			}, function(err, message) {
