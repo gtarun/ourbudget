@@ -10,7 +10,7 @@ var BudgetSchema = mongoose.Schema({
 	DATE : Date,
 	location : String,
 	spend_on : String,
-	LAST_UPDATED_AT : Date
+	//LAST_UPDATED_AT : Date
 });
 
 var Budget = mongoose.model("budget", BudgetSchema);

@@ -306,6 +306,22 @@ $(document).ready(function() {
     event.preventDefault(); 
   };
 
+
+  jQuery.validator.addMethod('check_dob', function(value, element){
+    var eDay=new Array();
+    var tYear= newDate();
+    eDay= $('#dob').val();
+    var eYear= eday.substring(6,10);
+    var tYear= tDay.getFullYear();
+
+    if(tyear - eYear > 10)
+    {
+      return true;
+    }
+    else
+      return false;
+  });
+
   jQuery.validator.addMethod("notEqual", function(value, element, param) {
  return this.optional(element) || value != $(param).val();
 }, "Email Ids of Parent and Children must be distint.");
@@ -414,9 +430,9 @@ $(document).ready(function() {
 
 		              success : function(data) {
                       console.log("email form submit handler success")
-                      if($(location).attr('search')){
-                            if (data.value.user){  
-                                alert('The User already exists. U are signing up as a child') ;                                 
+                      //if($(location).attr('search')){
+                            if (data.value.child){  
+                                alert(data.message) ;                                 
                                 $('#createUserRow').show();
                                 $('#createUserForm')[0].reset();
                                 $('#email1').val(data.value.email);
@@ -426,26 +442,31 @@ $(document).ready(function() {
                                   $('#addTagsDiv').hide();
                                 //}                                    
                             }
-                            else{
-
-                                alert("The User doesnt exist. U are signing up as a parent");
+                            else if(data.value.form===true){
+                                alert(data.message);
                                 $('#createUserRow').show();
                                 $('#createUserForm')[0].reset();
                                 $('#email1').val(data.value.email);
                                 $('#email1').prop('readonly',true);
                                 $('#emailRow').remove();
                             }
-                      }
-                      else{
-                            if(data.value.user){
-                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>You  have already signed up as a parent. Please Login.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                            else if(data.value.form===false){
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>"+data.message+"<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                                $("#emailform").html(innerHTML);
+                            }
+                            else if(data.value.parent===true){
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>"+data.message+"<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                                $("#emailform").html(innerHTML);
+                            }
+                            else if(data.value.parent===false){
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>You have signed up as a child. Please check your mail to proceed forward as a parent.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
                                 $("#emailform").html(innerHTML);
                             }
                             else{
-                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>Thank You for signing up as parent. Please check you email for verification.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button>Unexpected Error Encountered.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
                                 $("#emailform").html(innerHTML);
                             }
-                      }
+                      //}
                       return;
                 },
 
@@ -482,7 +503,8 @@ $('#createUserForm').validate({
             equalTo : "#pass1"
         },
         dob: {
-            required: true
+            required: true,
+            check_dob: true
         },
         countrycode: {
             required: true

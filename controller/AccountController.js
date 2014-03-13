@@ -127,91 +127,29 @@ function SaveRelationInfo (req, res){
  * @param req
  * @param res
  */
-function ChangePicture (req, res) {
+function ChangeProfilePicture (req, res) {
 
 	console.log("Chnage Picture Called:");
 	console.log(req.files.file.path);
 
 	var filePath = req.files.file.path;
 	var n = filePath.lastIndexOf(".");
-	var ext = filePath.substring(n);
-	var fileName = req.user.email + "$" + "userpic" + ext;
-	var newPath = "./public/assets/img/profiles/" + fileName;
+	var newPath = "./public/assets/img/profilepics/" + req.user.firstName+".jpg";
+	fs.readFile(req.files.file.path,function(err,data){
+		if(err){
+			console.log("err");
+			res.redirect("/user/user-home");
+			res.end();
+		}
+		else
+		{
+			fs.writeFile(newPath,data,function(err){
+				res.redirect("/user/user-home");
+			})
+		}
 
-	fs
-			.rename(
-					req.files.file.path,
-					newPath,
-					function(err) {
-						var response = {};
-						if (err) {
-							console.log(err);
-							response.error = "Saving the File to server failed. Reupload the File.";
-							console.log(response);
-							res.send(500, response);
-						} else {
-
-							console.log("Renamed the file to : " + newPath);
-							var conditions = {
-								email : req.user.email
-							}, update = {
-								profile_pic_path : newPath
-							}, options = {
-								multi : true
-							};
-
-							User.update(conditions, update, options, callback);
-
-							function callback(err, numAffected) {
-								if (err) {
-									console.log(err);
-									response.error = "Saving the File to server failed. Reupload the File.";
-									console.log(response);
-									res.send(500, response);
-								}
-
-								console.log("Updated the NewPath in DB");
-
-								if (req.user.profile_pic_path
-										&& req.user.profile_pic_path !== newPath) {
-									console
-											.log("Deleting the old Profile Pic: "
-													+ req.user.profile_pic_path);
-									fs
-											.unlink(
-													req.user.profile_pic_path,
-													function(err) {
-														if (err) {
-															console.log(err);
-															response.error = "Saving the File to server failed. Reupload the File.";
-															console
-																	.log(response);
-															res.send(500,
-																	response);
-														}
-														console
-																.log('successfully deleted '
-																		+ req.user.profile_pic_path);
-
-														req.user.profile_pic_path = newPath;
-
-														response.value = "File Received Succesfully";
-														res.send(200, response);
-													});
-
-								} else {
-
-									req.user.profile_pic_path = newPath;
-									response.value = "File Received Succesfully";
-									res.send(200, response);
-								}
-
-							}
-
-						}
-
-					});
-
+	})
+	
 }
 
 /**
@@ -330,7 +268,7 @@ function AddRelationInfo (req, res){
 */
 
 exports.SaveAccountInfo = SaveAccountInfo;
-exports.ChangePicture = ChangePicture;
+exports.ChangeProfilePicture = ChangeProfilePicture;
 exports.UpdatePrefrence =UpdatePrefrence;
 exports.SaveRelationInfo = SaveRelationInfo;
 exports.RemoveRelationInfo = RemoveRelationInfo;

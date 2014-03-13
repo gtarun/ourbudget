@@ -72,9 +72,9 @@ function initializeRoutes(App, passport, Cache) {
 	})
 	// Route for handling the chnage picture.
 	App.post("/users/changePicture", Auth.isAuthorizedForAPI,
-			AccountAPI.ChangePicture);
+			AccountAPI.ChangeProfilePicture);
 	App.post("/users/changeCover", Auth.isAuthorizedForAPI,
-			AccountAPI.ChangePicture);
+			AccountAPI.ChangeProfilePicture);
 	
 	
 	// Route for saving the account info.

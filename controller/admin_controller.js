@@ -9,9 +9,11 @@ var url='http://127.0.0.1:3000/signup';
 
 exports.getUser = function(req, res) {
 	var email = req.body.email;
-	console.log("Get User called with " + email);
+	var token = req.body.token;
+	console.log("Get User called with email " + email);
+	console.log("Get User called with token " + token);
 	var response = {};
-	User.findOne({email : email, parentID : {$exists:false}}, function(err, doc) {
+	User.findOne({email : email,parentID:{$exists:false}}, function(err, doc) {
 		if (err) {
 			console.log(err);
 			response.error = "DB Error";
@@ -22,16 +24,62 @@ exports.getUser = function(req, res) {
 		response.value = {};
 		response.value.email = email;
 		// Prepare the response object
-		if (doc === null) {
-			console.log('This user does not exist as a parent');
-			var text = 'Please click on th following link to sign up as a parent';
-			mail.sendMail(email,url,text);
+		if (doc){
+			//console.log("parentID"+doc.parentID);
+			
+			if(token!='undefined'){
+				console.log("Go to create user form");
+				response.value.form = true;
+				response.message = "You are proceeding to signup as a parent";
+			}
+			else if(token==='undefined'){
+				console.log("You have already signed up as parent.");
+				response.value.form = false;
+				response.message = "You have already signed up as parent once. Either login or check your mail for link to proceed."
+			}
+			else{
+				console.log("Unexpected situation 1 !!!");
+			}
 			res.json(200, response);
 			return;
-		} else {
-			// User found. Populate the user
-			console.log('You have already signed up as a parent');
-			response.value.user = doc;
+			
+			/*else if(doc.parentID && token==='undefined'){
+				console.log("You exist as a child but want to sign up as a parent too.");
+				var text = 'Please click on th following link to sign up as a parent';
+				mail.sendMail(email,url,text);
+				User.findOneAndUpdate({email:email,parentID:{$exists:false}},{email:email},{upsert:true},function(err,par){
+				if(err)
+					console.log("Error in creating Parent");
+				if(par)
+					console.log("Mail sent and parent created in database.");
+				});
+				response.value.parent = false;
+				response.message = "You exist as a child but want to sign up as a parent too."
+			}*/
+			
+		} 
+		else {
+			if(token==='undefined'){
+				console.log('You can sign up as a parent');
+				var text = 'Please click on th following link to sign up as a parent';
+				mail.sendMail(email,url,text);
+				User.findOneAndUpdate({email:email,parentID:{$exists:false}},{email:email},{upsert:true},function(err,par){
+					if(err)
+						console.log("Error in creating Parent");
+					if(par)
+						console.log("Mail sent and parent created in database."+par);
+				});
+				response.value.parent = true;
+				response.message='You have signed up as a parent. Please check your mail to proceed forward.'
+			}
+			else if(token!='undefined'){
+				console.log("You can signup as a child");
+				response.value.child = doc;
+				response.message = "You are proceeding to signup as a child";
+			}
+			else{
+				console.log("Unexpected situation 2 !!!");
+			}
 			res.json(200, response);
 			return;
 		}

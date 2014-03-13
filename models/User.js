@@ -17,7 +17,7 @@ UserSchema = mongoose.Schema({
 		countrycode : String,
 		phonenumber : String,
 	},
-	monthlyIncome:String,
+	monthlyIncome:Number,
 	facebook : {
 		id : String,
 		email : String,

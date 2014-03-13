@@ -36,7 +36,7 @@
            <form id = "emailform" action = "getUser" role="form">
 			   <h1>Family Budgetting Signup</h1>
                <div class="form-group">
-				   
+				           <input type='text' name='token' style='display:none' value=<%=token%> >
                    <label class="sr-only" for="email">Email address</label>
                    <input type="email" name = "email" class="form-control" id="email" placeholder="Enter email" value=<%=email%>>                 </div>
                <button type="submit" class="btn btn-success">Sign Up</button>
@@ -142,7 +142,7 @@
 				<div class="form-actions">
 					<div class="pull-right">
 					  <button class="btn btn-danger btn-cons" type="submit"><i class="icon-ok"></i> Save</button>
-					  <button class="btn btn-white btn-cons" type="button">Cancel</button>
+					  <button id='#save' class="btn btn-white btn-cons" type="button">Cancel</button>
 					</div>
 				  </div>
 			</form>

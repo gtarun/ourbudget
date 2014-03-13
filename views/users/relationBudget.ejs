@@ -1,0 +1,88 @@
+<% layout( '../boilerplate') -%>
+<div class="page-title">
+            	<h3><span class="semi-bold">Add your Relation Budget</span></h3>		
+			</div>
+		<!-- START CONTAINER -->
+			<div id="container">
+        		<div class = "row">
+            		<div class="col-md-10">
+						<div class=" tiles white col-md-12 no-padding">
+							<div class="tiles green cover-pic-wrapper">							
+                        		<img src="../../assets/img/cover_pic.png">
+							</div>
+							<div class="tiles white">			
+								<div class="row">
+									<div class="col-md-3 col-sm-3" >
+										<div class="user-profile-pic">	
+											<img width="100" height="100"  src="<%= imgpath %>">
+										</div>
+								 		<div class="user-mini-description">
+											<h3 class=" semi-bold">
+												<%=user.firstName %> <%=user.lastName %>
+											</h3>
+										</div>
+									</div>		
+								</div>
+                        		<div class="tiles-body">
+                            		<div class="row  column-seperation">  
+                                		<div class="col-md-6">
+                                    		<form id = "relBudgetForm" name = "relBudgetForm" method= "post" action="/relationBudget" role="form">
+                                          <div id = "relbudgetStatus">
+                                          </div>
+                                    			<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>	
+                                    			<div id = "addBudgetStatus">
+                                    			</div>
+                                    			<h4>Relation Budget</h4>
+                                    			<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input name="relation" id="relation" type="text" class="form-control" placeholder="Relation Name" list="relList">
+                                            			<datalist id="relList" required>
+                                            			</datalist>
+                                        			</div>
+                                    			</div>
+                                    			<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input type="text" class="form-control" name="amount" id="amount" placeholder="Budget">
+                                        			</div>
+                                    			</div>
+                                       			
+                            					<div class="form-actions">
+                                					<div class="pull-right">
+                                    					<button class="btn btn-primary btn-cons" type="submit">
+                                        					<i class="icon-ok"></i> Save
+                                    					</button>
+                                					</div>
+                            					</div>
+                                        
+                       						</form>
+                    					</div>
+                                
+                                		<div style = "height : 25%;" class="col-md-6"> 
+                                    		<h4>Location</h4>
+                                    		<div id="googleMapWarning">
+                                    		</div>
+                                        		<div id = "googleMap" style="height:300px;width:400px;" class="thumbnail">
+                                        		</div>
+                                			</div>
+                            				</div>                           
+                        				</div>
+                    				
+                    				</div>
+		          				</div>
+          					
+          					</div>
+          				</div>
+          			</div>
+        		</div>
+        	</div>
+<% var rel = user.familyMembers %>
+
+<% for (key1 in rel){%>
+	 <% var email = rel[key1].rel_email %>
+    <script>
+        var option = document.createElement('OPTION');
+        option.text = '<%- email %>';
+        option.value = '<%- email %>';
+        document.getElementById('relList').appendChild(option);
+    </script>                                               
+<%}%>                                        

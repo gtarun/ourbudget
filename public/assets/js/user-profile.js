@@ -129,7 +129,7 @@ $(document).ready(function(){
     };
     
     $("#userpicform").dropzone(options);
-    
+      $("#userpicform1").dropzone(options);
     function disFormSubmit(event){
        event.preventDefault(); 
      };
