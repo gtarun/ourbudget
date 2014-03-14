@@ -27,6 +27,8 @@ function remElement()
   });
 }
 
+
+
     
 function addElement()
 {
@@ -140,7 +142,7 @@ $(document).ready(function(){
     
     $('#accountInfoForm').submit(disFormSubmit);
     $('#parID').hide();
-     $('#accountInfoForm').validate({
+    $('#accountInfoForm').validate({
                 focusInvalid: false, 
                 ignore: "",
                 rules: {
@@ -155,11 +157,6 @@ $(document).ready(function(){
                         minlength: 6,
                         email: true,
                         notEqual : "#rel_email"
-                    },
-                    rel_email:{
-                        minlength : 6,
-                        email: true,
-                        notEqual : "#email"
                     },
                     countrycode: {
                         minlength: 3,
@@ -230,6 +227,68 @@ $(document).ready(function(){
                             return false;
                 }
             });	
+
+$('#relationForm').validate({
+                focusInvalid: false, 
+                ignore: "",
+                rules: {
+                    rel_email:{
+                        minlength : 6,
+                        email: true,
+                        notEqual : "#email"
+                    },
+                    monthlyIncome:{
+                      minlength : 3
+                    }
+                },
+
+                errorPlacement: function (label, element) { // render error placement for each input type   
+                    $('<span class="error"></span>').insertAfter(element).append(label)
+                    var parent = $(element).parent('.input-with-icon');
+                    parent.removeClass('success-control').addClass('error-control');  
+                },
+
+                success: function (label, element) {
+                    var parent = $(element).parent('.input-with-icon');
+                    parent.removeClass('error-control').addClass('success-control'); 
+                },
+
+                submitHandler: function (form) {
+                    
+                    $.ajax({
+                          url : $(form).attr('action'),
+                          dataType : 'json',
+                          data : $(form).serialize(),
+                          type : 'POST', 
+                          cache : false,
+                          beforeSend : function() {
+                              console.log("Submitting Edit Reations form with data : " + $(form).serialize());
+                          },
+                          error : function(jqXHR, textStatus, errorThrown) {
+                              var innerHTML = "<div class='alert alert-danger'><button class='close' data-dismiss='alert'></button> Server Failure. Please retry. </div>" ; 
+                              $("#relInfoStatus").html(innerHTML);
+                                },
+
+                          success : function(data) { 
+                              console.log("myData:" +JSON.stringify(data));
+                              if(data){
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Relations and monthly income has been saved successfully.</div>" ; 
+                                $("#relInfoStatus").html(innerHTML);
+                              }
+                              else{
+                                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Try again </div>" ; 
+                                $("#relInfoStatus").html(innerHTML);
+                              }    
+                           },
+
+                          complete : function() {
+                           console.log('Finished all tasks');
+                          }
+                         });
+                    
+                            return false;
+                }
+            }); 
     
 }   
 );

@@ -107,10 +107,12 @@ function SaveRelationInfo (req, res){
 	});
 
 	var members = [];
+
 	for ( var i = 0; i < req.body.relation.length; i++) {
 		var relation = req.body.relation[i];
 		var rel_email = req.body.rel_email[i];
 
+		
 		// Prepare the adData
 		if (relation.length > 0 && rel_email.length > 0) {
 			var adData = {relation : relation, rel_email : rel_email};
@@ -119,8 +121,7 @@ function SaveRelationInfo (req, res){
 		}
 	}
 
-	
-		
+	res.json(200,members);
 }		
 /**
  * Saves the User picture uploaded in the request to the Images folder, and changes the user pic.

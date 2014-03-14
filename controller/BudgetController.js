@@ -89,6 +89,58 @@ function getAllBudget(req,res){
 		}
 	});
 }
+
+function relbudget(req,res){
+  	console.log("Ajax request for: "+req.body.email+req.body.parId);
+  	var response={
+  		name:String,
+  		email:String,
+  		monthlyIncome:String
+  	};
+  	User.findOne({'email':req.body.email,'parentID':req.body.parId},function(err,found){
+  		if(err)
+  			console.log("Error in dealing");
+  		if(found){
+  			console.log("Found user:"+found);
+  			response.name = found.firstName+' '+found.lastName;
+  			//response.name = found.email+found.parentID;
+  			console.log(response.name);
+  		}
+  		else{
+  			response.name='';
+  		}
+  	});
+
+	User.find({_id:req.body.id} ,function(err,doc){
+		if(err){console.log("error ocuureed in fetching data"+err);
+		res.json(200,"error");}
+		else
+		{ 
+			doc=doc[0];
+			response.email= doc.email,
+			response.monthlyIncome=doc.monthlyIncome;
+			console.log(response);
+			res.json(200,response);
+
+		}
+	});
+}
+
+function relationBudget(req,res){
+	console.log("Body: "+JSON.stringify(req.body));
+	User.findOneAndUpdate({email:req.body.name,parentID:req.body.userid},
+						  {$inc:{monthlyIncome: req.body.amount}},
+						  function(err,updated){
+						  	if(err)
+						  		console.log("Error:"+err);
+						  	if(updated){
+						  		console.log("Updated Document:"+updated);
+						  	}
+						  	
+	});
+	res.redirect("/users/relationBudget");
+
+}
 /**
  * Export the functions
  */
@@ -96,3 +148,5 @@ function getAllBudget(req,res){
 exports.addBudgget = addBudgget;
 exports.getBudget = getBudget;
 exports.getAllBudget = getAllBudget;
+exports.relbudget = relbudget;
+exports.relationBudget= relationBudget;

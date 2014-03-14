@@ -60,13 +60,15 @@ function initializeRoutes(app, passport, cache) {
 			imgpaths :path});}
 			})
 		
-			console.log("add budget : " + req.user);
+			//console.log("add budget : " + req.user);
 			/*res.render("users/addbudget",{
 				user:req.user,
 				imgpath:"../assets/img/profilepics/"+req.user.firstName+".jpg",
 				imgpaths:"../assets/img/profilepics/"+req.user.firstName+".jpg"});*/
 		
 	});
+	app.post("/users/relationBudget",AccountAPI.relationBudget);
+	app.post("/users/relbudget",AccountAPI.relbudget);
 	
 	app.post("/users/addbudget", AccountAPI.addBudgget);
 
