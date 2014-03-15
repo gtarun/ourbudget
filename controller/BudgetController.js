@@ -92,55 +92,90 @@ function getAllBudget(req,res){
 
 function relbudget(req,res){
   	console.log("Ajax request for: "+req.body.email+req.body.parId);
-  	var response={
-  		name:String,
-  		email:String,
-  		monthlyIncome:String
-  	};
+  	var response={};
   	User.findOne({'email':req.body.email,'parentID':req.body.parId},function(err,found){
   		if(err)
   			console.log("Error in dealing");
   		if(found){
-  			console.log("Found user:"+found);
-  			response.name = found.firstName+' '+found.lastName;
-  			//response.name = found.email+found.parentID;
-  			console.log(response.name);
-  		}
-  		else{
-  			response.name='';
-  		}
-  	});
-
-	User.find({_id:req.body.id} ,function(err,doc){
-		if(err){console.log("error ocuureed in fetching data"+err);
-		res.json(200,"error");}
-		else
-		{ 
-			doc=doc[0];
-			response.email= doc.email,
-			response.monthlyIncome=doc.monthlyIncome;
-			console.log(response);
-			res.json(200,response);
-
+  			//console.log("Found user:"+found);
+  			var name=found.firstName;
+  			console.log("name is" +name);
+  			if(name === undefined)
+  			{
+  				console.log("name is undefind in if"+ (name === undefined));
+  				res.json(200,response);
+  			}
+  			else 
+  			{
+  				console.log("name is good"+(name === undefined));
+  				response.name = found.firstName+' '+found.lastName;
+				console.log("response.name in case of "+name +"is"+response.name);
+  				User.find({_id:req.body.id} ,function(err,doc){
+					if(err){	
+						console.log("error ocuureed in fetching data"+err);
+					res.json(200,"error");
+					}
+					else{ 
+						doc=doc[0];
+						response.email= doc.email,
+						response.monthlyIncome=doc.monthlyIncome;
+					}	
+					console.log("response final in else is :"+response);
+					res.json(200,response);
+				});
+			}
 		}
-	});
+	})
 }
+
+		
+
 
 function relationBudget(req,res){
 	console.log("Body: "+JSON.stringify(req.body));
-	User.findOneAndUpdate({email:req.body.name,parentID:req.body.userid},
-						  {$inc:{monthlyIncome: req.body.amount}},
+	console.log("user "+req.user.firstName);
+	if(req.body.income>=req.body.amount)
+	{
+	console.log(req.body.name);
+	name=req.body.name;
+
+	var spacePosition = name.lastIndexOf(" ");
+	var firstName=name.substring(0,spacePosition);
+	var lastName =name.substring(spacePosition+1,name.length);
+	User.findOneAndUpdate({firstName:firstName, lastName:lastName,parentID:req.body.userid},
+						  {$inc:{monthlyIncome: req.body.amount},$push:{notification:{postDate:new Date(),amount:req.body.amount,who:req.user.firstName+' '+req.user.lastName}}},
+						  function(err,updated){
+						  	if(err)
+						  		console.log("Error:"+err);
+						  	if(updated){
+						  		console.log("Updated Document:"+updated);
+						  		
+						  	}
+	});
+	User.findOneAndUpdate({_id:req.body.userid,},
+						  {$inc:{monthlyIncome: -req.body.amount}},
 						  function(err,updated){
 						  	if(err)
 						  		console.log("Error:"+err);
 						  	if(updated){
 						  		console.log("Updated Document:"+updated);
 						  	}
-						  	
 	});
+	
+}
+else{
+	console.log("Inappropriate transacion");
+}
 	res.redirect("/users/relationBudget");
 
 }
+
+function sendNotification(id,amount,income)
+{
+
+	
+}
+
 /**
  * Export the functions
  */

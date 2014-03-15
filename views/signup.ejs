@@ -44,15 +44,15 @@
         </div>
     </div>
     
-     <div id = "createUserRow" class = "row">
+     <div id = "createUserRow1" class = "row">
         <div class = "col-md-12">
             <div class="grid simple">
             <div class="grid-title no-border">
-              <h4>Create <span class="semi-bold">New User</span></h4>
+              <h4>Create <span class="semi-bold">New Parent</span></h4>
               <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
             </div>
             <div class="grid-body no-border">
-			<form class="createUserForm" id="createUserForm" action = "createUser" novalidate="novalidate">	
+			<form class="createParentForm" id="createParentForm" action = "createUser" novalidate="novalidate">	
               <div class="row column-seperation">
                 <div class="col-md-6">
                   <h4>Personal Information</h4>            
@@ -146,6 +146,94 @@
 					</div>
 				  </div>
 			</form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+<div id = "createUserRow2" class = "row">
+        <div class = "col-md-12">
+            <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Create <span class="semi-bold">New Child</span></h4>
+              <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="#grid-config" data-toggle="modal" class="config"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+            </div>
+            <div class="grid-body no-border">
+      <form class="createChildForm" id="createChildForm" action = "createUser" novalidate="novalidate"> 
+              <div class="row column-seperation">
+                <div class="col-md-6">
+                  <h4>Personal Information</h4>            
+                    <div class="row form-row">
+                      <div class="col-md-5">
+                        <input name="firstName" id="firstName" type="text" class="form-control" placeholder="First Name">
+                      </div>
+                      <div class="col-md-7">
+                        <input name="lastName" id="lastName" type="text" class="form-control" placeholder="Last Name">
+                      </div>
+                    </div>
+                  
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="email1" id="email1" type="email" class="form-control" placeholder="email@address.com">
+                      </div>
+                    </div>
+                    
+                      <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="pass1" id="pass1" type="password" class="form-control" placeholder="Password">
+                      </div>
+                    </div>
+                    
+                      <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="pass2" id="pass2" type="password" class="form-control" placeholder="Confirm Password">
+                      </div>
+                    </div>
+                    
+                     <div class="row form-row">
+                      <div class="col-md-4">
+                        <input name="dob" id="dob" type="date" class="form-control" placeholder="1987-24-10">
+                      </div>
+                      <div class="col-md-8">
+                        <select name="countrycode" id="countrycode" type="" class="form-control" placeholder="Country-Code">
+                        </select>
+                        <input name="phoneNumber" id="phoneNumber" type="tel" class="form-control" placeholder="Phone Number">
+                      </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6">
+        
+                  <h4>Account Information</h4>
+                  
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="address" id="address" type="text" class="form-control" placeholder="Adress" >
+                      </div>
+                    </div>
+           
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="monthlyIncome" id="monthlyIncome" type="number" class="form-control" placeholder="Monthly Income">
+                      </div>
+                     </div>
+    
+                    <div class="row small-text">
+          <p class="col-md-12">
+          
+          </p>
+          </div>
+             
+                </div>
+              </div>
+        <div class="form-actions">
+          <div class="pull-right">
+            <button class="btn btn-danger btn-cons" type="submit"><i class="icon-ok"></i> Save</button>
+            <button id='#save' class="btn btn-white btn-cons" type="button">Cancel</button>
+          </div>
+          </div>
+      </form>
             </div>
           </div>
         </div>

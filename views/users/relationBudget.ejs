@@ -29,7 +29,8 @@
                                     		<form id = "relBudgetForm" name = "relBudgetForm" method= "post" action="relationBudget" role="form">
                                           <div id = "relbudgetStatus">
                                           </div>
-                                    			<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>	
+                                    			<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>
+                                                <input  style="display:none" for='user_income' name="income" value= <%=user.monthlyIncome%> > </input>	
                                     			<div id = "addBudgetStatus">
                                     			</div>
                                     			<h4>Relation Budget</h4>
@@ -88,7 +89,7 @@
 <%var email = relationData[i].rel_email%>
 <script>
     $(document).ready(function(){
-        $('#relBudgetForm').validate({
+       /* $('#relBudgetForm').validate({
         rules:{
             name:{
                 required:true
@@ -98,7 +99,7 @@
                 number:true
             }
         }
-         })
+         })*/
 
         $.ajax({
             url : 'relbudget',
@@ -110,17 +111,19 @@
             success : function(data)
             {
                 console.log("data:"+JSON.stringify(data));
+                if(data.email!=undefined){
                 var option = document.createElement('OPTION');
-                option.text = data.name;
-                option.value = data.email;
+                option.text = data.email;
+                option.value = data.name;
                 document.getElementById('relList').appendChild(option);
                 console.log("data "+data.email+"with monthlyIncome" +data.monthlyIncome);
+
                                         var rel_name='<input class="col-md-6" type="text" class="form-control" name="" id="" placeholder="Name" value=" '+data.name+' "  /> ';
 
                                         var rel_income='<input class="col-md-4" type="text" class="form-control" name="" id="" placeholder="Income" value=" '+data.monthlyIncome+' "  /> ';
 
                                         $('#addIncome').append(rel_name);
-                                        $('#addIncome').append(rel_income);
+                                        $('#addIncome').append(rel_income);}
             },
             error: function(err,a,b){
                 console.log("Eroor!!!"+err+a+b);

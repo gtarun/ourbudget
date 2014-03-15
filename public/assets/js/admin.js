@@ -320,13 +320,14 @@ $(document).ready(function() {
     }
     else
       return false;
-  });
+  },"You must be atleast 10 yrs old.");
 
   jQuery.validator.addMethod("notEqual", function(value, element, param) {
  return this.optional(element) || value != $(param).val();
 }, "Email Ids of Parent and Children must be distint.");
 
-  $("#createUserRow").hide();
+  $("#createUserRow1").hide();
+  $("#createUserRow2").hide();
   //$("#modifyUserRow").hide();
     
   var i;
@@ -375,7 +376,7 @@ $(document).ready(function() {
     $(this).remove();
   });
     
-  $('#createUserForm').submit(disFormSubmit);
+  $('#createParentForm').submit(disFormSubmit);
   $('#emailform').submit(disFormSubmit);
     
   $('#emailform').validate({
@@ -433,19 +434,16 @@ $(document).ready(function() {
                       //if($(location).attr('search')){
                             if (data.value.child){  
                                 alert(data.message) ;                                 
-                                $('#createUserRow').show();
-                                $('#createUserForm')[0].reset();
+                                $('#createUserRow2').show();
+                                $('#createChildForm')[0].reset();
                                 $('#email1').val(data.value.email);
                                 $('#email1').prop('readonly',true);
                                 $('#emailRow').remove();
-                                //if(data.value.user.parentID){
-                                  $('#addTagsDiv').hide();
-                                //}                                    
                             }
                             else if(data.value.form===true){
                                 alert(data.message);
-                                $('#createUserRow').show();
-                                $('#createUserForm')[0].reset();
+                                $('#createUserRow1').show();
+                                $('#createParentForm')[0].reset();
                                 $('#email1').val(data.value.email);
                                 $('#email1').prop('readonly',true);
                                 $('#emailRow').remove();
@@ -478,7 +476,7 @@ $(document).ready(function() {
         }
   });
 
-$('#createUserForm').validate({
+$('#createParentForm').validate({
     rules: {
         firstName: {
             minlength: 2,
@@ -503,8 +501,8 @@ $('#createUserForm').validate({
             equalTo : "#pass1"
         },
         dob: {
-            required: true,
-            check_dob: true
+            required: true
+           // check_dob: true
         },
         countrycode: {
             required: true
@@ -556,12 +554,12 @@ $('#createUserForm').validate({
 
             error : function(jqXHR, textStatus, errorThrown) {
                 var innerHTML = "<div class='alert alert-danger'><button class='close' data-dismiss='alert'></button>  User Creation failed. Please try again. </div>" ; 
-                $("#createUserForm").html(innerHTML);
+                $("#createParentForm").html(innerHTML);
             },
 
             success : function(data) { 
                 var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Successfully created the User.You will be redirected to login screen after 3 seconds.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
-                $("#createUserForm").html(innerHTML);
+                $("#createParentForm").html(innerHTML);
                 console.log("create user form submit handler success");
             },
 

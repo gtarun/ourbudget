@@ -303,7 +303,16 @@ font-size: 25px;
 </div>
 
 <% } %>
- 
+<% var pref = user.prefrences[0] %>
+
+<% for (key1 in pref){%>
+    <% for (key2 in pref[key1]){%>
+    <% var check = key1+'['+key2+']' %>
+    <script>
+    document.getElementsByName('<%- check %>')[0].checked = true;
+    </script>   
+    <%}%>                                            
+<%}%> 
 
 
 		<div>

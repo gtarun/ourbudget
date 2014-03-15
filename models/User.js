@@ -31,7 +31,12 @@ UserSchema = mongoose.Schema({
 	familyMembers: [{relation: String,
 		rel_email : String}],
 	PaymentMethod : {},
-	prefrences : []
+	prefrences : [],
+	notification:[{
+		postDate:Date,
+		amount :Number,
+		who    : String
+	}]
 });
 
 
@@ -53,7 +58,7 @@ UserSchema.statics.signup = function(email, password, done) {
 };
 
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
-	this.findOne({email : email, parentID:{$exists:false}}, function(err, user) {
+	this.findOne({email : email}, function(err, user) {
 		if (err) {
 			return done(err);
 		}

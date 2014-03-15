@@ -74,7 +74,7 @@ exports.getUser = function(req, res) {
 			}
 			else if(token!='undefined'){
 				console.log("You can signup as a child");
-				response.value.child = doc;
+				response.value.child = true;
 				response.message = "You are proceeding to signup as a child";
 			}
 			else{

@@ -99,11 +99,11 @@ function SaveAccountInfo (req, res) {
 }
 
 function SaveRelationInfo (req, res){
-	User.findOne({_id:req.user._id},function(err,doc){
-		console.log("Update Monthly Income")
-		if(req.body.monthlyIncome !== null)
-			doc.monthlyIncome = req.body.monthlyIncome;
-		doc.save(function(err){console.log("Saved")})
+	User.findOneAndUpdate({_id:req.user._id},
+						  {$inc:{monthlyIncome:req.body.monthlyIncome}},
+						  function(err,doc){
+						  	if(!err)
+								console.log("Update Monthly Income")
 	});
 
 	var members = [];
@@ -204,9 +204,7 @@ function UpdatePrefrence(req,res){
 									response.value = "Information Saved Succesfully";
 									console.log(response);
 									res.json(200, response);
-									res.render("users/prefrence", {
-										user : req.user.prefrences
-									});
+									res.redirect("/users/prefrence");
 
 								});
 					});
