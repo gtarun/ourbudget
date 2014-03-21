@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var BudgetSchema = mongoose.Schema({
 	userId : String,
 	amount_spend : String,
-	DATE : Date,
+	DATE : String,
 	location : String,
 	spend_on : String,
 	//LAST_UPDATED_AT : Date

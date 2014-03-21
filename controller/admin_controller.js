@@ -95,9 +95,13 @@ exports.getUser = function(req, res) {
  */
 exports.createUser = function(req, res) {
 	console.log("Create User called");
-	var email = req.body.email1;
-
-	var data = {
+		var data ={};
+	// Construct the AdTags Structure
+	var members = [];
+	var size = 0;
+	if(req.body.relation){
+		var email = req.body.email1;
+	data = {
 		firstName : req.body.firstName,
 		lastName : req.body.lastName,
 		email : req.body.email1,
@@ -126,10 +130,7 @@ exports.createUser = function(req, res) {
 		
 	};
 
-	// Construct the AdTags Structure
-	var members = [];
-	var size = 0;
-	console.log("TYPE:"+typeof(req.body.relation));
+			console.log("TYPE:"+typeof(req.body.relation));
 	if(typeof(req.body.relation)=='string')
 	{
 		var adData = {relation : req.body.relation, rel_email : req.body.rel_email};
@@ -148,10 +149,40 @@ exports.createUser = function(req, res) {
 		}
 	}
 	}
-
 	console.log('members: '+JSON.stringify(members));
 
 	data.familyMembers = members;
+	
+	}
+	else{
+		data = {
+		firstName : req.body.firstName2,
+		lastName : req.body.lastName2,
+		email : req.body.email2,
+		pass : req.body.pass3,
+		dob : req.body.dob2,
+		address :req.body.address2,
+		//parentID: '',
+		contactInformation : {
+				countrycode : req.body.countrycode2,
+				phonenumber : req.body.phoneNumber2
+		},
+		monthlyIncome:req.body.monthlyIncome2,
+		profile_pic_path : '',
+		facebook : {
+			id : '',
+			email : '',
+			name : ''
+		},
+		twitter : {
+			id : '',
+			email : '',
+			name : ''
+		},
+		PaymentMethod : {}		
+	};
+
+	}
 	/*Add function to send Invitation to all the members */
 
 	// Reponse object.

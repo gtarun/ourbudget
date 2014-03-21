@@ -75,6 +75,8 @@ function initializeRoutes(app, passport, cache) {
 	app.post("/addbudget", AccountAPI.addBudgget);
 	app.post("/getBudget",AccountAPI.getBudget);
     app.post("/getAllBudget",AccountAPI.getAllBudget);
+    app.post("/countNotify",AccountAPI.countNotify);
+    app.post("/showNotify",AccountAPI.showNotify);
 }
 
 module.exports = initializeRoutes;

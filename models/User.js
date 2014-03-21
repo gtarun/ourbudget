@@ -18,6 +18,8 @@ UserSchema = mongoose.Schema({
 		phonenumber : String,
 	},
 	monthlyIncome:{type:Number,default:0},
+	amnt_spnt : {type:Number,default:0},
+	amnt_rcvd : {type:Number,default:0},
 	facebook : {
 		id : String,
 		email : String,

@@ -324,7 +324,7 @@ $(document).ready(function() {
 
   jQuery.validator.addMethod("notEqual", function(value, element, param) {
  return this.optional(element) || value != $(param).val();
-}, "Email Ids of Parent and Children must be distint.");
+  }, "Email Ids of Parent and Children must be distint.");
 
   $("#createUserRow1").hide();
   $("#createUserRow2").hide();
@@ -357,7 +357,7 @@ $(document).ready(function() {
   for(i=0; i<countries.length; i++)
   {
     option= '<option value="'+codes[i]+'">'+countries[i]+'</option>';
-    $('#countrycode').append(option);
+    $('.countrycode').append(option);
   }
 
   for(i=0; i<relations.length; i++)
@@ -436,8 +436,8 @@ $(document).ready(function() {
                                 alert(data.message) ;                                 
                                 $('#createUserRow2').show();
                                 $('#createChildForm')[0].reset();
-                                $('#email1').val(data.value.email);
-                                $('#email1').prop('readonly',true);
+                                $('#email2').val(data.value.email);
+                                $('#email2').prop('readonly',true);
                                 $('#emailRow').remove();
                             }
                             else if(data.value.form===true){
@@ -560,6 +560,78 @@ $('#createParentForm').validate({
             success : function(data) { 
                 var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Successfully created the User.You will be redirected to login screen after 3 seconds.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
                 $("#createParentForm").html(innerHTML);
+                console.log("create user form submit handler success");
+            },
+
+            complete : function() {
+                console.log('Finished all tasks');
+            }
+        });
+        return false;
+    }        
+});
+
+$('#createChildForm').validate({
+  rules: {
+        firstName2: {
+            minlength: 2,
+            required: true
+        },
+        lastName2: {
+            minlength: 2,
+            required: true
+        },
+        email2: {
+            minlength: 2,
+            required: true,
+            email : true
+        },
+        pass3: {
+            minlength: 5,
+            required : true,
+        },
+        pass4: {
+            required: true,
+            minlength: 5,
+            equalTo : "#pass3"
+        },
+        dob2: {
+            required: true
+           // check_dob: true
+        },
+        countrycode2: {
+            required: true
+        },
+        phoneNumber2: {
+            minlength: 10,
+            maxlength:10,
+            required: true
+        },
+        address2: {
+            minlength: 10,
+            required: true
+        },
+    },
+    submitHandler: function (form) {
+        $.ajax({
+            url : $(form).attr('action'),
+            dataType : 'json',
+            data : $(form).serialize(),
+            type : 'POST', 
+            cache : false,
+
+            beforeSend : function() {
+                console.log("Submitting the Create New User form");
+            },
+
+            error : function(jqXHR, textStatus, errorThrown) {
+                var innerHTML = "<div class='alert alert-danger'><button class='close' data-dismiss='alert'></button>  User Creation failed. Please try again!!!!!!. </div>" ; 
+                $("#createChildForm").html(innerHTML);
+            },
+
+            success : function(data) { 
+                var innerHTML = "<div class='alert alert-success'><button class='close' data-dismiss='alert'></button> Successfully created the User.You will be redirected to login screen after 3 seconds.<script>setTimeout(function(){window.location.href = '../login';},3000);</script></div>" ; 
+                $("#createChildForm").html(innerHTML);
                 console.log("create user form submit handler success");
             },
 

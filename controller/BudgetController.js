@@ -5,11 +5,10 @@
 var Budget = require("../models/Budget");
 var User = require("../models/User");
 
-
 function addBudgget(req, res) {
 	console.log("Get Budget called");
 	console.log(req.body);
-	var datetime = new Date();
+	var datetime = new Date().toISOString().slice(0,10).replace(/-/g,"-");
 	var data = new Budget({
 		userId : req.body.userid,
 		amount_spend : req.body.amount_spend,
@@ -35,6 +34,14 @@ function addBudgget(req, res) {
 			res.redirect("/users/home");
 		}
 	});
+
+	User.findOneAndUpdate({_id:req.body.userid},{$inc:{amnt_spnt:req.body.amount_spend}},function(err,data){
+		if(err)
+			console.log("Error");
+		if(data){
+			console.log("data");
+		}
+	})
 }
 
 function getBudget(req,res){
@@ -143,7 +150,7 @@ function relationBudget(req,res){
 	var firstName=name.substring(0,spacePosition);
 	var lastName =name.substring(spacePosition+1,name.length);
 	User.findOneAndUpdate({firstName:firstName, lastName:lastName,parentID:req.body.userid},
-						  {$inc:{monthlyIncome: req.body.amount},$push:{notification:{postDate:new Date(),amount:req.body.amount,who:req.user.firstName+' '+req.user.lastName}}},
+						  {$inc:{amnt_rcvd: req.body.amount},$push:{notification:{postDate:new Date(),amount:req.body.amount,who:req.user.firstName+' '+req.user.lastName}}},
 						  function(err,updated){
 						  	if(err)
 						  		console.log("Error:"+err);
@@ -153,7 +160,7 @@ function relationBudget(req,res){
 						  	}
 	});
 	User.findOneAndUpdate({_id:req.body.userid,},
-						  {$inc:{monthlyIncome: -req.body.amount}},
+						  {$inc:{amnt_spnt: req.body.amount}},
 						  function(err,updated){
 						  	if(err)
 						  		console.log("Error:"+err);
@@ -170,10 +177,38 @@ else{
 
 }
 
-function sendNotification(id,amount,income)
+function countNotify(req,res)
 {
-
+User.findOne({'firstName':req.body.fname,'lastName':req.body.lname},function(err,user){
+	if(err){
+		console.log("Error");
+	}
+	else if(user)
+	{
+		res.json(200,{'length':user.notification.length});
 	
+	}
+	else{
+		console.log("NO user found");
+	}
+});
+}
+	
+function showNotify(req,res)
+{
+User.findOne({'firstName':req.body.fname,'lastName':req.body.lname},function(err,user){
+	if(err){
+		console.log("Error");
+	}
+	else if(user)
+	{	
+		console.log(user.notification);
+		res.json(200,{'notification' : user.notification});
+	}
+	else{
+		console.log("NO user found");
+	}
+}).sort({'user.notification.postDate' :-1});
 }
 
 /**
@@ -185,3 +220,5 @@ exports.getBudget = getBudget;
 exports.getAllBudget = getAllBudget;
 exports.relbudget = relbudget;
 exports.relationBudget= relationBudget;
+exports.countNotify = countNotify;
+exports.showNotify = showNotify;

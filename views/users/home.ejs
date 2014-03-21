@@ -11,7 +11,7 @@
 	{
 		margin:0 auto;
 		width:990px;
-	}.timeline{float:left; position:relative; min-height:470px; margin-top:25px; width:100%; background:url(../assets/img/timeline.png) no-repeat center top;}
+	}.timeline{float:left; position:relative; min-height:470px; margin-top:25px; width:100%; }
 .comment1{color: #FFFFFF;
     font-size: 14px;
     overflow: hidden;
@@ -36,17 +36,102 @@
 
 
 	</style>
+<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
 
-<div class="timeline">
-	<div style="width:1000px; margin:0 auto; position:relative;">
-            	<div class="comment1">
-                	<p>I have purchased mobile phone Rs 15,000</p>
-                </div>
-                <div class="comment2">
-                	<p>I filled gas for Rs. 300 in bike today.</p>
-                </div>
-                <div class="comment3">
-                	<p>Went to Movie, spent Rs. 500 </p>
-                </div>
-					</div>
+<div class="row">
+    <div class="col-xs-8 col-md-12">
+<div class="timeline " id="timeline">
 </div>
+    </div>
+</div>
+
+<div class="row" id="children" >
+    <div class="col-xs-6 col-md-4">
+      <DIV id="donut" >
+      </DIV>
+    </div>
+</div>
+
+<script>
+var dataArr=[];
+var count = 0;
+var ch = 1;
+var ykey=[];
+var child=[]; 
+<% for(var i=0;i<data.length;i++) { %>
+<% for(var j=0;j<data[i].length;j++) { %>
+dataArr[count] = {"period":"<%= data[i][j].period%>"};
+dataArr[count][ch] = <%= data[i][j].value%>;
+console.log("dataArr : "+JSON.stringify(dataArr[count]));
+console.log("ch :"+ch);
+count++;
+<% } %>
+ykey[<%= i%>]=ch.toString();
+ch++;
+
+<% } %>
+
+
+console.log(dataArr);
+Morris.Line({
+  element: 'timeline',
+  data:  dataArr,
+  xkey: ['period'],
+  ykeys: ykey,
+  labels: ['value1','value2','value3'],
+  smooth: false,
+  backgroundColor: '#000',
+  grid:true
+});
+var amnt_spnt = <%= user.amnt_spnt %>;
+var amnt_rcvd = <%= user.amnt_rcvd %>;
+var monthlyIncome = <%= user.monthlyIncome %>;
+var savings = monthlyIncome+amnt_rcvd-amnt_spnt;
+Morris.Donut({
+  element: 'donut',
+  data: [{label: "spent", value: amnt_spnt},
+    {label: "savings", value: savings}
+    ],
+    backgroundColor: '#DAEDE2',
+  labelColor: '#77C4D3',
+  colors: [
+    '#EA2E49',
+    '#333745'
+  ],
+  resize:true
+});
+count = 0;
+
+<% for (i=0;i<children.length;i++) {%>    
+    var amnt_spnt = <%= children[i].amnt_spnt %>;
+    var amnt_rcvd = <%= children[i].amnt_rcvd %>;
+    var monthlyIncome = <%= children[i].monthlyIncome %>;
+    var savings = monthlyIncome+amnt_rcvd-amnt_spnt;
+    console.log("savings: " + savings);
+    var id= "donut"+<%= i %>;
+    var parent = document.getElementById('children');
+    var child = document.createElement('div');
+      child.className = "col-xs-6 col-md-2 col-md-offset-1";
+      child.innerHTML = '<DIV id="'+id+'" ></DIV>'
+      parent.appendChild(child);
+    console.log("id:"+id);
+Morris.Donut({
+  element: id,
+  data: [{label: "spent", value: amnt_spnt},
+    {label: "savings", value: savings}
+    ],
+    backgroundColor: '#DAEDE2',
+  labelColor: '#206594',
+  colors: [
+    '#df5650',
+    '#00a07e'
+  ],
+  resize:true
+});
+
+<% } %>
+
+</script>

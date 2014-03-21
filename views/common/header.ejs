@@ -32,34 +32,17 @@
 			<!-- BEGIN CHAT TOGGLER -->
 			<div class="pull-right">
 				<div class="chat-toggler">
-					<a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content='
-					<%for (var i=user.notification.length-1;i>=0;i--){%>
-					<div style="width:300px" class="scroller" data-height="100px">
-						  <div class="notification-messages info">
-									<div class="user-profile">
+					<a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" 
+					data-toggle="dropdown" data-original-title="Notifications" data-html='true'
+					data-content='<div id="alerts"></div>'
+					>
 
-										<img src="../assets/img/profilepics/<%=user.notification[i].who.substring(0,user.notification[i].who.lastIndexOf(" "))%>.jpg"  width="35" height="35">
-									</div>
-									<div class="message-wrapper">
-										<div class="heading">
-										<%=JSON.stringify(user.notification[i].who)%> - Sent you Rs. <%=JSON.stringify(user.notification[i].amount)%>
-										</div>
-										<div class="description">
-											
-										</div>
-										<div class="date pull-left">
-										Date :<%=JSON.stringify(user.notification[i].postDate)%>
-										</div>										
-									</div>
-									<div class="clearfix"></div>									
-								</div>	
-							 <%}%>' data-toggle="dropdown" data-original-title="Notifications">
 						
 						<div class="user-details">
 							<div class="username">
-								<span class="badge badge-important"><%=user.notification.length%></span>
-								<%=user.firstName%>
-								<span class="bold"><%=user.lastName%></span>
+								<span class="badge badge-important" id="countNotify">0</span>
+								<span id="first-name"><%=user.firstName%></span>
+								<span class="bold" id="last-name"><%=user.lastName%></span>
 							</div>
 						</div>
 						<div class="iconset top-down-arrow"></div>
@@ -100,4 +83,15 @@
 	</div>
 	<!-- END TOP NAVIGATION BAR -->
 </div>
+
 <!-- END HEADER -->
+<script type="text/javascript" src="../assets/plugins/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../assets/js/notify.js"></script>
+<script>
+$(document).ready(function(){
+	console.log('ger'+ '<%-user.notification.length%>');
+	$('.notification-messages info').click(function(){
+		console.log('<%-user.notification.lengths%>');
+	})
+})
+</script>
