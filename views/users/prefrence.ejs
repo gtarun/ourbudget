@@ -70,7 +70,6 @@ font-size: 25px;
 </style>
 
 <form action="updateprefrence" method="post">
-<%//=JSON.stringify(user)%>
 <br>
 <% if(user.length > 1){  %>
 <% for(var item =0 ;item< user.length;item++){ %>
@@ -314,9 +313,22 @@ font-size: 25px;
     <%}%>                                            
 <%}%> 
 
+<% } %>
 
+<%//=JSON.stringify(user.prefrences[0])%>
+<% var pref = user.prefrences[0] %>
+<%//=JSON.stringify(Object.keys(pref).length)%>
+<% for (key1 in pref){%>
+    <% for (key2 in pref[key1]){%>
+    <% var check = key1+'['+key2+']' %>
+    <script>
+    document.getElementsByName('<%- check %>')[0].checked = true;
+    </script>   
+    <%}%>                                            
+<%}%>                                        
+ 
 		<div>
-			<input type="submit" />
+			<input type="submit" class='btn btn-primary' value='Save Preferences'/>
 			</div>
     </form>
 			

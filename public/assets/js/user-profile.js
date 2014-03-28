@@ -125,7 +125,6 @@ $(document).ready(function(){
              window.location.href = "user-profile";
         });
          this.on("error", function(file, error){
-            alert(error);
         });
       }
     };

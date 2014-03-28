@@ -151,6 +151,7 @@ function ChangeProfilePicture (req, res) {
 	
 }
 
+
 /**
  * Export the required functions as module.
  */
@@ -159,10 +160,13 @@ function UpdatePrefrence(req,res){
 	var conditions = {
 		email : req.user._id
 	}, options = {
-		multi : true
+		multi : true,
+		upsert :true
 	};
 
-	var data= req.body;
+	var data= {
+	prefrences :req.body
+		};
 	// Save the Info into DB.
 	User.findOne(conditions,function(err, doc) {
 		var response = {};

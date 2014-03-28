@@ -1,3 +1,6 @@
+/**
+ * Admin controller which handles the routes in admin_router.js
+ */
 var email = require("emailjs");
 var crypto = require("crypto");
 var redis = require("../cache/redis_cache");
@@ -247,6 +250,5 @@ exports.createUser = function(req, res) {
 		});
 	}	
 }
-
 
 
