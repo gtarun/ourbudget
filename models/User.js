@@ -10,13 +10,16 @@ UserSchema = mongoose.Schema({
 	email : String,
 	pass : String,
 	dob : String,
-	parentID: String,
+	parentID : {type: String, default:''},
 	address :String,
+	mailSent: {type: Boolean, default:false},
 	contactInformation: {
 		countrycode : String,
 		phonenumber : String,
 	},
-	monthlyIncome:String,
+	monthlyIncome:{type:Number,default:0},
+	amnt_spnt : {type:Number,default:0},
+	amnt_rcvd : {type:Number,default:0},
 	facebook : {
 		id : String,
 		email : String,
@@ -30,14 +33,17 @@ UserSchema = mongoose.Schema({
 	familyMembers: [{relation: String,
 		rel_email : String}],
 	PaymentMethod : {},
-	prefrences : []
+	prefrences : [],
+	notification:[{
+		postDate:Date,
+		amount :Number,
+		who    : String
+	}]
 });
 
-
-
+//creating User with given emailID and Password
 UserSchema.statics.signup = function(email, password, done) {
 	var User = this;
-
 	User.create({
 		email : email,
 		pass : password,
@@ -51,29 +57,18 @@ UserSchema.statics.signup = function(email, password, done) {
 	});
 };
 
+//Validating User with emailID and Password
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
-	this.findOne({
-		email : email
-	}, function(err, user) {
-		if (err) {
+	this.findOne({email : email, pass : password}, function(err, user) {
+		if (err) 
 			return done(err);
-		}
-
-		if (!user) {
-			return done(null, false, {
-				message : 'Email provided is not registered.'
-			});
-		}
-
-		if (password === user.pass) {
+		if (user){ 
 			console.log(user);
 			return done(null, user);
 		}
-
-		return done(null, false, {
-			message : 'Password is incorrect. Plese retry.'
-		});
-	});
+		else
+			return done(null, false, {message : 'EmailID or Password is incorrect. Plese retry.'});
+	})
 };
 
 UserSchema.statics.findOrCreateFaceBookUser = function(profile, done) {

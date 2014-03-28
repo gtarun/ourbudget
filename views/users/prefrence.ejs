@@ -101,11 +101,11 @@ font-size: 25px;
         <div class="back face center">
             <ul class="listing">
                 <li>
-                    <input type="checkbox" name="Transport[public]" />
+                    <input type="checkbox" name="Transport[public transport]" />
                     Public Transport
                 </li>
                 <li>
-                    <input type="checkbox" name="Transport[Fuel]" />
+                    <input type="checkbox" name="Transport[fuel]" />
                     Fuel
                 </li>
                 <li>
@@ -163,11 +163,11 @@ font-size: 25px;
                    Ration
                 </li>
                 <li>
-                    <input type="checkbox" name="Household[pocketMoney]" />
+                    <input type="checkbox" name="Household[pocket money]" />
                     Pocket Money
                 </li>
                 <li>
-                    <input type="checkbox" name="Household[servantSalary]" />
+                    <input type="checkbox" name="Household[servant salary]" />
                     Servant Salary
                 </li>
                 <li>
@@ -207,7 +207,7 @@ font-size: 25px;
                     Gas
                 </li>
                 <li>
-                    <input type="checkbox" name="Bills[mobileRecharge]" />
+                    <input type="checkbox" name="Bills[mobile recharge]" />
                     Mobile Recharge
                 </li>
                 <li>
@@ -219,7 +219,7 @@ font-size: 25px;
                     Rent
                 </li>
                 <li>
-                    <input type="checkbox" name="Bills[healthCare]" />
+                    <input type="checkbox" name="Bills[health care]" />
                     Health Care
                 </li>
                 <li>
@@ -246,7 +246,7 @@ font-size: 25px;
         <div class="back face center">
             <ul class="listing">
                 <li>
-                    <input type="checkbox" name="Shopping[householdCommodities]" />
+                    <input type="checkbox" name="Shopping[household commodities]" />
                     Household Commodities
                 </li>
                 <li>
@@ -285,11 +285,11 @@ font-size: 25px;
                     Donations
                 </li>
                 <li>
-                    <input type="checkbox" name="Miscellaneous[personalExpenses]" />
+                    <input type="checkbox" name="Miscellaneous[personal expenses]" />
                     Personal Expenses
                 </li>
                 <li>
-                    <input type="checkbox" name="Miscellaneous[moneyLending]" />
+                    <input type="checkbox" name="Miscellaneous[money lending]" />
                     Money Lending
                 </li>
                 <li>
@@ -300,6 +300,18 @@ font-size: 25px;
         </div>
     </div>
 </div>
+
+<% } %>
+<% var pref = user.prefrences[0] %>
+
+<% for (key1 in pref){%>
+    <% for (key2 in pref[key1]){%>
+    <% var check = key1+'['+key2+']' %>
+    <script>
+    document.getElementsByName('<%- check %>')[0].checked = true;
+    </script>   
+    <%}%>                                            
+<%}%> 
 
 <% } %>
 

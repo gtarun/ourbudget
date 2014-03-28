@@ -13,36 +13,59 @@ function initializeRoutes(app, passport, cache) {
 	app.get("/users/addbudget",Auth.isAuthenticated, function(req, res) {
 			path="./public/assets/img/profilepics/"+req.user.firstName+".jpg";
 			console.log("path is in addbudget"+path);
-			fs.stat(path,function(err,stat)
-			{
-			if(!err){
-			path="../assets/img/profilepics/"+req.user.firstName+".jpg";
-			console.log('pic found');
-			res.render("users/addbudget", {
-			user   : req.user,
-			imgpath : path,
-			imgpaths :path});}
-		else{
-			path="../assets/img/profilepics/1.jpg"
-			console.log('not found');
-			res.render("users/addbudget", {
-			user   : req.user,
-			imgpath : path,
-			imgpaths :path});}
+			fs.stat(path,function(err,stat){
+				if(!err){
+					path="../assets/img/profilepics/"+req.user.firstName+".jpg";
+					console.log('pic found');
+					res.render("users/addbudget",
+					 			{user   : req.user,
+								imgpath : path,
+								imgpaths :path});
+				}
+				else{
+					path="../assets/img/profilepics/1.jpg"
+					console.log('not found');
+					res.render("users/addbudget", 
+								{user   : req.user,
+								imgpath : path,
+								imgpaths :path});
+				}
 			})
-		
-			console.log("add budget : " + req.user);
-			/*res.render("users/addbudget",{
-				user:req.user,
-				imgpath:"../assets/img/profilepics/"+req.user.firstName+".jpg",
-				imgpaths:"../assets/img/profilepics/"+req.user.firstName+".jpg"});*/
-		
+			console.log("add budget for: " + req.user);
 	});
-	
+
+	app.get("/users/relationBudget",Auth.isAuthenticated, function(req, res) {
+			path="./public/assets/img/profilepics/"+req.user.firstName+".jpg";
+			console.log("path is in addbudget"+path);
+			fs.stat(path,function(err,stat){
+				if(!err){
+					path="../assets/img/profilepics/"+req.user.firstName+".jpg";
+					console.log('pic found');
+						res.render("users/relationBudget",
+									{user   : req.user,
+									imgpath : path,
+									imgpaths :path});
+				}
+				else{
+					path="../assets/img/profilepics/1.jpg"
+					console.log('not found');
+						res.render("users/relationBudget",
+						 			{user   : req.user,
+									imgpath : path,
+									imgpaths :path});
+				}
+			});
+
+	});
+
+	app.post("/users/relationBudget",AccountAPI.relationBudget);
+	app.post("/users/relbudget",AccountAPI.relbudget);
 	app.post("/users/addbudget", AccountAPI.addBudgget);
 	app.post("/addbudget", AccountAPI.addBudgget);
 	app.post("/getBudget",AccountAPI.getBudget);
     app.post("/getAllBudget",AccountAPI.getAllBudget);
+    app.post("/countNotify",AccountAPI.countNotify);
+    app.post("/showNotify",AccountAPI.showNotify);
 }
 
 module.exports = initializeRoutes;

@@ -85,10 +85,22 @@
 					<div class="iconset top-settings-dark "></div> 	
 				</a>
 				<ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="dropdownMenu">
-                  <li><a href="user-profile"> My Account</a>
-                  </li>
-                  <li class="divider"></li>                
-                  <li><a href="logout"><i class="icon-off"></i>&nbsp;&nbsp;Log Out</a></li>
+              <li>
+                <a href="user-profile">My Account</a>
+              </li>
+              <li>
+                <a href="calender">My Calendar</a>
+              </li>
+              <li>
+                <a href="email">My Inbox&nbsp;&nbsp;
+                  <span class="badge badge-important animated bounceIn">2</span>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="../logout">
+                  <i class="icon-off"></i>&nbsp;&nbsp;Log Out</a>
+              </li>
                </ul>
 			</li> 
 		</ul>
@@ -124,25 +136,32 @@
    
    <!-- BEGIN SIDEBAR MENU -->	
 	<p class="menu-title"></p>
-    <ul>
-        
-        <li class="start active"> <a href=""> <i class="icon-custom-chart"></i> <span class="title">Ad Sales</span> <span class="arrow "></span> </a>
-        <ul class="sub-menu">
-		  <li> <a href="earnings"> Revenue </a> </li>
-		   <li> <a href="payments">Payments</a> </li>
-        </ul>
-      </li>
-        
-         <li class=""> <a href=""> <i class="icon-custom-thumb"></i> <span class="title">Influence Boost</span> <span class="arrow "></span> </a>
-        <ul class="sub-menu">
-        </ul>
-      </li>
-        
-         <li class=""> <a href=""> <i class="icon-custom-extra"></i> <span class="title">Knowledge Base</span> <span class="arrow "></span> </a>
-        <ul class="sub-menu">
-        </ul>
-      </li>
-	</ul>
+<ul>
+  <li class="">
+    <a href="/users/home">
+      <i class="icon-custom-chart"></i>
+      <span class="title" value='Home'>Home</span>
+    </a>
+  </li>
+  <li class="start active">
+    <a href="/users/user-profile">
+      <i class="icon-custom-thumb"></i>
+      <span class="title" value='Info'>Info Settings</span>
+    </a>
+  </li>
+  <li class="">
+    <a href="/users/changePicture">
+      <i class="icon-custom-extra"></i>
+      <span class="title" value='Picture'>Picture Settings</span>
+    </a>
+  </li>
+  <li class="">
+    <a href="/users/user-profile">
+      <i class="icon-custom-thumb"></i>
+      <span class="title" value='Payment'>Payment Settings</span>
+    </a>
+  </li>
+</ul>
 	
 	<!-- SCROLLBAR --> 
 	<a href="#" class="scrollup">Scroll</a>
@@ -201,16 +220,21 @@
                                         <div class="col-md-12">
                                             <input name="email" id="email" type="text" class="form-control" value=<%=user.email%>>
                                         </div>
+                                        <div class="col-md-12">
+                                            <input name="parID" id="parID" type="text" class="form-control" readonly='readonly' value=<%=user._id%> >
+                                        </div>
                                     </div>
                                     <div class="row form-row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <input name="countrycode" id="countrycode" type="text" class="form-control" value=<%=user.contactInformation.countrycode%>>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-9">
                                             <input name="phonenumber" id="phonenumber" type="text" class="form-control" value=<%=user.contactInformation.phonenumber%>>
                                         </div>
                                     </div>
+
                                     
+            
                                     <h4>Change Password</h4>
                                      <div class="row form-row">
                                         <div class="col-md-12">
@@ -231,8 +255,59 @@
                                         
                         </form>
                     </div>
-                                
-                                <div style = "height : 25%;" class="col-md-6"> 
+                                <div class="col-md-6">
+                                    <form id = "relationForm" name = "relationForm" method= "post" action="saveRelationInfo" role="form">
+                                      <div id = "relInfoStatus">
+                                      </div>
+                                      <h4>Edit Relation</h4>
+                                    <div id = "addTagsDiv" class="row form-row">
+                                      <div class="addTagDiv top">
+                                      <div class="col-md-3">
+                                       <input name="relation" id="relation" type="text" class="form-control" placeholder="+relation">
+                                      </div>
+                                      <div class="col-md-7">
+                                       <input name="rel_email" id="rel_email" type="email" class="form-control" placeholder="Relative Email">
+                                      </div>
+                                      <div class = "col-md-1 links">
+                                              <a href = "javascript:addElement();" class="addMore topanchor">add</a>
+                                      </div>
+                                      </div>
+                                      </div>
+                                    <% for(var fm =0 ; fm < user.familyMembers.length ; fm++){ %>
+                                     <div id = "remTagsDiv" class="row form-row">
+                                     <div class="remTagDiv top">
+                                     <div class="col-md-3">
+                                      <input name="relation" id="relation" type="text" class="form-control" readonly="readonly" value=<%=user.familyMembers[fm].relation%>>
+                                     </div>
+                                     <div class="col-md-7">
+                                       <input name="rel_email" id="rel_email" type="email" class="form-control" readonly="readonly" value=<%=user.familyMembers[fm].rel_email%> readonly='readonly'>
+                                     </div>
+                                     <div class = "col-md-1 links">
+                                      <a href = "javascript:remElement();" class="destroy">remove</a>
+                                     </div>
+                                     </div>
+                                     </div>
+                                     <% } %>
+
+                      <h4>Add Self Budget</h4>  
+                      <div class="row form-row">             
+                      <div class="col-md-12">
+                        <input name="monthlyIncome" id="monthlyIncome" type="number" class="form-control" placeholder="Add Self Budget"  value=<%=user.monthlyIncome%>>
+                      </div>
+                    </div>
+                     
+
+                            <div class="form-actions">
+                                <div class="pull-right">
+                                    <button class="btn btn-primary btn-cons" type="submit">
+                                        <i class="icon-ok"></i> Save
+                                    </button>
+                                </div>
+                            </div>
+
+                          </form>
+                        </div>
+                                <!--div style = "height : 25%;" class="col-md-6"> 
                                     <h4>Change the Profile Picture</h4>
                                     <div id="userpicWarning">
                                     </div>
@@ -246,7 +321,7 @@
                                    
                                     
                                     
-                                </div>
+                                </div-->
                             </div>
                             
                             

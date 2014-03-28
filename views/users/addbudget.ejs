@@ -1,22 +1,103 @@
 <% layout( '../boilerplate') -%>
-<h1>Add your Budget</h1>
+    	<!-- START CONTENT -->
+			<div class="page-title">
+            	<h3><span class="semi-bold">Add your Budget</span></h3>		
+			</div>
+		<!-- START CONTAINER -->
+			<div id="container">
+        		<div class = "row">
+            		<div class="col-md-10">
+						<div class=" tiles white col-md-12 no-padding">
+							<div class="tiles green cover-pic-wrapper">							
+                        		<img src="../../assets/img/cover_pic.png">
+							</div>
+							<div class="tiles white">			
+								<div class="row">
+									<div class="col-md-3 col-sm-3" >
+										<div class="user-profile-pic">	
+											<img width="100" height="100"  src="<%= imgpath %>">
+										</div>
+								 		<div class="user-mini-description">
+											<h3 class=" semi-bold">
+												<%=user.firstName %> <%=user.lastName %>
+											</h3>
+										</div>
+									</div>		
+								</div>
+                        		<div class="tiles-body">
+                            		<div class="row  column-seperation">  
+                                		<div class="col-md-6">
+                                    		<form id = "addBudgetForm" name = "addBudgetForm" method= "post" action="/addBudget" role="form">
+                                          <div id = "budgetStatus">
+                                          </div>
+                                    			<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>	
+                                    			<div id = "addBudgetStatus">
+                                    			</div>
+                                    			<h4>Your Expenses</h4>
+                                    			<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input name="amount_spend" id="amount_spend" type="text" class="form-control" placeholder="Amount Spend">
+                                        			</div>
+                                    			</div>
+                                    			<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input type="text" class="form-control" name="spend_on" id="spend_on" list="spend_items" placeholder="Spent On">
+                                            			<datalist id="spend_items" required>
+														</datalist>
+                                        			</div>
+                                    			</div>
+                                       			<div class="row form-row">
+                                        			<div class="col-md-10">
+                                            			<input name="location" class="form-control" placeholder="Location" id="location" type="text" required>
+                                        			</div>
+	                                       			<div class="col-md-1">
+	                                       				<div class="pull-right">
+                             	              				<a onclick="getLocation();" value="Get Location" class="btn btn-warning">
+                             	              					<i class="icon-globe"></i></a>
+                             	              			</div>
+                                        			</div>
+                                        			<div class="col-md-1">
+	                                       				<div class="pull-right">
+                             	              				<a onclick="getCurrentLocation();" value="Get Location" class="btn btn-info">
+                             	              					<i class="icon-map-marker"></i></a>
+                             	              			</div>
+                                        			</div>
+ 	                                  			</div>
+                                        		<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input name="description" class="form-control" placeholder="Description">
+                                        			</div>
+ 	                                  			</div>
+                            					<div class="form-actions">
+                                					<div class="pull-right">
+                                    					<button class="btn btn-primary btn-cons" type="submit">
+                                        					<i class="icon-ok"></i> Save
+                                    					</button>
+                                					</div>
+                            					</div>
+                                        
+                       						 </form>
+                    					</div>
+                                
+                                		<div style = "height : 25%;" class="col-md-6"> 
+                                    		<h4>Location</h4>
+                                    		<div id="googleMapWarning">
+                                    		</div>
+                                    
+                                        		<div id = "googleMap" style="height:300px;width:400px;" class="thumbnail">
 
-<form action="/addbudget" method="post">
-	<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>
-	<label for="amount_spend">Amount Spend</label> 
-		<input type="text" name="amount_spend" />
-	<label for="spend_on">Spend On</label> 
-		<input type="text" name="spend_on" list="spend_items"/>
-	<datalist id="spend_items">
-   </datalist>
-	<label for="location">location</label>
-	<input type="text" name="location" />
-	<label for="id">Description</label> 
-		<input type="text" name="description" />
-		<input type="submit" value="Add" class='btn btn-primary'/>
-			
-</form>
+                                        		</div>
+                                		</div>
 
+                            		</div>                           
+                        		</div>
+
+                    		</div>
+
+          				</div>
+          			</div>
+          		</div>
+          	</div>
 <% var pref = user.prefrences[0] %>
 
 <% for (key1 in pref){%>
@@ -29,3 +110,110 @@
     </script>                                               
 <%}%>                                        
 <%}%>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+<script src="../../assets/js/addbudget.js" type="text/javascript"></script> 
+<script type="text/javascript">
+function initialize() {
+    var input = document.getElementById('location');
+    var options = {};
+                 
+    new google.maps.places.Autocomplete(input, options);
+}
+             
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script type="text/javascript">
+
+function showLocation(position) {
+
+console.log('showLocation');
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  var myLatlng = latitude + "," + longitude;
+  var latlon = new google.maps.LatLng(latitude,longitude);
+  showMap(latlon); 
+  console.log(latlon);
+  console.log("Latitude : " + latitude + " Longitude: " + longitude);
+}
+
+function showMap(latlon){
+	  var mapOptions = {
+    zoom: 18,
+    center: latlon
+  }
+
+var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+  var marker = new google.maps.Marker({
+    map: map,
+    animation:google.maps.Animation.BOUNCE,
+    position:latlon
+  });
+var geocoder = new google.maps.Geocoder();
+geocoder.geocode( { 'location': latlon}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+document.getElementById('location').value = results[0].formatted_address;
+        
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+});
+
+}
+function errorHandler(err)
+{
+	if(err.code==1)
+	{
+		alert("User denied geolocation.");
+	}
+	else if(err.code==2)
+	{
+		alert("Position unavailable.");
+	}
+	else if(err.code==3)
+	{
+		alert("Timeout expired.");
+	}
+	else
+	{
+		alert("ERROR:"+ err.message);
+	}
+}
+
+function getLocation(){
+	  var mapOptions = {
+    zoom: 18
+      }
+
+var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+
+var geocoder = new google.maps.Geocoder();
+var place =  document.getElementById('location').value;
+geocoder.geocode({'address':place}, function(results,status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+        map : map,
+	    animation:google.maps.Animation.BOUNCE,
+        position : results[0].geometry.location
+        });	
+    } else {
+    console.log(status);
+    }
+});
+}
+
+function getCurrentLocation(){
+console.log('getLocation');
+   if(navigator.geolocation){
+   		console.log('getLocation if');
+      var options = {timeout:60000};
+      navigator.geolocation.getCurrentPosition(showLocation, 
+                                               errorHandler,
+                                               options);
+
+   }else{
+      alert("Sorry, browser does not support geolocation!");
+   }
+}
+
+</script>

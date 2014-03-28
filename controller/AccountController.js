@@ -3,6 +3,7 @@
  */
 var fs = require('fs');
 var User = require('../models/User');
+var mail = require("../controller/MailingController");
 
 /**
  * Saves the Account Information in the request to the DB.
@@ -14,17 +15,8 @@ function SaveAccountInfo (req, res) {
 	var countrycode = null;
 	var phonenumber = null;
 	var password = null;
-
-	// Information to be updated.
 	var update = {};
 
-	console.log("Update: "+req.user);
-
-	// Current contact information of the user.
-	//var contactInformation = req.user.contactInformation;
-	
-	// User can upload different pieces of information using this route.
-	// Figure out the info to be saved.
 	if (req.body.email !== null) {
 		email = req.body.email;
 		update.email = email;
@@ -41,94 +33,122 @@ function SaveAccountInfo (req, res) {
 		update.pass = req.body.pass1;
 	}
 
-		
-	//update.contactInformation = contactInformation;
-	
-	// Query Condition.
 	var conditions = {_id : req.user._id}, options = {multi : true};
 
 	console.log("Updating the contact info with: ");
 	console.log(update);
 
-	// Save the Info into DB.
-	User
-			.findOne(
-					conditions,
-					function(err, doc) {
-						var response = {};
-						if (err) {
-							console.log(err);
-							response.error = "Saving the File to server failed. Please retry";
-							console.log(response);
-							res.json(500, response);
-							return;
-						}
-
-						// Create the ContactInformation if not present.
-						if (!doc.contactInformaion)
-						{
-							doc.contactInformaion = {};	
-						}
-						//console.log(doc);
-						
-						
-						// Update the doc
-						doc.contactInformation.countrycode = update.countrycode;
-						doc.contactInformation.phonenumber = update.phonenumber;
+	User.findOne(conditions,function(err, doc) {
+		var response = {};
+		if (err) {
+			console.log(err);
+			response.error = "Saving the File to server failed. Please retry";
+			console.log(response);
+			res.json(500, response);
+			return;
+		}
+		// Create the ContactInformation if not present.
+		if (!doc.contactInformaion)
+			doc.contactInformaion = {};	
+		doc.contactInformation.countrycode = update.countrycode;
+		doc.contactInformation.phonenumber = update.phonenumber;
 				
-						if (update.pass) {
-							doc.pass = update.pass;
-						}
+		if (update.pass) {
+			doc.pass = update.pass;
+		}
 						
-						if (update.email) {
-							doc.email = update.email;
-						}
+		if (update.email) {
+			if(doc.email !== update.email){
+				User.findOne({email : update.email, parentID : {$exists:false}}, function(err, parent){
+					if(parent){
+						console.log("parent exists :)");
+						response.user = parent;
+						res.json(200,response);
+						return;
+					}
+										
+					else{
+						console.log("parent doesn't exist :)");
+						mail.sendMail(update.email,'http://127.0.0.1:3000/login',
+						'Your login emailID has been changed from '+doc.email+' to '+update.email);
+						doc.email = update.email;
+					}
+				});
+								
+			}
+		}
 
-						// Save the information.
-						doc
-								.save(function(err) {
-									// Saving failed.
-									if (err) {
-										console.log(err);
-										response.error = "Saving the File to server failed. Please retry";
-										console.log(response);
-										res.json(500, response);
-										return;
-									}
+		// Save the information.
+		doc.save(function(err) {
+			if (err) {
+				console.log(err);
+				response.error = "Saving the File to server failed. Please retry";
+				console.log(response);
+				res.json(500, response);
+				return;
+			}
+			// Once is is saved, logout the user for security reasons.
+			req.logout();
+			response.value = "Information Saved Succesfully";
+			console.log(response);
+			res.json(200, response);
 
-									// Once is is saved, logout the user for security reasons.
-									req.logout();
-									response.value = "Information Saved Succesfully";
-									console.log(response);
-									res.json(200, response);
-
-								});
-					});
+		});
+	});
 }
 
+//saves the updated relation Information and updated monthly Income
+function SaveRelationInfo (req, res){
+	//Updates the monthly Income 
+	User.findOneAndUpdate({_id:req.user._id},
+						  {monthlyIncome:req.body.monthlyIncome},
+						  function(err,doc){
+						  	if(!err)
+								console.log("Update Monthly Income")
+	});
+	// 
+	var members = [];
+	for ( var i = 0; i < req.body.relation.length; i++) {
+		var relation = req.body.relation[i];
+		var rel_email = req.body.rel_email[i];
+		// Prepare the adData
+		if (relation.length > 0 && rel_email.length > 0) {
+			var adData = {relation : relation, rel_email : rel_email};
+			console.log('Pushing:' + adData.relation + adData.rel_email);
+			members.push(adData);
+		}
+	}
+	//module left to sendemailto newly added relations???????????
+	res.json(200,members);
+}		
 /**
  * Saves the User picture uploaded in the request to the Images folder, and changes the user pic.
  * @param req
  * @param res
  */
-function ChangePicture (req, res) {
+function ChangeProfilePicture (req, res) {
+
+	console.log("Chnage Picture Called:");
+	console.log(req.files.file.path);
+
 	var filePath = req.files.file.path;
 	var n = filePath.lastIndexOf(".");
-	var ext = filePath.substring(n);
-	var fileName ="./public/assets/img/profilepics/"+ req.user.firstName+".jpg";
-	var newPath = fileName;
-	fs.readFile(req.files.file.path, function (err, data) {
-	if(err){
-  		console.log("err")
-  		res.redirect("/user/user-home");
-  		res.end();
-	}
-	else {
-    fs.writeFile(newPath, data, function (err) {
-    res.redirect('/user/user-home');
-     });
-    }
-  });
+	var newPath = "./public/assets/img/profilepics/" + req.user.firstName+".jpg";
+	fs.readFile(req.files.file.path,function(err,data){
+		if(err){
+			console.log("err");
+			res.redirect("/user/user-home");
+			res.end();
+		}
+		else
+		{
+			fs.writeFile(newPath,data,function(err){
+				res.redirect("/user/user-home");
+			})
+		}
+
+	})
+	
 }
 
 
@@ -138,7 +158,7 @@ function ChangePicture (req, res) {
 function UpdatePrefrence(req,res){
 	// Query Condition.
 	var conditions = {
-		_id: req.user._id
+		email : req.user._id
 	}, options = {
 		multi : true,
 		upsert :true
@@ -148,41 +168,106 @@ function UpdatePrefrence(req,res){
 	prefrences :req.body
 		};
 	// Save the Info into DB.
-	
-	User.findOneAndUpdate(conditions,data,options,function(err, doc) {
-						var response = {};
-						if (err) {
-							console.log(err);
-							response.error = "Saving the File to server failed. Please retry";
-							console.log(response);
-							res.json(500, response);
-							return;
-						}
+	User.findOne(conditions,function(err, doc) {
+		var response = {};
+		if (err) {
+			console.log(err);
+			response.error = "Saving the File to server failed. Please retry";
+			console.log(response);
+			res.json(500, response);
+			return;
+		}
 
-						// Create the ContactInformation if not present.
-						if (!doc.prefrences)
-						{
-							doc.prefrences = {};	
-						}
-						// Once is is saved, logout the user for security reasons.
-						if(doc){
-								response.value = "Information Saved Succesfully";
-								console.log(response);
-								res.json(200, response);
-								res.redirect('users/prefrence');
-								}
-								});
-					
-	
+		// Create the ContactInformation if not present.
+		if (!doc.prefrences)
+		{
+			doc.prefrences = {};	
+		}
+						
+		// Update the doc
+		doc.prefrences =data;
+				
+		// Save the information.
+		doc.save(function(err) {
+			// Saving failed.
+			if (err) {
+				console.log(err);
+				response.error = "Saving the File to server failed. Please retry";
+				console.log(response);
+				res.json(500, response);
+				return;
+			}
 
-	// Save the Info into DB.
-	
+			// Once is is saved, logout the user for security reasons.
+			response.value = "Information Saved Succesfully";
+			console.log(response);
+			res.json(200, response);
+			res.redirect("/users/prefrence");
+
+		});
+	});
 }
 
+//Ajax function to remove relation on click of remove link
+function RemoveRelationInfo (req, res){
+	console.log(req.body.email);
+	console.log(req.body.pent_id);
+	//remove child relation frm database
+	User.remove({email:req.body.email,parentID:req.body.parent_id},function(err,removed){
+		if(err)
+			console.log("Error in Remove Relation child");
+		if(removed){
+			console.log("removed child");
+		}
+	});
+	
+	//update familyMembrs array of parent 
+	User.findOneAndUpdate({_id:req.body.parent_id},
+						  {$pull:{familyMembers:{rel_email:req.body.email}}},
+						  function(err,updated){
+						  		if(err)
+									console.log("Error in Remove Relation Parent");
+								if(updated){
+									console.log("updated/removed from parent");
+								}
+    });
+	res.send(req.body);
+}
+
+//Ajax function to add relation on click of add link
+function AddRelationInfo (req, res){
+	//Update familyMembers array of parent
+	User.findOneAndUpdate({_id:req.body.parent_id},
+					      {$push:{familyMembers:{rel_email:req.body.email,relation:req.body.rel}}},
+					      function(err,added1){
+						    if(err) 
+						    	console.log('error');
+							if(added1){
+								console.log('updated/added into Parent'+added1);
+								var len=added1.familyMembers.length - 1;
+								console.log(len);
+								console.log(added1.familyMembers[len]._id);
+								//insert child into the database with _id
+								User.findOneAndUpdate({_id:added1.familyMembers[len]._id},
+													  {email:req.body.email,parentID:req.body.parent_id},//{_id:added1.familyMembers[len]._id},
+													  {upsert:true},
+													  function(err,added2){
+														if(err) 
+															console.log('error2');
+														if(added2)
+														    console.log('Added child'+added2); 
+								}); 
+							}
+	});
+	res.send(req.body);
+}
 /**
 * Export the prefrence of user
 */
 
 exports.SaveAccountInfo = SaveAccountInfo;
-exports.ChangePicture = ChangePicture;
+exports.ChangeProfilePicture = ChangeProfilePicture;
 exports.UpdatePrefrence =UpdatePrefrence;
+exports.SaveRelationInfo = SaveRelationInfo;
+exports.RemoveRelationInfo = RemoveRelationInfo;
+exports.AddRelationInfo = AddRelationInfo;

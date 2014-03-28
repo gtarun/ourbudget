@@ -1,0 +1,138 @@
+<% layout( '../boilerplate') -%>
+<div class="page-title">
+            	<h3><span class="semi-bold">Add your Relation Budget</span></h3>		
+	   		</div>
+		<!-- START CONTAINER -->
+			<div id="container">
+        		<div class = "row">
+            		<div class="col-md-10">
+						<div class=" tiles white col-md-12 no-padding">
+							<div class="tiles green cover-pic-wrapper">							
+                        		<img src="../../assets/img/cover_pic.png">
+							</div>
+							<div class="tiles white">			
+								<div class="row">
+									<div class="col-md-3 col-sm-3" >
+										<div class="user-profile-pic">	
+											<img width="100" height="100"  src="<%= imgpath %>">
+										</div>
+								 		<div class="user-mini-description">
+											<h3 class=" semi-bold">
+												<%=user.firstName %> <%=user.lastName %>
+											</h3>
+										</div>
+									</div>		
+								</div>
+                        		<div class="tiles-body">
+                            		<div class="row  column-seperation">  
+                                		<div class="col-md-6">
+                                    		<form id = "relBudgetForm" name = "relBudgetForm" method= "post" action="relationBudget" role="form">
+                                          <div id = "relbudgetStatus">
+                                          </div>
+                                    			<input  style="display:none" for='user_id' name="userid" value= <%=user._id%> > </input>
+                                                <input  style="display:none" for='user_income' name="income" value= <%=user.monthlyIncome%> > </input>
+                                                <input  style="display:none" for='user_rcvd' name="rcvd" value= <%=user.amnt_rcvd%> > </input>
+                                                <input  style="display:none" for='user_spnt' name="spnt" value= <%=user.amnt_spnt%> > </input>	
+                                    			<div id = "addBudgetStatus">
+                                    			</div>
+                                    			<h4>Relation Budget</h4>
+                                    			<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input name="name" id="name" type="text" class="form-control" placeholder="Relation Name" list="relList">
+                                            			<datalist id="relList" required>
+                                            			</datalist>
+                                        			</div>
+                                    			</div>
+                                    			<div class="row form-row">
+                                        			<div class="col-md-12">
+                                            			<input type="text" class="form-control" name="amount" id="amount" placeholder="Budget">
+                                        			</div>
+                                    			</div>
+                                       			
+                            					<div class="form-actions">
+                                					<div class="pull-right">
+                                    					<button class="btn btn-primary btn-cons" type="submit">
+                                        					<i class="icon-ok"></i> Save
+                                    					</button>
+                                					</div>
+                            					</div>
+                                        
+                       						</form>
+                    					</div>
+                                
+                                		<div style = "height : 25%;" class="col-md-6"> 
+                                            <h4 class="col-md-6">Relation Name</h4> <h4>Total Income</h4>
+                                            <div id="showRelationIncome">
+                                            </div>
+                                            <div id="addIncome">
+                                            
+                                            </div>
+                                        </div>
+                                        </div>
+                    				
+                    				</div>
+		          				</div>
+          					
+          					</div>
+          				</div>
+          			</div>
+        		</div>
+        	</div>
+
+<script src="../assets/plugins/jquery-1.8.3.min.js" type="text/javascript"> </script>  
+<script src="../assets/js/jquery-validate.js" type="text/javascript"></script>
+<script src="../assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
+<%var num=user.familyMembers.length%>
+<% var relationData = user.familyMembers %>
+<%var parId=user._id%>
+<%for(var i=0 ;i<num; i++){%>
+<%var rel_id= relationData[i]._id%>
+<%var email = relationData[i].rel_email%>
+<script>
+    $(document).ready(function(){
+       /* $('#relBudgetForm').validate({
+        rules:{
+            name:{
+                required:true
+            },
+            amount:{
+                required:true,
+                number:true
+            }
+        }
+         })*/
+
+        $.ajax({
+            url : 'relbudget',
+            type : 'post',
+            datatype : 'json',
+            data : {'email' : '<%-email%>',
+                    'parId' : '<%-parId%>',
+                    'id': '<%-rel_id%>'},
+            success : function(data)
+            {
+                console.log("data:"+JSON.stringify(data));
+                if(data.email!=undefined){
+                var option = document.createElement('OPTION');
+                option.text = data.email;
+                option.value = data.name;
+                document.getElementById('relList').appendChild(option);
+                console.log("data "+data.email+"with monthlyIncome" +data.monthlyIncome);
+
+                                        var rel_name='<input class="col-md-6" type="text" class="form-control" name="" id="" placeholder="Name" value=" '+data.name+' "  /> ';
+
+                                        var rel_income='<input class="col-md-4" type="text" class="form-control" name="" id="" placeholder="Income" value=" '+data.monthlyIncome+' "  /> ';
+
+                                        $('#addIncome').append(rel_name);
+                                        $('#addIncome').append(rel_income);}
+            },
+            error: function(err,a,b){
+                console.log("Eroor!!!"+err+a+b);
+            }
+        });
+    });    
+</script>                                               
+<%}%>
+
+

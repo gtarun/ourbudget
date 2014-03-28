@@ -5,12 +5,16 @@
 var mongoose = require('mongoose');
 
 var BudgetSchema = mongoose.Schema({
-	user : String,
-	amount_spend : String,
+	userId : {name:String,id:String},
+	amount_spend : Number,
 	DATE : Date,
 	location : String,
 	spend_on : String,
-	LAST_UPDATED_AT : Date
+	description : String,
+	notification: {
+		send_to : String,
+		status : Boolean
+	}
 });
 
 var Budget = mongoose.model("budget", BudgetSchema);
