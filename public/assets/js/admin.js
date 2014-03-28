@@ -627,6 +627,7 @@ $('#createChildForm').validate({
             error : function(jqXHR, textStatus, errorThrown) {
                 var innerHTML = "<div class='alert alert-danger'><button class='close' data-dismiss='alert'></button>  User Creation failed. Please try again!!!!!!. </div>" ; 
                 $("#createChildForm").html(innerHTML);
+                console.log("Error");
             },
 
             success : function(data) { 

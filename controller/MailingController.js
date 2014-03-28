@@ -1,8 +1,11 @@
-
+/**
+ * Controller for handling the routes in  MyAccount page.
+ */
 var email = require("emailjs");
 var crypto = require("crypto");
 var redis = require("../cache/redis_cache");
 
+// link will be sent to user using following mail.
 var server = email.server.connect({
 	user : " ourbudget@venturepact.com",
 	password : "ourbudget@vp",
@@ -10,10 +13,12 @@ var server = email.server.connect({
 	ssl : true
 });
 
+//alrorithm and key used for encryption
 var algo = 'aes256';
 var key = 'ourbudget@vp';
 
-exports.sendMail = function(email, url, text){
+//function tosen mail to given email
+exports.sendMail = function(email, url, parentID, text){
 	var client = redis.getClient();
 
 	var cipher = crypto.createCipher(algo , key);
@@ -25,7 +30,7 @@ exports.sendMail = function(email, url, text){
 		}
 		else{
 			redis.insertKeyValue(token,email);
-			myurl = url + '?token=' + token;
+			myurl = url + '?token=' + token + '&parentID=' + parentID;
 			emailText = text + "\n" + myurl;
 			server.send({
 				text : emailText,
@@ -44,7 +49,8 @@ exports.sendMail = function(email, url, text){
 	})
 }
 
-exports.decryptToken = function(token){
+//function todecrypt the token
+exports.decryptToken = function(token,parentID){
 	var decipher = crypto.createDecipher(algo,key);
 	decrypted = decipher.update(token,'hex','utf8') + decipher.final('utf8');
 	return decrypted;

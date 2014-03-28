@@ -41,11 +41,9 @@ UserSchema = mongoose.Schema({
 	}]
 });
 
-
-
+//creating User with given emailID and Password
 UserSchema.statics.signup = function(email, password, done) {
 	var User = this;
-
 	User.create({
 		email : email,
 		pass : password,
@@ -59,28 +57,18 @@ UserSchema.statics.signup = function(email, password, done) {
 	});
 };
 
+//Validating User with emailID and Password
 UserSchema.statics.isValidUserPassword = function(email, password, done) {
-	this.findOne({email : email}, function(err, user) {
-		if (err) {
+	this.findOne({email : email, pass : password}, function(err, user) {
+		if (err) 
 			return done(err);
-		}
-
-		if (!user) {
-			return done(null, false, {
-				message : 'Email provided is not registered.'
-			});
-		}
-
-		if (password === user.pass) {
+		if (user){ 
 			console.log(user);
 			return done(null, user);
 		}
-console.log('Password is incorrect. Plese retry.');
-		return done(null, false, {
-			message : 'Password is incorrect. Plese retry.'
-			
-		});
-	});
+		else
+			return done(null, false, {message : 'EmailID or Password is incorrect. Plese retry.'});
+	})
 };
 
 UserSchema.statics.findOrCreateFaceBookUser = function(profile, done) {

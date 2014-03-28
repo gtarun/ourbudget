@@ -12,25 +12,19 @@ function initializeRoutes(app, passport, cache) {
 		
 		if (req.isAuthenticated()) {
 			console.log("Authenticated : " + req.user);
-			
 			res.render('users/home');
-
-		} else {
+		} 
+		else {
 			console.log("Unauthenticated Req received for GET /");
 			var flash = req.flash('error');
 			console.log("Request Received for Login");
-	
 			var message = {
 				message : flash
 			};
-	
 			console.log("Rendering login");
-	
 			// Render the login page using the error messages from flash. 
 			res.render("login", message);
 		}
-	
-		
 	});
 
 	// Posts the User Login Data using the login form to gain access to the system.
@@ -43,14 +37,11 @@ function initializeRoutes(app, passport, cache) {
 	
 	// Logs out the current user and redirects to the login page
 	app.get('/logout', function(req, res) {
-
 		console.log("Logging out the user");
-
 		// Remove the user from the Express Middleware
 		req.logout();
-
 		// Render the login page
-		res.render('login', {
+		res.render('homepage', {
 			message : req.flash('error')
 		});
         //res.redirect('/');

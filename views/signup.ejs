@@ -39,7 +39,8 @@
 				           <input type='text' name='token' style='display:none' value=<%=token%> >
                    <label class="sr-only" for="email">Email address</label>
                    <input type="email" name = "email" class="form-control" id="email" placeholder="Enter email" value=<%=email%>>                 </div>
-               <button type="submit" class="btn btn-success">Sign Up</button>
+               <button type="submit" class="btn btn-primary">Sign Up</button>
+               <a href="/login" class="pull-right">Already a user?</a>
             </form>
         </div>
     </div>
@@ -210,6 +211,12 @@
                     <div class="row form-row">
                       <div class="col-md-12">
                         <input name="address2" id="address2" type="text" class="form-control" placeholder="Adress" >
+                      </div>
+                    </div>
+
+                    <div class="row form-row">
+                      <div class="col-md-12">
+                        <input name="parentID" id="parentID" type="text" class="form-control" placeholder="ParentID" readonly='readonly' value=<%=parentID%>>
                       </div>
                     </div>
            

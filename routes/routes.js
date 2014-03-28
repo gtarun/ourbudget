@@ -11,7 +11,7 @@ var admin_router = require('../routes/admin_router.js');
 var payments_router = require('../routes/payments_router.js');*/
 var myaccount_router = require('../routes/myaccount_router.js');
 var budget_router = require('../routes/budget_router.js');
-
+var charts_router =  require('../routes/charts_router.js');
 /**
  * 
  */
@@ -39,4 +39,5 @@ module.exports = function(app, passport, cache) {
 	password_router(app, passport, cache);
 	
 	budget_router(app,passport,cache);
+	charts_router(app,passport,cache);
 };

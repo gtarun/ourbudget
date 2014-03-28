@@ -34,13 +34,13 @@
 				<div class="chat-toggler">
 					<a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" 
 					data-toggle="dropdown" data-original-title="Notifications" data-html='true'
-					data-content='<div id="alerts"></div>'
+					data-content=''
 					>
 
 						
 						<div class="user-details">
 							<div class="username">
-								<span class="badge badge-important" id="countNotify">0</span>
+								<span class="badge badge-important" id="countNotify"></span>
 								<span id="first-name"><%=user.firstName%></span>
 								<span class="bold" id="last-name"><%=user.lastName%></span>
 							</div>
@@ -87,11 +87,3 @@
 <!-- END HEADER -->
 <script type="text/javascript" src="../assets/plugins/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../assets/js/notify.js"></script>
-<script>
-$(document).ready(function(){
-	console.log('ger'+ '<%-user.notification.length%>');
-	$('.notification-messages info').click(function(){
-		console.log('<%-user.notification.lengths%>');
-	})
-})
-</script>

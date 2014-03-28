@@ -1,0 +1,112 @@
+<% layout( '../boilerplate') -%>
+<style>
+#dashboard_div{
+  margin-top: 30px;
+}
+</style>
+<script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['controls']});
+    </script>
+    <script type="text/javascript">
+    
+    // Load the Visualization API and the piechart package.
+      
+    // Set a callback to run when the Google Visualization API is loaded.
+function drawVisualization() {
+$.ajax({
+  url: '/users/ComboChart',
+  type: 'GET',
+  dataType: 'json',
+})
+.done(function(data) {
+console.log("data :"+data); 
+ var datatable = google.visualization.arrayToDataTable(data);
+ console.log(datatable);
+var options = {
+          title : 'Monthly Expenditure',
+          height : 500,
+          vAxis: {title: "Expenditure"},
+          hAxis: {title: "Month"},
+          seriesType: "bars",
+          series: {5: {type: "line"}},
+        };
+
+var myStringSlider = new google.visualization.ControlWrapper({  
+  'controlType': 'StringFilter',  
+  'containerId': 'filter_div2',  
+  'options': {  
+    'filterColumnIndex': 0  
+  }  
+});
+
+var myChartSlider = new google.visualization.ControlWrapper({
+     'controlType': 'ChartRangeFilter',
+     'containerId': 'filter_div3',
+     'options': {
+       // Filter by the date axis.
+       'filterColumnIndex': 0,
+       'ui': {
+         'chartType': 'LineChart',
+         'chartOptions': {
+           'chartArea': {'width': '90%'},
+           'hAxis': {'baselineColor': 'none'}
+         },
+       }
+     },
+   });
+
+var comboChart = new google.visualization.ChartWrapper({
+          'chartType': 'ComboChart',
+          'containerId': 'chart_div',
+          'options': options
+        });
+
+// Create the dashboard.
+        var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div')).
+          // Configure the slider to affect the bar chart
+          bind([myChartSlider],comboChart).
+          // Draw the dashboard
+          draw(datatable);})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+  
+}
+google.setOnLoadCallback(drawVisualization);
+
+      // Create our data table out of data loaded from server.
+
+      // Instantiate and draw our chart, passing in some options.
+    </script>
+
+    <!--Div that will hold the pie chart-->
+    <div class="row">
+    <div class="col-md-12">
+    <div id="dashboard_div">
+            <div class="row">
+        <div class="col-md-12">
+          <div id="filter_div1" class="pull-right">
+          </div>
+          <div id="filter_div2" class="pull-left">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="chart_div">
+          </div>    
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">          
+          <div id="filter_div3">
+          </div>
+        </div>
+      </div>    
+    </div>
+    </div>
+    </div>

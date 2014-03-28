@@ -33,86 +33,84 @@ function SaveAccountInfo (req, res) {
 		update.pass = req.body.pass1;
 	}
 
-
 	var conditions = {_id : req.user._id}, options = {multi : true};
 
 	console.log("Updating the contact info with: ");
 	console.log(update);
 
 	User.findOne(conditions,function(err, doc) {
-						var response = {};
-						if (err) {
-							console.log(err);
-							response.error = "Saving the File to server failed. Please retry";
-							console.log(response);
-							res.json(500, response);
-							return;
-						}
-						// Create the ContactInformation if not present.
-						if (!doc.contactInformaion)
-							doc.contactInformaion = {};	
-						doc.contactInformation.countrycode = update.countrycode;
-						doc.contactInformation.phonenumber = update.phonenumber;
+		var response = {};
+		if (err) {
+			console.log(err);
+			response.error = "Saving the File to server failed. Please retry";
+			console.log(response);
+			res.json(500, response);
+			return;
+		}
+		// Create the ContactInformation if not present.
+		if (!doc.contactInformaion)
+			doc.contactInformaion = {};	
+		doc.contactInformation.countrycode = update.countrycode;
+		doc.contactInformation.phonenumber = update.phonenumber;
 				
-						if (update.pass) {
-							doc.pass = update.pass;
-						}
+		if (update.pass) {
+			doc.pass = update.pass;
+		}
 						
-						if (update.email) {
-							if(doc.email !== update.email){
-								User.findOne({email : update.email, parentID : {$exists:false}}, function(err, parent){
-									if(parent){
-										console.log("parent exists :)");
-										response.user = parent;
-										res.json(200,response);
-										return;
-									}
+		if (update.email) {
+			if(doc.email !== update.email){
+				User.findOne({email : update.email, parentID : {$exists:false}}, function(err, parent){
+					if(parent){
+						console.log("parent exists :)");
+						response.user = parent;
+						res.json(200,response);
+						return;
+					}
 										
-									else{
-										console.log("parent doesn't exist :)");
-										mail.sendMail(update.email,'http://127.0.0.1:3000/login',
-										'Your login emailID has been changed from '+doc.email+' to '+update.email);
-										doc.email = update.email;
-									}
-								});
+					else{
+						console.log("parent doesn't exist :)");
+						mail.sendMail(update.email,'http://127.0.0.1:3000/login',
+						'Your login emailID has been changed from '+doc.email+' to '+update.email);
+						doc.email = update.email;
+					}
+				});
 								
-							}
-						}
+			}
+		}
 
-						// Save the information.
-						doc.save(function(err) {
-									if (err) {
-										console.log(err);
-										response.error = "Saving the File to server failed. Please retry";
-										console.log(response);
-										res.json(500, response);
-										return;
-									}
-									// Once is is saved, logout the user for security reasons.
-									req.logout();
-									response.value = "Information Saved Succesfully";
-									console.log(response);
-									res.json(200, response);
+		// Save the information.
+		doc.save(function(err) {
+			if (err) {
+				console.log(err);
+				response.error = "Saving the File to server failed. Please retry";
+				console.log(response);
+				res.json(500, response);
+				return;
+			}
+			// Once is is saved, logout the user for security reasons.
+			req.logout();
+			response.value = "Information Saved Succesfully";
+			console.log(response);
+			res.json(200, response);
 
-								});
-					});
+		});
+	});
 }
 
+//saves the updated relation Information and updated monthly Income
 function SaveRelationInfo (req, res){
+	//Updates the monthly Income 
 	User.findOneAndUpdate({_id:req.user._id},
-						  {$inc:{monthlyIncome:req.body.monthlyIncome}},
+						  {monthlyIncome:req.body.monthlyIncome},
 						  function(err,doc){
 						  	if(!err)
 								console.log("Update Monthly Income")
 	});
-
+	// 
 	var members = [];
-
 	for ( var i = 0; i < req.body.relation.length; i++) {
 		var relation = req.body.relation[i];
 		var rel_email = req.body.rel_email[i];
-
-		
 		// Prepare the adData
 		if (relation.length > 0 && rel_email.length > 0) {
 			var adData = {relation : relation, rel_email : rel_email};
@@ -120,7 +118,7 @@ function SaveRelationInfo (req, res){
 			members.push(adData);
 		}
 	}
-
+	//module left to sendemailto newly added relations???????????
 	res.json(200,members);
 }		
 /**
@@ -159,64 +157,58 @@ function ChangeProfilePicture (req, res) {
 function UpdatePrefrence(req,res){
 	// Query Condition.
 	var conditions = {
-		email : req.user.email
+		email : req.user._id
 	}, options = {
 		multi : true
 	};
 
 	var data= req.body;
 	// Save the Info into DB.
-	User
-			.findOne(
-					conditions,
-					function(err, doc) {
-						var response = {};
-						if (err) {
-							console.log(err);
-							response.error = "Saving the File to server failed. Please retry";
-							console.log(response);
-							res.json(500, response);
-							return;
-						}
+	User.findOne(conditions,function(err, doc) {
+		var response = {};
+		if (err) {
+			console.log(err);
+			response.error = "Saving the File to server failed. Please retry";
+			console.log(response);
+			res.json(500, response);
+			return;
+		}
 
-						// Create the ContactInformation if not present.
-						if (!doc.prefrences)
-						{
-							doc.prefrences = {};	
-						}
+		// Create the ContactInformation if not present.
+		if (!doc.prefrences)
+		{
+			doc.prefrences = {};	
+		}
 						
-						// Update the doc
-						doc.prefrences =data;
+		// Update the doc
+		doc.prefrences =data;
 				
-						// Save the information.
-						doc.save(function(err) {
-									// Saving failed.
-									if (err) {
-										console.log(err);
-										response.error = "Saving the File to server failed. Please retry";
-										console.log(response);
-										res.json(500, response);
-										return;
-									}
+		// Save the information.
+		doc.save(function(err) {
+			// Saving failed.
+			if (err) {
+				console.log(err);
+				response.error = "Saving the File to server failed. Please retry";
+				console.log(response);
+				res.json(500, response);
+				return;
+			}
 
-									// Once is is saved, logout the user for security reasons.
-									
-									response.value = "Information Saved Succesfully";
-									console.log(response);
-									res.json(200, response);
-									res.redirect("/users/prefrence");
+			// Once is is saved, logout the user for security reasons.
+			response.value = "Information Saved Succesfully";
+			console.log(response);
+			res.json(200, response);
+			res.redirect("/users/prefrence");
 
-								});
-					});
-	
-
-	// Save the Info into DB.
-	
+		});
+	});
 }
 
+//Ajax function to remove relation on click of remove link
 function RemoveRelationInfo (req, res){
 	console.log(req.body.email);
-	console.log(req.body.parent_id);
+	console.log(req.body.pent_id);
+	//remove child relation frm database
 	User.remove({email:req.body.email,parentID:req.body.parent_id},function(err,removed){
 		if(err)
 			console.log("Error in Remove Relation child");
@@ -225,6 +217,7 @@ function RemoveRelationInfo (req, res){
 		}
 	});
 	
+	//update familyMembrs array of parent 
 	User.findOneAndUpdate({_id:req.body.parent_id},
 						  {$pull:{familyMembers:{rel_email:req.body.email}}},
 						  function(err,updated){
@@ -237,7 +230,9 @@ function RemoveRelationInfo (req, res){
 	res.send(req.body);
 }
 
+//Ajax function to add relation on click of add link
 function AddRelationInfo (req, res){
+	//Update familyMembers array of parent
 	User.findOneAndUpdate({_id:req.body.parent_id},
 					      {$push:{familyMembers:{rel_email:req.body.email,relation:req.body.rel}}},
 					      function(err,added1){
@@ -248,6 +243,7 @@ function AddRelationInfo (req, res){
 								var len=added1.familyMembers.length - 1;
 								console.log(len);
 								console.log(added1.familyMembers[len]._id);
+								//insert child into the database with _id
 								User.findOneAndUpdate({_id:added1.familyMembers[len]._id},
 													  {email:req.body.email,parentID:req.body.parent_id},//{_id:added1.familyMembers[len]._id},
 													  {upsert:true},
@@ -259,7 +255,6 @@ function AddRelationInfo (req, res){
 								}); 
 							}
 	});
-	
 	res.send(req.body);
 }
 /**
